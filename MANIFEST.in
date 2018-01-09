@@ -1,0 +1,3 @@
+include README.rst
+include wrfconf/conf/README.namelist
+include wrfconf/conf/wrfconf_params.yml

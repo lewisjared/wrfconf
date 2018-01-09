@@ -1,0 +1,174 @@
+---
+meta:
+  owner: Jared Lewis
+  email: jared@jared.kiwi.nz
+  run_name: test
+
+wps:
+  share:
+    wrf_core: ARW
+    max_dom: 2
+    start_date: ['2006-08-16_12:00:00','2006-08-16_12:00:00']
+    end_date: ['2006-08-16_18:00:00','2006-08-16_12:00:00']
+    interval_seconds: 21600
+    active_grid: True, True,
+    subgrid_ratio_x: 1
+    subgrid_ratio_y: 1
+    io_form_geogrid: 2
+    opt_output_from_geogrid_path: './'
+    debug_level: 0
+
+    start_date: ['2000-01-24_12:00:00','2000-01-24_12:00:00']
+    end_date: ['2000-01-25_12:00:00','2000-01-24_12:00:00']
+    start_year: [2006, 2006]
+    start_month: [08,   08]
+    start_day: [16,   16]
+    start_hour: [12,   12]
+    start_minute: [00,   00]
+    start_second: [00, 00]
+    end_year: [2006, 2006]
+    end_month: [08, 08]
+    end_day: [16, 16]
+    end_hour: [18, 18]
+    end_minute: [00, 00]
+    end_second: [00, 00]
+
+  geogrid:
+    parent_id: [1, 1]
+    parent_grid_ratio: 1, 3,
+    i_parent_start: 1, 31,
+    j_parent_start: 1, 17,
+    s_we: [1, 1]
+    e_we: [ 74, 112]
+    s_sn: [ 1, 1]
+    e_sn: [ 61, 97]
+    geog_data_res: ['default','default']
+    dx: 30000
+    dy: 30000
+    map_proj: 'lambert'
+    ref_lat: 34.83
+    ref_lon: -81.03
+    ref_x: 37.0
+    ref_y: 30.5
+    truelat1: 30.0
+    truelat2: 60.0
+    stand_lon: -98.0
+    geog_data_path: '/glade/p/work/wrfhelp/WPS_GEOG/'
+    opt_geogrid_tbl_path: 'geogrid/'
+
+  ungrib:
+   out_format: 'WPS'
+   prefix: 'FILE'
+
+  metgrid:
+   fg_name: 'FILE'
+   constants_name: './TAVGSFC'
+   io_form_metgrid: 2
+   opt_output_from_metgrid_path: './'
+   opt_metgrid_tbl_path: 'metgrid/'
+   process_only_bdy: 5
+
+  mod_levs:
+   press_pa: [201300 , 200100 , 100000 , 95000 , 90000 , 85000 , 80000 , 75000 , 70000 , 65000 , 60000 , 55000 , 50000 , 45000 , 40000 , 35000 , 30000 , 25000 , 20000 , 15000 , 10000 , 5000 , 1000]
+
+  plotfmt:
+   ix: 100
+   jx: 100
+   ioff: 30
+   joff: 30
+
+
+namelist:
+  time_control:
+    run_days: 0
+    run_hours: 36
+
+    start_year: [2017, 2017, 2017, 2017]
+    start_month: [1, 1, 1, 1]
+    start_day: [30, 30, 30, 30]
+    end_year: [2017, 2017, 2017, 2017]
+    end_month: [1, 1, 1, 1]
+    end_day: [30, 30, 30, 30]
+    end_hour: [12, 12, 12, 12]
+    interval_seconds: 10800
+    input_from_file: [True, True, True, True]
+    history_interval: [ 60, 60, 60, 60]
+    frames_per_outfile: [ 1000, 1000, 1000, 1000]
+    restart: False,
+    restart_interval: 5000,
+    io_form_history: 2
+    io_form_restart: 2
+    io_form_input: 2
+    io_form_boundary: 2
+    debug_level: 0
+
+
+  domains:
+    time_step: 180,
+    time_step_fract_num: 0,
+    time_step_fract_den: 1,
+    max_dom: 4,
+    e_we:               [ 79, 70, 121, 70]
+    e_sn: [ 61, 79, 79, 67]
+    e_vert: [ 30, 30, 30, 30]
+    p_top_requested: 5000,
+    num_metgrid_levels: 32,
+    num_metgrid_soil_levels: 4,
+    dx: [30000, 10000, 3333.33, 1111.11]
+    dy: [30000, 10000, 3333.33, 1111.11]
+    grid_id: [ 1, 2, 3, 4]
+    parent_id: [ 0, 1, 2, 3]
+    i_parent_start: [ 1, 31, 13, 60]
+    j_parent_start: [ 1, 7, 10, 45]
+    parent_grid_ratio: [ 1, 3, 3, 3]
+    parent_time_step_ratio: [ 1, 3, 3, 3]
+    feedback: 1,
+    smooth_option: 0
+
+
+  physics:
+    mp_physics:         [ 3, 3, 3, 3]
+    ra_lw_physics:      [ 1, 1, 1, 1]
+    ra_sw_physics:      [ 1, 1, 1, 1]
+    radt:               [ 30, 30, 30, 30]
+    sf_sfclay_physics:  [ 1, 1, 1, 1]
+    sf_surface_physics: [ 2, 2, 2, 2]
+    bl_pbl_physics:     [ 1, 1, 1, 1]
+    bldt:               [ 0, 0, 0, 0]
+    cu_physics:         [ 1, 1, 0, 0]
+    cudt:               [ 5, 5, 5, 5]
+    isfflx: 1,
+    ifsnow: 1,
+    icloud: 1,
+    surface_input_source: 3,
+    num_soil_layers:    4
+    num_land_cat:       21
+    sf_urban_physics:   [ 0, 0, 0, 0]
+
+  dynamics:
+    w_damping: 0,
+    diff_opt: [ 1, 1, 1, 1]
+    km_opt: [ 4, 4, 4, 4]
+    diff_6th_opt: [ 0, 0, 0, 0]
+    diff_6th_factor: 0.12, 0.12, 0.12, 0.12
+    base_temp: 290.
+    damp_opt: 0,
+    zdamp: [5000., 5000., 5000., 5000.]
+    dampcoef: [0.2, 0.2, 0.2, 0.2]
+    khdif: [ 0, 0, 0, 0]
+    kvdif: [ 0, 0, 0, 0]
+    non_hydrostatic: [ True, True, True, True]
+    moist_adv_opt: [ 1, 1, 1, 1]
+    scalar_adv_opt: [ 1, 1, 1, 0]
+
+  bdy_control:
+    spec_bdy_width: 5,
+    spec_zone: 1,
+    relax_zone: 4,
+    specified: [True, False,False,False]
+    nested: [False, True, True,True]
+
+  namelist_quilt:
+    nio_tasks_per_group: 0,
+    nio_groups: 1,
+

@@ -1,0 +1,6118 @@
+afwa:
+- default: 0,
+  description: 'Icing option, 1: on'
+  is_multi_dim: true
+  name: afwa_icing_opt
+- default: 0,
+  description: 'Buoyancy option, 1: on'
+  is_multi_dim: true
+  name: afwa_buoy_opt
+- default: 0,
+  description: 'Precip type option, 1: on'
+  is_multi_dim: true
+  name: afwa_ptype_opt
+- default: 0,
+  description: 'Visibility option, 1: on'
+  is_multi_dim: true
+  name: afwa_vis_opt
+- default: 0,
+  description: 'Hailcast option, 1: on'
+  is_multi_dim: true
+  name: afwa_hailcast_opt
+- default: 0,
+  description: 'Vert Int Liquid option, 1: on'
+  is_multi_dim: true
+  name: afwa_vil_opt
+- default: 0,
+  description: 'Cloud option, 1: on'
+  is_multi_dim: true
+  name: afwa_cloud_opt
+- default: 0,
+  description: 'AFWA Diagnostic option, 1: on'
+  is_multi_dim: true
+  name: afwa_diag_opt
+- default: 264.15,
+  description: CCN temperature for precipitation type calculation
+  is_multi_dim: false
+  name: afwa_ptype_ccn_tmp
+- default: 0,
+  description: 'Radar option, 1: on'
+  is_multi_dim: true
+  name: afwa_radar_opt
+- default: 0,
+  description: 'Thermal indices option, 1: on'
+  is_multi_dim: true
+  name: afwa_therm_opt
+- default: 50,
+  description: Total melting energy for precipitation type calculation
+  is_multi_dim: false
+  name: afwa_ptype_tot_melt
+- default: 0,
+  description: 'Severe Wx option, 1: on'
+  is_multi_dim: true
+  name: afwa_severe_opt
+- default: 0,
+  description: 'Turbulence option, 1: on'
+  is_multi_dim: true
+  name: afwa_turb_opt
+bdy_control:
+- default: 4,
+  description: number of points in relaxation zone (spec b.c. option)
+  is_multi_dim: false
+  name: relax_zone
+- default: .false.,
+  description: 'specified boundary conditions (only can be used for domain 1)
+
+    the above 4 are used for real-data runs'
+  is_multi_dim: true
+  name: specified
+- default: '0.'
+  description: 'exponential multiplier for relaxation zone ramp for specified=.t.
+
+    (0.=linear ramp default, e.g. 0.33=~3*dx exp decay factor)'
+  is_multi_dim: false
+  name: spec_exp
+- default: .false.
+  description: constant boundary condition used with DFI
+  is_multi_dim: false
+  name: constant_bc
+- default: 5,
+  description: total number of rows for specified boundary value nudging
+  is_multi_dim: false
+  name: spec_bdy_width
+- default: 0,
+  description: 'whether to call spec_bdy_final for mu (since 3.7):'
+  is_multi_dim: false
+  name: spec_bdy_final_mu
+- default: .false.,
+  description: symmetric boundary conditions at x start (west)
+  is_multi_dim: true
+  name: symmetric_xs
+- default: .false.,
+  description: periodic boundary conditions in x direction
+  is_multi_dim: true
+  name: periodic_x
+- default: .false.,
+  description: symmetric boundary conditions at x end (east)
+  is_multi_dim: true
+  name: symmetric_xe
+- default: .false.,
+  description: open boundary conditions at x start (west)
+  is_multi_dim: true
+  name: open_xs
+- default: .false.,
+  description: open boundary conditions at x end (east)
+  is_multi_dim: true
+  name: open_xe
+- default: .false.,
+  description: periodic boundary conditions in y direction
+  is_multi_dim: true
+  name: periodic_y
+- default: .false.,
+  description: symmetric boundary conditions at y start (south)
+  is_multi_dim: true
+  name: symmetric_ys
+- default: .false.,
+  description: symmetric boundary conditions at y end (north)
+  is_multi_dim: true
+  name: symmetric_ye
+- default: .false.,
+  description: open boundary conditions at y start (south)
+  is_multi_dim: true
+  name: open_ys
+- default: .false.,
+  description: open boundary conditions at y end (north)
+  is_multi_dim: true
+  name: open_ye
+- default: .false.,
+  description: nested boundary conditions (must be used for nests)
+  is_multi_dim: true
+  name: nested
+- default: .false.,
+  description: 'polar boundary condition
+
+    (v=0 at polarward-most v-point)'
+  is_multi_dim: false
+  name: polar
+- default: .false.,
+  description: 'model run after ndown only: do not use microphysics variables in bdy
+    file'
+  is_multi_dim: false
+  name: have_bcs_moist
+- default: 1,
+  description: fundamental timesteps between calls to Euler advection, dynamics (NMM
+    only)
+  is_multi_dim: false
+  name: idtadt
+- default: .false.,
+  description: 'model run after ndown only: do not use scalar variables in bdy file'
+  is_multi_dim: false
+  name: have_bcs_scalar
+- default: .false.,
+  description: conservative Eulerian passive advection (NMM only)
+  is_multi_dim: false
+  name: euler_adv
+- default: '1'
+  description: fundamental timesteps between calls to Euler advection, chemistry (NMM
+    only)
+  is_multi_dim: false
+  name: idtadc
+- default: 1,
+  description: number of points in specified zone (spec b.c. option)
+  is_multi_dim: false
+  name: spec_zone
+dfi_control:
+- default: '13'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_day
+- default: '1000'
+  description: 'maximum number of time steps for filtering period
+
+    ;   this value can be larger than necessary'
+  is_multi_dim: false
+  name: dfi_time_dim
+- default: '00'
+  description: two-digit minute of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_minute
+- default: '0'
+  description: 'which DFI option to use (3 is recommended)
+
+    ;   0 = no digital filter initialization
+
+    ;   1 = digital filter launch (DFL)
+
+    ;   2 = diabatic DFI (DDFI)
+
+    ;   3 = twice DFI (TDFI)'
+  is_multi_dim: false
+  name: dfi_opt
+- default: '2004'
+  description: four-digit year of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_year
+- default: '7'
+  description: 'digital filter type to use (7 is recommended)
+
+    ;   0 = uniform
+
+    ;   1 = Lanczos
+
+    ;   2 = Hamming
+
+    ;   3 = Blackman
+
+    ;   4 = Kaiser
+
+    ;   5 = Potter
+
+    ;   6 = Dolph window
+
+    ;   7 = Dolph
+
+    ;   8 = recursive high-order'
+  is_multi_dim: false
+  name: dfi_nfilter
+- default: '12'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_hour
+- default: '00'
+  description: two-digit second of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_second
+- default: .true.
+  description: 'whether to write wrfinput file with filtered
+
+    ;   model state before beginning forecast'
+  is_multi_dim: false
+  name: dfi_write_filtered_input
+- default: '00'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_minute
+- default: '03'
+  description: two-digit month of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_month
+- default: '2004'
+  description: four-digit year of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_year
+- default: .false.
+  description: whether to write wrfout files during filtering integration
+  is_multi_dim: false
+  name: dfi_write_dfi_history
+- default: '00'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_second
+- default: '14'
+  description: two-digit day of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_day
+- default: '03'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_month
+- default: '3600'
+  description: cutoff period, in seconds, for the filter
+  is_multi_dim: false
+  name: dfi_cutoff_seconds
+- default: '0'
+  description: DFI radar da switch
+  is_multi_dim: false
+  name: dfi_radar
+- default: '12'
+  description: two-digit hour of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_hour
+diags:
+- default: '2'
+  description: 'Which half level pressure to use: 1=total (p+pb); 2=hydrostatic
+
+    (p_hyd).  The p_hyd option is the default and less noisy.  Total
+
+    pressure is consistent with what is done in various post-proc
+
+    packages.'
+  is_multi_dim: false
+  name: use_tot_or_hyd_p
+- default: 0,
+  description: 'Vertically interpolate diagnostics to z-levels
+
+    0=NO, 1=YES'
+  is_multi_dim: false
+  name: z_lev_diags
+- default: 1,
+  description: 'Vertically interpolate diagnostics to p-levels
+
+    0=NO, 1=YES'
+  is_multi_dim: false
+  name: p_lev_diags
+- default: 0,
+  description: 'List of height values (m) to interpolate data to.
+
+    ;   Positive numbers are for height above mean sea level (i.e. a flight level)
+
+    ;   Negative numbers are for levels above ground
+
+    /'
+  is_multi_dim: false
+  name: z_levels
+- default: 2,
+  description: Number of height levels to interpolate to
+  is_multi_dim: false
+  name: num_z_levels
+- default: 0,
+  description: 'Number of pressure levels to interpolate to, for example,
+
+    could be 2'
+  is_multi_dim: false
+  name: num_press_levels
+- default: 0,
+  description: 'Which pressure levels (Pa) to interpolate to, for example
+
+    could be 85000, 70000'
+  is_multi_dim: false
+  name: press_levels
+domains:
+- default: 60,
+  description: 'time step for integration in integer seconds
+
+    recommend 6*dx (in km) for typical real-data cases'
+  is_multi_dim: false
+  name: time_step
+- default: 10000,
+  description: 'grid length in x direction; ARW: unit in meters, NMM: unit in degrees
+    (e.g. 0.667)'
+  is_multi_dim: true
+  name: dx
+- default: '2'
+  description: 'vertical interpolation order
+
+    ; 1 = linear
+
+    ; 2 = quadratic
+
+    ; 9 = cubic spline'
+  is_multi_dim: false
+  name: lagrange_order
+- default: '500'
+  description: ignore isobaric level above surface if delta p (Pa) < zap_close_levels
+  is_multi_dim: false
+  name: zap_close_levels
+- default: '1'
+  description: vertical refinement factor for ndown, not used for concurrent vertical
+    grid refinement
+  is_multi_dim: false
+  name: vert_refine_fact
+- default: .false.
+  description: 'place the surface value into the lowest eta location
+
+    ; T = use surface value as lowest eta (u,v,t,q)
+
+    ; F = use traditional interpolation'
+  is_multi_dim: false
+  name: lowest_lev_from_sfc
+- default: 10000,
+  description: 'grid length in y direction; ARW: unit in meters, NMM: unit in degrees
+    (e.g. 0.0658)'
+  is_multi_dim: true
+  name: dy
+- default: '1'
+  description: 'use the surface level as the lower boundary when interpolating
+
+    ; through this many eta levels
+
+    ; 0 = perform traditional trapping interpolation
+
+    ; n = first n eta levels directly use surface level'
+  is_multi_dim: false
+  name: force_sfc_in_vinterp
+- default: '5000'
+  description: 'Pressure threshold (Pa).  For using the level of max winds, when the
+
+    ; pressure differnce between neighboring values exceeds this maximum,
+
+    ; the variable is NOT inserted into the column for vertical interpolation.
+
+    ; ARW real only.'
+  is_multi_dim: false
+  name: maxw_horiz_pres_diff
+- default: '19000.'
+  description: used in mass model for idealized cases
+  is_multi_dim: true
+  name: ztop
+- default: '5000'
+  description: 'Pressure threshold (Pa).  For using the tropopause level, when the
+
+    ; pressure differnce between neighboring values exceeds this maximum,
+
+    ; the variable is NOT inserted into the column for vertical interpolation.
+
+    ; ARW real only.'
+  is_multi_dim: false
+  name: trop_horiz_pres_diff
+- default: 0,
+  description: numerator for fractional time step
+  is_multi_dim: false
+  name: time_step_fract_num
+- default: 1,
+  description: domain identifier
+  is_multi_dim: true
+  name: grid_id
+- default: '30000'
+  description: 'Minimum height (actually it is pressure in Pa) to allow using the
+
+    ; level of max wind information in real.  With a value of 300 hPa, then
+
+    ; a max wind value at 500 hPa will be ignored.
+
+    ; ARW real only.
+
+    use_maxw_level                                 ; 0=do not use max wind speed level
+    in vertical interpolation inside
+
+    ; of the ARW real program, 1 = use level
+
+    use_trop_level                                 ; as above, with tropopause level
+    data'
+  is_multi_dim: false
+  name: maxw_above_this_level
+- default: 1,
+  description: 'denominator for fractional time step
+
+    Example, if you want to use 60.3 sec as your time step,
+
+    set time_step = 60, time_step_fract_num = 3, and
+
+    time_step_fract_den = 10'
+  is_multi_dim: false
+  name: time_step_fract_den
+- default: 0,
+  description: id of the parent domain
+  is_multi_dim: true
+  name: parent_id
+- default: .false.
+  description: 'Optional method to compute model''s surface pressure when incoming
+
+    ; data only has surface pressure and terrain, but not SLP'
+  is_multi_dim: false
+  name: sfcp_to_sfcp
+- default: 60,
+  description: time step for DFI, may be different from regular time_step
+  is_multi_dim: false
+  name: time_step_dfi
+- default: .false.
+  description: 'Smooth the outer rows and columns of domain 1''s topography w.r.t.
+
+    ; the input data'
+  is_multi_dim: false
+  name: smooth_cg_topo
+- default: 0,
+  description: starting LLC I-indices from the parent domain
+  is_multi_dim: true
+  name: i_parent_start
+- default: 1,
+  description: number of domains - set it to > 1 if it is a nested run
+  is_multi_dim: false
+  name: max_dom
+- default: .false.
+  description: 'whether to use diurnally averaged surface temp as skin temp. The
+
+    diurnall averaged surface temp can be computed using WPS utility
+
+    avg_tsfc.exe. May use this option when SKINTEMP is not present.'
+  is_multi_dim: false
+  name: use_tavg_for_tsk
+- default: 0,
+  description: starting LLC J-indices from the parent domain
+  is_multi_dim: true
+  name: j_parent_start
+- default: 1,
+  description: start index in x (west-east) direction (leave as is)
+  is_multi_dim: true
+  name: s_we
+- default: 1,
+  description: 'parent-to-nest domain grid size ratio: for real-data cases
+
+    the ratio has to be odd; for idealized cases,
+
+    the ratio can be even if feedback is set to 0. (NMM: must be 3)'
+  is_multi_dim: true
+  name: parent_grid_ratio
+- default: .false.
+  description: 'whetger to aggregate the grass, shrubs, trees in dominant landuse;
+
+    default is false.'
+  is_multi_dim: false
+  name: aggregate_lu
+- default: .true.,
+  description: whether to compute RH with respect to water (true) or ice (false)
+  is_multi_dim: false
+  name: rh2qv_wrt_liquid
+- default: 1,
+  description: 'parent-to-nest time step ratio; it can be different
+
+    from the parent_grid_ratio (NMM: must be 3)'
+  is_multi_dim: true
+  name: parent_time_step_ratio
+- default: 91,
+  description: end index in x (west-east) direction (staggered dimension)
+  is_multi_dim: true
+  name: e_we
+- default: 1,
+  description: 'which methed to use to computer mixing ratio from RH:
+
+    default is option 1, the old MM5 method; option 2 uses a WMO
+
+    recommended method (WMO-No. 49, corrigendum, August 2000) -
+
+    there is a difference between the two methods though small'
+  is_multi_dim: false
+  name: rh2qv_method
+- default: 1,
+  description: feedback from nest to its parent domain; 0 = no feedback
+  is_multi_dim: false
+  name: feedback
+- default: 1,
+  description: start index in y (south-north) direction (leave as is)
+  is_multi_dim: true
+  name: s_sn
+- default: '0'
+  description: 'smoothing option for parent domain, used only with feedback
+
+    option on. 0: no smoothing; 1: 1-2-1 smoothing; 2: smoothing-desmoothing'
+  is_multi_dim: false
+  name: smooth_option
+- default: .false.
+  description: 'If set to .false., it will vertically interpolate temperature
+
+    instead of potential temperature, which may reduce bias when
+
+    compared with input data'
+  is_multi_dim: false
+  name: interp_theta
+- default: '4'
+  description: 'number of vertical soil levels or layers input
+
+    ; from WPS metgrid program'
+  is_multi_dim: false
+  name: num_metgrid_soil_levels
+- default: 2,
+  description: '= 1: default method'
+  is_multi_dim: false
+  name: hypsometric_opt
+- default: '27'
+  description: 'number of vertical levels of 3d meteorological fields coming
+
+    ; from WPS metgrid program'
+  is_multi_dim: false
+  name: num_metgrid_levels
+- default: 82,
+  description: end index in y (south-north) direction (staggered dimension)
+  is_multi_dim: true
+  name: e_sn
+- default: '42000.'
+  description: 'FOR NMM:  defines the pressure interface dividing
+
+    ;           the terrain following portion of the hybrid vertical
+
+    ;           coordinate (p > ptsgm) and the purely
+
+    ;           isobaric portion of the vertical coordinate (p < ptsgm)'
+  is_multi_dim: false
+  name: ptsgm
+- default: '2'
+  description: 'vertical interpolation
+
+    ; 1 = linear in pressure
+
+    ; 2 = linear in log(pressure)'
+  is_multi_dim: false
+  name: interp_type
+- default: '5000'
+  description: p_top (Pa) to use in the model
+  is_multi_dim: false
+  name: p_top_requested
+- default: '2'
+  description: 'vertical extrapolation of non-temperature fields
+
+    ; 1 = extrapolate using the two lowest levels
+
+    ; 2 = use lowest level as constant below ground'
+  is_multi_dim: false
+  name: extrap_type
+- default: 1,
+  description: start index in z (vertical) direction (leave as is)
+  is_multi_dim: true
+  name: s_vert
+- default: '2'
+  description: 'vertical extrapolation for potential temperature
+
+    ; 1 = isothermal
+
+    ; 2 = -6.5 K/km lapse rate for temperature
+
+    ; 3 = constant theta'
+  is_multi_dim: false
+  name: t_extrap_type
+- default: .true.
+  description: 'in vertical interpolation, use levels below input surface level
+
+    ; T = use input isobaric levels below input surface
+
+    ; F = extrapolate when WRF location is below input surface value'
+  is_multi_dim: false
+  name: use_levels_below_ground
+- default: 30,
+  description: 'end index in z (vertical) direction (staggered dimension)
+
+    Note: this refers to full levels including surface and top
+
+    vertical dimensions need to be the same for all nests
+
+    Note: most variables are unstaggered (= staggered dim - 1)'
+  is_multi_dim: true
+  name: e_vert
+- default: .true.
+  description: 'use the input surface level data in the vertical interp and extrap
+
+    ; T = use the input surface data
+
+    ; F = do not use the input surface data'
+  is_multi_dim: false
+  name: use_surface
+- default: '0'
+  description: 'vertical refinement method (new in 3.7)
+
+    0: no vertical refinement
+
+    1: integer vertical refinement
+
+    2: use specified or computed eta levels for vertical refinement'
+  is_multi_dim: true
+  name: vert_refine_method
+? 'domains
+
+  '
+: - default: '4'
+    description: total number of moves
+    is_multi_dim: false
+    name: num_moves
+  - default: 5,51
+    description: 'percentage of previous time step to increase, if the
+
+      max(vert cfl, horiz cfl) <= target_cfl, then the time
+
+      will increase by max_step_increase_pct. Use something
+
+      large for nests (51% suggested)'
+    is_multi_dim: true
+    name: max_step_increase_pct
+  - default: -1,-1
+    description: 'flag = -1 implies use 6 * dx (defined in start_em),
+
+      starting_time_step = 100 means the starting time step
+
+      for the coarse grid is 100 s'
+    is_multi_dim: true
+    name: starting_time_step
+  - default: 2,2,2,2,
+    description: a list of nest domain id's, one per move
+    is_multi_dim: false
+    name: move_id(max_moves)
+  - default: 60,120,150,180,
+    description: time in minutes since the start of this domain
+    is_multi_dim: false
+    name: move_interval(max_moves)
+  - default: -1,-1
+    description: 'flag = -1 implies max time step is 3 * starting_time_step,
+
+      max_time_step = 100 means that the time step will not
+
+      exceed 100 s'
+    is_multi_dim: true
+    name: max_time_step
+  - default: 1,1,0,-1,
+    description: the number of parent domain grid cells to move in i direction
+    is_multi_dim: false
+    name: move_cd_x(max_moves)
+  - default: 1,0,-1,1,
+    description: 'the number of parent domain grid cells to move in j direction
+
+      positive is to move in increasing i and j direction, and
+
+      negative is to move in decreasing i and j direction.
+
+      0 means no move. The limitation now is to move only 1 grid cell
+
+      at each move.'
+    is_multi_dim: false
+    name: move_cd_y(max_moves)
+  - default: -1,-1
+    description: 'flag = -1 implies max time step is 0.5 * starting_time_step,
+
+      min_time_step = 100 means that the time step will not
+
+      be less than 100 s'
+    is_multi_dim: true
+    name: min_time_step
+  - default: '15'
+    description: how often the new vortex position is computed
+    is_multi_dim: true
+    name: vortex_interval
+  - default: '1'
+    description: 'default, all fine grid domains adaptive dt driven by coarse-grid
+
+      ; 2 = Fine grid domain #2 determines the fundamental adaptive dt.'
+    is_multi_dim: false
+    name: adaptation_domain
+  - default: '40'
+    description: used to compute the search radius for the new vortex position
+    is_multi_dim: true
+    name: max_vortex_speed
+  - default: '8'
+    description: 'how many coarse grid cells the moving nest is allowed to get
+
+      near the mother domain boundary'
+    is_multi_dim: true
+    name: corral_dist
+  - default: '50000'
+    description: pressure value in Pa where the vortex is tracked
+    is_multi_dim: false
+    name: track_level
+  - default: '0.'
+    description: time (in minutes) to start the moving nests
+    is_multi_dim: true
+    name: time_to_move
+  - default: 0,
+    description: number of points in tile x direction
+    is_multi_dim: false
+    name: tile_sz_x
+  - default: 0,
+    description: 'number of points in tile y direction
+
+      can be determined automatically'
+    is_multi_dim: false
+    name: tile_sz_y
+  - default: 1,
+    description: number of tiles per patch (alternative to above two items)
+    is_multi_dim: false
+    name: numtiles
+  - default: -1,
+    description: number of processors in x for decomposition
+    is_multi_dim: false
+    name: nproc_x
+  - default: -1,
+    description: 'number of processors in y for decomposition
+
+      -1: code will do automatic decomposition
+
+      >1: for both: will be used for decomposition'
+    is_multi_dim: false
+    name: nproc_y
+  - default: .false.
+    description: T/F use adaptive time stepping, ARW only
+    is_multi_dim: false
+    name: use_adaptive_time_step
+  - default: .true.
+    description: 'if adaptive time stepping, T/F modify the
+
+      time steps so that the exact history time is reached'
+    is_multi_dim: false
+    name: step_to_output_time
+  - default: 1.2,1.2
+    description: 'vertical and horizontal CFL <= to this value implies
+
+      no reason to reduce the time step, and to increase it'
+    is_multi_dim: true
+    name: target_cfl
+  - default: .84,.84
+    description: horizontal CFL <= to this value implies
+    is_multi_dim: true
+    name: target_hcfl
+dynamics:
+- default: 4 /
+  description: 'number of sound steps per time-step (0=set automatically)
+
+    (if using a time_step much larger than 6*dx (in km),
+
+    proportionally increase number of sound steps - also
+
+    best to use even numbers)'
+  is_multi_dim: true
+  name: time_step_sound
+- default: 0.,
+  description: damping coefficient (see above)
+  is_multi_dim: true
+  name: dampcoef
+- default: 'no'
+  description: 'default)
+
+    1 = yes'
+  is_multi_dim: false
+  name: '0'
+- default: 5000.,
+  description: damping depth (m) from model top
+  is_multi_dim: true
+  name: zdamp
+- default: 0,
+  description: whether to output time-averaged convective mass-fluxes from Grell-Devenyi
+    ensemble scheme
+  is_multi_dim: true
+  name: do_avgflx_cugd
+- default: .true.,
+  description: whether running the model in hydrostatic or non-hydro mode
+  is_multi_dim: true
+  name: non_hydrostatic
+- default: 'no'
+  description: default)
+  is_multi_dim: false
+  name: '0'
+- default: 0,
+  description: whether to output time-averaged mass-coupled advective velocities
+  is_multi_dim: true
+  name: do_avgflx_em
+- default: .false.,
+  description: Coriolis only acts on wind perturbation (idealized)
+  is_multi_dim: true
+  name: pert_coriolis
+- default: 0,
+  description: 'vertical velocity damping flag (for operational use)
+
+    0 = without damping
+
+    1 = with    damping'
+  is_multi_dim: false
+  name: w_damping
+- default: 3,
+  description: 'time-integration scheme option:
+
+    2 = Runge-Kutta 2nd order
+
+    3 = Runge-Kutta 3rd order'
+  is_multi_dim: false
+  name: rk_ord
+- default: .false.,
+  description: Zero vertical motion at top of domain
+  is_multi_dim: true
+  name: top_lid
+- default: 'yes'
+  description: only takes effect if do_avgflx_em=1 and cu_physics= 93
+  is_multi_dim: false
+  name: '1'
+- default: .true.,
+  description: whether to do Coriolis calculations (idealized) (inactive)
+  is_multi_dim: true
+  name: do_coriolis
+- default: 290.,
+  description: real-data, em ONLY, base sea-level temp (K)
+  is_multi_dim: false
+  name: base_temp
+- default: .true.,
+  description: 'used with diff_opt = 2; value of ".true." is recommended, except for
+
+    highly idealized numerical tests; damp_opt must not be 1 if ".true."
+
+    is chosen. .false. means subtract 1-d base-state profile before mixing'
+  is_multi_dim: true
+  name: mix_full_fields
+- default: 0,
+  description: 'turbulence and mixing option:
+
+    0 = no turbulence or explicit
+
+    spatial numerical filters (km_opt IS IGNORED).
+
+    1 = evaluates 2nd order
+
+    diffusion term on coordinate surfaces.
+
+    uses kvdif for vertical diff unless PBL option
+
+    is used. may be used with km_opt = 1 and 4.
+
+    (= 1, recommended for real-data cases)
+
+    2 = evaluates mixing terms in
+
+    physical space (stress form) (x,y,z).
+
+    turbulence parameterization is chosen
+
+    by specifying km_opt.'
+  is_multi_dim: true
+  name: diff_opt
+- default: 10^5
+  description: real-data, em ONLY, base sea-level pres (Pa), DO NOT CHANGE
+  is_multi_dim: false
+  name: base_pres
+- default: '0'
+  description: 0=anistropic vertical/horizontal diffusion coeffs, 1=isotropic
+  is_multi_dim: true
+  name: mix_isotropic
+- default: .true.,
+  description: whether to do curvature calculations (idealized) (inactive)
+  is_multi_dim: true
+  name: do_curvature
+- default: 1,
+  description: eddy coefficient option
+  is_multi_dim: true
+  name: km_opt
+- default: 50.,
+  description: real-data, em ONLY, lapse rate (K), DO NOT CHANGE
+  is_multi_dim: false
+  name: base_lapse
+- default: '0.1'
+  description: non-dimensional upper limit for diffusion coeffs
+  is_multi_dim: true
+  name: mix_upper_bound
+- default: .true.,
+  description: whether to do horizontal pressure gradient calculations (idealized)
+    (inactive)
+  is_multi_dim: true
+  name: do_gradp
+- default: 0.,
+  description: surface drag coefficient (Cd, dimensionless) for diff_opt=2 only
+  is_multi_dim: true
+  name: tke_drag_coefficient
+- default: 200.,
+  description: real-data, em ONLY, reference temp in stratosphere, US Standard atmosphere
+    216.5 K
+  is_multi_dim: false
+  name: iso_temp
+- default: constant
+  description: use khdif kvdif)
+  is_multi_dim: false
+  name: '1'
+- default: '45.'
+  description: the latitude above which the polar filter is turned on
+  is_multi_dim: false
+  name: fft_filter_lat
+- default: 0.,
+  description: surface thermal flux (H/(rho*cp), K m/s) for diff_opt=2 only
+  is_multi_dim: true
+  name: tke_heat_flux
+- default: '5500.'
+  description: 'real-data, em ONLY, base state pressure (Pa) at bottom of the stratosphere,
+
+    US Standard atmosphere 55 hPa'
+  is_multi_dim: false
+  name: base_pres_strat
+- default: 1.5 order TKE closure
+  description: 3D)
+  is_multi_dim: false
+  name: '2'
+- default: .true.
+  description: T/F mu coupled scalar arrays are run through the polar filters
+  is_multi_dim: false
+  name: coupled_filtering
+- default: Smagorinsky first order closure
+  description: '3D)
+
+    Note: option 2 and 3 are not recommended for DX > 2 km
+
+    4 = horizontal Smagorinsky first order closure
+
+    (recommended for real-data cases)'
+  is_multi_dim: false
+  name: '3'
+- default: '0.'
+  description: 'real-data, em ONLY, base state lapse rate ( dT / d(lnP) ) in stratosphere,
+
+    approx to US Standard atmosphere -12 K'
+  is_multi_dim: false
+  name: base_lapse_strat
+- default: 5,
+  description: horizontal momentum advection order (5=5th, etc.)
+  is_multi_dim: true
+  name: h_mom_adv_order
+- default: .false.
+  description: T/F remove negative values of scalar arrays by setting minimum value
+    to zero
+  is_multi_dim: false
+  name: pos_def
+- default: 0,
+  description: 'upper level damping flag
+
+    0 = without damping
+
+    1 = with diffusive damping, maybe used for real-data cases
+
+    (dampcoef nondimensional ~0.01-0.1)'
+  is_multi_dim: false
+  name: damp_opt
+- default: .f.,
+  description: whether to use base state parameters from the namelist
+  is_multi_dim: false
+  name: use_baseparam_fr_nml
+- default: 3,
+  description: vertical momentum advection order
+  is_multi_dim: true
+  name: v_mom_adv_order
+- default: with Rayleigh  damping
+  description: 'dampcoef inverse time scale [1/s] e.g. .003; idealized case only
+
+    not for real-data cases)'
+  is_multi_dim: false
+  name: '2'
+- default: 5,
+  description: horizontal scalar advection order
+  is_multi_dim: true
+  name: h_sca_adv_order
+- default: .f.,
+  description: whether to use vertical velocity from input file
+  is_multi_dim: false
+  name: use_input_w
+- default: .false.
+  description: T/F replace the entire j=1 (jds-1) with the values from j=2 (jds-2)
+  is_multi_dim: false
+  name: swap_pole_with_next_j
+- default: with w-Rayleigh damping
+  description: 'dampcoef inverse time scale [1/s] e.g. .2;
+
+    for real-data cases)'
+  is_multi_dim: false
+  name: '3'
+- default: '0'
+  description: '1: use theta_m=theta(1+1.61Qv)
+
+    0: use dry theta in dynamics'
+  is_multi_dim: false
+  name: use_theta_m
+- default: 0,
+  description: horizontal diffusion constant (m^2/s). A typical value should be 0.1*DX
+    in meters.
+  is_multi_dim: true
+  name: khdif
+- default: 3,
+  description: vertical scalar advection order
+  is_multi_dim: true
+  name: v_sca_adv_order
+- default: '0'
+  description: 'whether to include QV and QC tendencies in advection (new in 3.7)
+
+    0 = default, old behavior
+
+    1 = include QV and QC tendencies - this helps to produce correct solution
+
+    in an idealized ''moist benchmark'' test case (Bryan, 2014).
+
+    In real data testing, time step needs to be reduce to maintain stable solution'
+  is_multi_dim: false
+  name: use_q_diabatic
+- default: .false.
+  description: T/F average the field at each i location in the j-loop with a number
+    of grid points based on a map-factor ratio
+  is_multi_dim: false
+  name: actual_distance_average
+- default: '0.25'
+  description: Smagorinsky coeff
+  is_multi_dim: false
+  name: c_s
+- default: 0,
+  description: vertical diffusion constant (m^2/s). A typical value should be 100.
+  is_multi_dim: true
+  name: kvdif
+- default: 1,
+  description: 'advection options for momentum variables:
+
+    1=original, 3 = 5th-order WENO
+
+    ; advection options for scalar variables: 0=simple, 1=positive definite,
+
+    2=monotonic, 3=5th order WENO, 4=5th-order WENO with positive definite filter'
+  is_multi_dim: true
+  name: momentum_adv_opt
+- default: '0'
+  description: for running without gravity wave drag
+  is_multi_dim: false
+  name: gwd_opt
+- default: '1'
+  description: for moisture
+  is_multi_dim: true
+  name: moist_adv_opt
+- default: '0'
+  description: nonlinear backscatter and anisotropy (NBA) off
+  is_multi_dim: true
+  name: sfs_opt
+- default: '0.15'
+  description: TKE coeff
+  is_multi_dim: false
+  name: c_k
+- default: '1'
+  description: for scalars
+  is_multi_dim: true
+  name: scalar_adv_opt
+- default: 0.1,
+  description: divergence damping (0.1 is typical)
+  is_multi_dim: true
+  name: smdiv
+- default: '0'
+  description: no added output
+  is_multi_dim: true
+  name: m_opt
+- default: '1'
+  description: for chem variables
+  is_multi_dim: true
+  name: chem_adv_opt
+- default: '1'
+  description: for tracer variables (WRF-Chem activated)
+  is_multi_dim: true
+  name: tracer_adv_opt
+- default: 0,
+  description: 6th-order numerical diffusion
+  is_multi_dim: false
+  name: diff_6th_opt
+- default: 0.01,
+  description: 'external-mode filter coef for mass coordinate model
+
+    (0.01 is typical for real-data cases)'
+  is_multi_dim: true
+  name: emdiv
+- default: '1'
+  description: for tke
+  is_multi_dim: true
+  name: tke_adv_opt
+- default: '0'
+  description: ''
+  is_multi_dim: true
+  name: tracer_opt
+- default: no 6th-order diffusion
+  description: default)
+  is_multi_dim: false
+  name: '0'
+- default: 6th-order numerical diffusion
+  description: 'not recommended)
+
+    2 = 6th-order numerical diffusion but prohibit up-gradient diffusion'
+  is_multi_dim: false
+  name: '1'
+- default: .1,
+  description: time off-centering for vertical sound waves
+  is_multi_dim: true
+  name: epssm
+- default: 0.12,
+  description: '6th-order numerical diffusion non-dimensional rate (max value 1.0
+
+    corresponds to complete removal of 2dx wave in one timestep)'
+  is_multi_dim: false
+  name: diff_6th_factor
+fdda:
+- default: '1'
+  description: PXLSM Soil nudging option (requires wrfsfdda file)
+  is_multi_dim: true
+  name: pxlsm_soil_nudge
+- default: 0,
+  description: 1= nudging tendencies are set to zero in between fdda calls
+  is_multi_dim: true
+  name: fgdtzero
+- default: 0,
+  description: 1= no nudging of ph in the pbl, 0= nuding in the pbl
+  is_multi_dim: false
+  name: if_no_pbl_nudging_ph
+- default: 0,
+  description: 0= nudge ph in all layers, 1= limit nudging to levels above k_zfac_ph
+  is_multi_dim: true
+  name: if_zfac_ph
+- default: 10,
+  description: 10= model level below which nudging is switched off for ph
+  is_multi_dim: true
+  name: k_zfac_ph
+- default: 1,
+  description: 'depth in k between k_zfac_X to dk_zfac_X where nudging increases
+
+    linearly to full strength
+
+    dk_zfac_t  (max_dom)                = 1,
+
+    dk_zfac_ph (max_dom)                = 1,
+
+    gph (max_dom)                       = 0.0003,'
+  is_multi_dim: true
+  name: dk_zfac_uv
+- default: 3,
+  description: top wave number to nudge in x direction
+  is_multi_dim: true
+  name: xwavenum
+- default: 3,
+  description: top wave number to nudge in y direction
+  is_multi_dim: true
+  name: ywavenum
+- default: '1'
+  description: 'obs-nudging fdda on (=0 off) for each domain
+
+    also need to set auxinput11_interval and auxinput11_end_h
+
+    in time_control namelist'
+  is_multi_dim: true
+  name: obs_nudge_opt
+- default: '150000'
+  description: 'max number of observations used on a domain during any
+
+    given time window'
+  is_multi_dim: false
+  name: max_obs
+- default: '0'
+  description: obs nudging start time in minutes
+  is_multi_dim: false
+  name: fdda_start
+- default: '180'
+  description: obs nudging end time in minutes
+  is_multi_dim: false
+  name: fdda_end
+- default: '1'
+  description: 'whether to nudge wind: (=0 off)'
+  is_multi_dim: true
+  name: obs_nudge_wind
+- default: 6.E-4,
+  description: 'nudging coefficient for wind, unit: s-1'
+  is_multi_dim: false
+  name: obs_coef_wind
+- default: '1'
+  description: 'whether to nudge temperature: (=0 off)'
+  is_multi_dim: false
+  name: obs_nudge_temp
+- default: 6.E-4,
+  description: 'nudging coefficient for temperature, unit: s-1'
+  is_multi_dim: false
+  name: obs_coef_temp
+- default: '1'
+  description: 'whether to nudge water vapor mixing ratio: (=0 off)'
+  is_multi_dim: false
+  name: obs_nudge_mois
+- default: 6.E-4,
+  description: 'nudging coefficient for water vapor mixing ratio, unit: s-1'
+  is_multi_dim: false
+  name: obs_coef_mois
+- default: '0'
+  description: whether to nudge surface pressure (not used)
+  is_multi_dim: false
+  name: obs_nudge_pstr
+- default: '0.'
+  description: 'nudging coefficient for surface pressure, unit: s-1 (not used)'
+  is_multi_dim: false
+  name: obs_coef_pstr
+- default: 200.,
+  description: horizonal radius of influence in km
+  is_multi_dim: false
+  name: obs_rinxy
+- default: 0.1,
+  description: vertical radius of influence in eta
+  is_multi_dim: false
+  name: obs_rinsig
+- default: '0.66667'
+  description: 'half-period time window over which an observation
+
+    will be used for nudging (hours)'
+  is_multi_dim: true
+  name: obs_twindo
+- default: 10,
+  description: freq in coarse grid timesteps for diag prints
+  is_multi_dim: false
+  name: obs_npfi
+- default: '2'
+  description: freq in coarse grid timesteps for obs input and err calc
+  is_multi_dim: true
+  name: obs_ionf
+- default: '0'
+  description: 'for dynamic initialization using a ramp-down function to gradually
+
+    turn off the FDDA before the pure forecast (=1 on)'
+  is_multi_dim: false
+  name: obs_idynin
+- default: '40'
+  description: 'time period in minutes over which the nudging is ramped down
+
+    from one to zero.'
+  is_multi_dim: false
+  name: obs_dtramp
+- default: 10,
+  description: Frequency in obs index for diagnostic printout
+  is_multi_dim: true
+  name: obs_prt_freq
+- default: 1000,
+  description: Maximum allowed obs entries in diagnostic printout
+  is_multi_dim: false
+  name: obs_prt_max
+- default: .true.
+  description: print obs input diagnostics (=.false. off)
+  is_multi_dim: false
+  name: obs_ipf_in4dob
+- default: .true.
+  description: print obs error diagnostics (=.false. off)
+  is_multi_dim: false
+  name: obs_ipf_errob
+- default: '1'
+  description: grid-nudging fdda on (=0 off) for each domain
+  is_multi_dim: true
+  name: grid_fdda
+- default: .true.
+  description: print obs nudge diagnostics (=.false. off)
+  is_multi_dim: false
+  name: obs_ipf_nudob
+- default: .true.
+  description: Enable obs init warning messages
+  is_multi_dim: false
+  name: obs_ipf_init
+- default: '0'
+  description: 1=no wind-nudging within pbl
+  is_multi_dim: true
+  name: obs_no_pbl_nudge_uv
+- default: '0'
+  description: 1=no temperature-nudging within pbl
+  is_multi_dim: true
+  name: obs_no_pbl_nudge_t
+- default: '0'
+  description: 1=no moisture-nudging within pbl
+  is_multi_dim: true
+  name: obs_no_pbl_nudge_q
+- default: '0'
+  description: 'horizontal spreading scheme for surf obs;
+
+    0=wrf scheme, 1=original mm5 scheme'
+  is_multi_dim: false
+  name: obs_sfc_scheme_horiz
+- default: '0'
+  description: 'vertical spreading scheme for surf obs
+
+    0=regime vif scheme, 1=original simple scheme'
+  is_multi_dim: false
+  name: obs_sfc_scheme_vert
+- default: '20'
+  description: Max pressure gap between soundings, in cb
+  is_multi_dim: false
+  name: obs_max_sndng_gap
+- default: '50'
+  description: Vert infl full weight  height for lowest model level (LML) obs, regime
+    1, winds
+  is_multi_dim: false
+  name: obs_nudgezfullr1_uv
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 1, winds
+  is_multi_dim: false
+  name: obs_nudgezrampr1_uv
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 2, winds
+  is_multi_dim: false
+  name: obs_nudgezfullr2_uv
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 2, winds
+  is_multi_dim: false
+  name: obs_nudgezrampr2_uv
+- default: '-5000'
+  description: Vert infl full weight  height for LML obs, regime 4, winds
+  is_multi_dim: false
+  name: obs_nudgezfullr4_uv
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 4, winds
+  is_multi_dim: false
+  name: obs_nudgezrampr4_uv
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 1, temperature
+  is_multi_dim: false
+  name: obs_nudgezfullr1_t
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 1, temperature
+  is_multi_dim: false
+  name: obs_nudgezrampr1_t
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 2, temperature
+  is_multi_dim: false
+  name: obs_nudgezfullr2_t
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 2, temperature
+  is_multi_dim: false
+  name: obs_nudgezrampr2_t
+- default: '-5000'
+  description: Vert infl full weight  height for LML obs, regime 4, temperature
+  is_multi_dim: false
+  name: obs_nudgezfullr4_t
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 4, temperature
+  is_multi_dim: false
+  name: obs_nudgezrampr4_t
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 1, moisture
+  is_multi_dim: false
+  name: obs_nudgezfullr1_q
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 1, moisture
+  is_multi_dim: false
+  name: obs_nudgezrampr1_q
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 2, moisture
+  is_multi_dim: false
+  name: obs_nudgezfullr2_q
+- default: '360'
+  description: time interval (in min) between analysis times (must use minutes)
+  is_multi_dim: true
+  name: gfdda_interval_m
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 2, moisture
+  is_multi_dim: false
+  name: obs_nudgezrampr2_q
+- default: '"wrffdda_d<domain>"'
+  description: defined name in real
+  is_multi_dim: false
+  name: gfdda_inname
+- default: '-5000'
+  description: Vert infl full weight  height for LML obs, regime 4, moisture
+  is_multi_dim: false
+  name: obs_nudgezfullr4_q
+- default: '6'
+  description: time (in hours) to stop nudging after start of forecast
+  is_multi_dim: true
+  name: gfdda_end_h
+- default: '2'
+  description: analysis data io format (2 = netCDF)
+  is_multi_dim: false
+  name: io_form_gfdda
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 4, moisture
+  is_multi_dim: false
+  name: obs_nudgezrampr4_q
+- default: '0'
+  description: calculation frequency (minutes) for grid-nudging (0=every step)
+  is_multi_dim: true
+  name: fgdt
+- default: '50'
+  description: Min depth through which vertical infl fcn remains 1.0
+  is_multi_dim: false
+  name: obs_nudgezfullmin
+- default: '0'
+  description: 1= no nudging of u and v in the pbl, 0=nudging in the pbl
+  is_multi_dim: true
+  name: if_no_pbl_nudging_uv
+- default: '0'
+  description: 1= no nudging of temp in the pbl, 0=nudging in the pbl
+  is_multi_dim: true
+  name: if_no_pbl_nudging_t
+- default: '50'
+  description: Min depth (m) through which vert infl fcn decreases from 1 to 0
+  is_multi_dim: false
+  name: obs_nudgezrampmin
+- default: '0'
+  description: 1= no nudging of qvapor in the pbl, 0=nudging in the pbl
+  is_multi_dim: true
+  name: if_no_pbl_nudging_q
+- default: '0'
+  description: 0= nudge u and v in all layers, 1= limit nudging to levels above k_zfac_uv
+  is_multi_dim: true
+  name: if_zfac_uv
+- default: '3000'
+  description: Max depth (m) in which vert infl function is nonzero
+  is_multi_dim: false
+  name: obs_nudgezmax
+- default: '10'
+  description: 10=model level below which nudging is switched off for u and v
+  is_multi_dim: true
+  name: k_zfac_uv
+- default: '1.0'
+  description: Scale factor applied to time window for surface obs
+  is_multi_dim: false
+  name: obs_sfcfact
+- default: '0'
+  description: 0= nudge temp in all layers, 1= limit nudging to levels above k_zfac_t
+  is_multi_dim: true
+  name: if_zfac_t
+- default: '10'
+  description: 10=model level below which nudging is switched off for temp
+  is_multi_dim: true
+  name: k_zfac_t
+- default: '1.0'
+  description: Scale factor applied to horiz radius of influence for surface obs
+  is_multi_dim: false
+  name: obs_sfcfacr
+- default: '0'
+  description: 0= nudge qvapor in all layers, 1= limit nudging to levels above k_zfac_q
+  is_multi_dim: true
+  name: if_zfac_q
+- default: '7.5'
+  description: Max pressure change (cb) allowed within horiz radius of influence
+  is_multi_dim: false
+  name: obs_dpsmx
+- default: '10'
+  description: 10=model level below which nudging is switched off for qvapor
+  is_multi_dim: true
+  name: k_zfac_q
+- default: '0'
+  description: '1 = prevent to nudge toward negative QV
+
+    /'
+  is_multi_dim: false
+  name: obs_scl_neg_qv_innov
+- default: '0.0003'
+  description: nudging coefficient for u and v (sec-1)
+  is_multi_dim: true
+  name: guv
+- default: '0.0003'
+  description: nudging coefficient for temp (sec-1)
+  is_multi_dim: true
+  name: gt
+- default: '0.0003'
+  description: nudging coefficient for qvapor (sec-1)
+  is_multi_dim: true
+  name: gq
+- default: '0'
+  description: 0= nudging ends as a step function, 1= ramping nudging down at end
+    of period
+  is_multi_dim: false
+  name: if_ramping
+- default: '60.0'
+  description: 'time (min) for ramping function, 60.0=ramping starts at last analysis
+    time,
+
+    -60.0=ramping ends at last analysis time'
+  is_multi_dim: false
+  name: dtramp_min
+- default: '0'
+  description: 'surface fdda switch
+
+    0: off;
+
+    1: nudging selected surface fields;
+
+    2: FASDAS (flux-adjusting surface data assimilation system)'
+  is_multi_dim: true
+  name: grid_sfdda
+- default: '6'
+  description: time (in hours) to stop sfc nudging after start of forecast
+  is_multi_dim: true
+  name: sgfdda_end_h
+- default: '"wrfsfdda_d<domain>"'
+  description: defined name for sfc nudgingi in input file (from program obsgrid)
+  is_multi_dim: false
+  name: sgfdda_inname
+- default: '180'
+  description: time interval (in min) between sfc analysis times (must use minutes)
+  is_multi_dim: true
+  name: sgfdda_interval_m
+- default: '2'
+  description: sfc analysis data io format (2 = netCDF)
+  is_multi_dim: false
+  name: io_form_sgfdda
+- default: '0.0003'
+  description: nudging coefficient for sfc u and v (sec-1)
+  is_multi_dim: true
+  name: guv_sfc
+- default: '0.0003'
+  description: nudging coefficient for sfc temp (sec-1)
+  is_multi_dim: true
+  name: gt_sfc
+- default: '0.0003'
+  description: nudging coefficient for sfc qvapor (sec-1)
+  is_multi_dim: true
+  name: gq_sfc
+- default: '250.0'
+  description: 'radius of influence used to determine the confidence (or weights)
+    for
+
+    the analysis, which is based on the distance between the grid point to the nearest
+
+    obs. The analysis without nearby observation is used at a reduced weight.'
+  is_multi_dim: false
+  name: rinblw
+grib2:
+- default: 255,
+  description: 'Production status of processed data in the grib2 message.
+
+    See Code Table 1.3 of the grib2 manual. This is octet 20 of
+
+    Section 1 in the grib2 record'
+  is_multi_dim: false
+  name: production_status
+- default: 255,
+  description: 'Analysis or generating forecast process identifier, typically
+
+    defined by the originating center to identify the forecast process
+
+    that was used to generate the data. This is octet 14 of Section
+
+    4 in the grib2 message'
+  is_multi_dim: false
+  name: forecast_proc_id
+- default: 40,
+  description: 'The compression method to encode the output grib2 message.
+
+    Only 40 for jpeg2000 or 41 for PNG are supported'
+  is_multi_dim: false
+  name: compression
+- default: 255,
+  description: 'Background generating process identifier, typically defined
+
+    by the originating center to identify the background data that
+
+    was used in creating the data. This is octet 13 of Section 4
+
+    in the grib2 message'
+  is_multi_dim: false
+  name: background_proc_id
+namelist_quilt:
+- default: '0,        default value is 0: no quilting'
+  description: '> 0 quilting I/O
+
+    nio_groups                          = 1,        default 1. May be set to higher
+    value for nesting IO
+
+    or history and restart IO'
+  is_multi_dim: false
+  name: nio_tasks_per_group
+noah_mp:
+- default: 1,
+  description: 'Noah-MP Precipitation Partitioning between snow and rain
+
+    ;    1 = Jordan (1991)
+
+    ;    2 = BATS:  Snow when SFCTMP < TFRZ+2.2
+
+    ;    3 = Snow when SFCTMP < TFRZ
+
+    ;    4 = Use WRF precipitation partitioning'
+  is_multi_dim: false
+  name: opt_snf
+- default: 4,
+  description: 'Noah-MP Dynamic Vegetation option:
+
+    ;    1 = Off (LAI from table; FVEG = shdfac)
+
+    ;    2 = On  (LAI predicted;  FVEG calculated)
+
+    ;    3 = Off (LAI from table; FVEG calculated)
+
+    ;    4 = Off (LAI from table; FVEG = maximum veg. fraction)
+
+    ;    5 = On  (LAI predicted;  FVEG = maximum veg. fraction)'
+  is_multi_dim: false
+  name: dveg
+- default: 1,
+  description: 'Noah-MP Runoff and Groundwater option
+
+    ;    1 = TOPMODEL with groundwater
+
+    ;    2 = TOPMODEL with equilibrium water table
+
+    ;    3 = original surface and subsurface runoff (free drainage)
+
+    ;    4 = BATS surface and subsurface runoff (free drainage)'
+  is_multi_dim: false
+  name: opt_run
+- default: 1,
+  description: 'Noah-MP Soil Permeability option
+
+    ;    1 = Linear effects, more permeable;
+
+    ;    2 = Non-linear effects, less permeable'
+  is_multi_dim: false
+  name: opt_inf
+- default: 1,
+  description: 'Noah-MP surface evaporation resistence option (new in 3.8)
+
+    ;    1 -> Sakaguchi and Zeng, 2009
+
+    ;    2 -> Sellers (1992)
+
+    ;    3 -> adjusted Sellers to decrease RSURF for wet soil
+
+    ;    4 -> option 1 for non-snow; rsurf = rsurf_snow for snow (set in MPTABLE);
+    AD v3.8
+
+    /'
+  is_multi_dim: false
+  name: opt_rsf
+- default: 3,
+  description: 'Noah-MP Radiative Transfer option
+
+    ;    1 = Modified two-stream;
+
+    ;    2 = Two-stream applied to grid-cell
+
+    ;    3 = Two-stream applied to vegetated fraction'
+  is_multi_dim: false
+  name: opt_rad
+- default: 1,
+  description: 'Noah-MP Stomatal Resistance option:
+
+    ;    1 = Ball-Berry; 2 = Jarvis'
+  is_multi_dim: false
+  name: opt_crs
+- default: 2,
+  description: 'Noah-MP Soil Temperature Lower Boundary Condition
+
+    ;    1 = Zero heat flux
+
+    ;    2 = TBOT at 8 m from input file'
+  is_multi_dim: false
+  name: opt_tbot
+- default: 1,
+  description: 'Noah-MP Supercooled Liquid Water option
+
+    ;    1 = No iteration; 2 = Koren''s iteration'
+  is_multi_dim: false
+  name: opt_frz
+- default: 1,
+  description: 'Noah-MP Snow/Soil temperature time scheme
+
+    ;    1 = semi-implicit
+
+    ;    2 = full-implicit
+
+    ;    3 = semi-implicit where Ts uses snow cover fraction'
+  is_multi_dim: false
+  name: opt_stc
+- default: '1'
+  description: 'Noah-MP surface layer drag coefficient calculation
+
+    ;    1 = Monin-Obukhov; 2 = original Noah (Chen97);
+
+    ;    3 = MYJ consistent; 4 = YSU consistent.
+
+    ;    options 3 and 4 removed in 3.7'
+  is_multi_dim: false
+  name: opt_sfc
+- default: 2,
+  description: 'Noah-MP Ground Surface Albedo option
+
+    ;    1 = BATS; 2 = CLASS'
+  is_multi_dim: false
+  name: opt_alb
+- default: 1,
+  description: 'Noah-MP glacier treatment option (new in 3.8)
+
+    ;    1 = includes phase change
+
+    ;    2 = slab ice (Noah)'
+  is_multi_dim: false
+  name: opt_gla
+- default: 1,
+  description: 'Noah-MP Soil Moisture Factor for Stomatal Resistance
+
+    ;    1 = Noah; 2 = CLM; 3 = SSiB'
+  is_multi_dim: false
+  name: opt_btr
+physics:
+- default: '0'
+  description: update deep soil temperature (1, yes; 0, no)
+  is_multi_dim: false
+  name: tmn_update
+- default: '0'
+  description: 1 = Simulates the effects of wind turbines in the atmospheric evolution
+  is_multi_dim: false
+  name: windfarm_opt
+- default: '150'
+  description: days over which tmn is computed using skin temperature
+  is_multi_dim: false
+  name: lagday
+- default: '0'
+  description: 'whether to use lat-lon or i-j coordinate as wind turbine locations
+
+    ; 0 = The coordinate of the turbines are defined in terms of lat-lon
+
+    ; 1 = The coordinate of the turbines are defined in terms of grid points'
+  is_multi_dim: false
+  name: windfarm_ij
+- default: '0'
+  description: calculate skin SST
+  is_multi_dim: false
+  name: sst_skin
+- default: '0'
+  description: slope effects for solar radiation (1=on, 0=off)
+  is_multi_dim: true
+  name: slope_rad
+- default: '0'
+  description: neighboring-point shadow effects for solar radiation (1=on, 0=off)
+  is_multi_dim: true
+  name: topo_shading
+- default: '25000.'
+  description: max shadow length in meters for topo_shading=1
+  is_multi_dim: false
+  name: shadlen
+- default: '0'
+  description: 'activate ocean model (0=no, 1=1d mixed layer; 2=3D PWP, no bathy)
+
+    ; works with sf_surface_physics = 1 only'
+  is_multi_dim: false
+  name: sf_ocean_physics
+- default: '50'
+  description: oml model can be initialized with a constant depth everywhere (m)
+  is_multi_dim: false
+  name: oml_hml0
+- default: '0.14'
+  description: oml deep water lapse rate (K m-1)
+  is_multi_dim: false
+  name: oml_gamma
+- default: '0.'
+  description: 'Relaxation time (in second) of mixed layer ocean model back to original
+    values
+
+    (an example value is 259200 sec. (3 days)) (new in 3.8)'
+  is_multi_dim: false
+  name: oml_relaxation_time
+- default: '1.'
+  description: '3D PWP time step (min).  It can be set to be the same as WRF time
+    step
+
+    ; in corresponding nested grids, but omdt should be no less than 1.0 minute.'
+  is_multi_dim: false
+  name: omdt
+- default: '30'
+  description: 'number of vertical levels in 3DPWP. Note that the depth of each ocean
+
+    ; model layers is specified in OM_DEPTH in wrfinput_d01'
+  is_multi_dim: false
+  name: ocean_levels
+- default: '0'
+  description: Forward trajectory calculation (Lee and Chen 2013)
+  is_multi_dim: false
+  name: traj_opt
+- default: '50'
+  description: number of trajectories to be released
+  is_multi_dim: false
+  name: num_traj
+- default: '0'
+  description: 'alternative Ck, Cd formulation for tropical storm application
+
+    ; sf_sfclay=1 and 11
+
+    ; 0=default
+
+    ; 1=Donelan Cd + const z0q
+
+    ; 2=Donelan Cd + Garratt
+
+    ; sf_sfclay=5
+
+    ;   (default) =0: z0, zt, and zq from COARE3.0 (Fairall et al 2003)
+
+    ;             =1: z0 from Davis et al (2008), zt & zq from COARE3.0
+
+    ;             =2: z0 from Davis et al (2008), zt & zq from Garratt (1992)'
+  is_multi_dim: false
+  name: isftcflx
+- default: '0'
+  description: 'treat sea-ice as fractional field (1) or ice/no-ice flag (0)
+
+    works for sf_sfclay_physics=1,2,5,or 7.
+
+    If fractional_seaice = 1, also set seaice_threshold = 0.'
+  is_multi_dim: false
+  name: fractional_seaice
+- default: '0'
+  description: 'option to set albedo over sea ice
+
+    ; 0 = seaice albedo is a constant value from namelist option seaice_albedo_default
+
+    ; 1 = seaice albedo is f(Tair,Tskin,Snow) follwing Mills (2011) for Arctic Ocean
+
+    ; 2 = seaice albedo read in from input variable ALBSI'
+  is_multi_dim: false
+  name: seaice_albedo_opt
+- default: '0.65'
+  description: default value of seaice albedo for seaice_albedo_opt=0
+  is_multi_dim: false
+  name: seaice_albedo_default
+- default: '0'
+  description: 'method for treating snow depth on sea ice
+
+    ; 0 = snow depth on sea ice is bounded by seaice_snowdepth_min and seaice_snowdepth_max
+
+    ; 1 = snow depth on sea ice read in from input array SNOWSI (bounded by
+
+    ;     seaice_snowdepth_min and seaice_snodepth_max)'
+  is_multi_dim: false
+  name: seaice_snowdepth_opt
+- default: 1.E10
+  description: maximum allowed accumulation of snow (m) on sea ice
+  is_multi_dim: false
+  name: seaice_snowdepth_max
+- default: '0.001'
+  description: minimum snow depth (m) on sea ice
+  is_multi_dim: false
+  name: seaice_snowdepth_min
+- default: '0'
+  description: 'option for treating seaice thickness
+
+    ; 0 = seaice thickness is uniform value taken from namelist variable seaice_thickness_default
+
+    ; 1 = seaice_thickness is read in from input variable ICEDEPTH'
+  is_multi_dim: false
+  name: seaice_thickness_opt
+- default: '3.0'
+  description: default value of seaice thickness for seaice_thickness_opt=0
+  is_multi_dim: false
+  name: seaice_thickness_default
+- default: .false.
+  description: set Tice to Tsk to avoid unrealistically low sea ice temperatures
+  is_multi_dim: false
+  name: tice2tsk_if2cold
+- default: '0'
+  description: 'thermal roughness length for sfclay and myjsfc (0 = old, 1 = veg dependent
+    Chen-Zhang Czil)
+
+    ;     for mynn sfc (0=Zilitinkevitch,1=Chen-Zhang,2=mod Yang,3=const zt)'
+  is_multi_dim: false
+  name: iz0tlnd
+- default: 10.,
+  description: limit on temp tendency from mp latent heating from radar data assimilation
+  is_multi_dim: false
+  name: mp_tend_lim
+- default: 0.,
+  description: 'number of minutes in precipitation bucket (ARW only) - will add three
+
+    new 2d output fields: prec_acc_c, prec_acc_nc and snow_acc_nc'
+  is_multi_dim: true
+  name: prec_acc_dt
+- default: 0,
+  description: 1 = improve effect of topography for surface winds.
+  is_multi_dim: true
+  name: topo_wind
+- default: .false.
+  description: 'Option to activate UA Noah changes: a different snow-cover physics
+    in
+
+    Noah, aimed particularly toward improving treatment of snow as it relates
+
+    to the vegetation canopy. Also uses new columns added in VEGPARM.TBL'
+  is_multi_dim: false
+  name: ua_phys
+- default: aerosol input option for radiation
+  description: 'currently rrtmg only)
+
+    = 0, none'
+  is_multi_dim: false
+  name: aer_opt
+- default: 1,
+  description: lake model on/off
+  is_multi_dim: true
+  name: sf_lake_physics
+- default: 50,
+  description: 'default lake depth (If there is no lake_depth information in the input
+    data, then lake depth
+
+    is assumed to be 50m)'
+  is_multi_dim: true
+  name: lakedepth_default
+- default: 5,
+  description: 'minimum elevation of lakes. May be used to determine whether a water
+    point is a lake in the absence of lake
+
+    category. If the landuse type includes ''lake'' (i.e. Modis_lake and USGS_LAKE),
+    this variable is of no effects.'
+  is_multi_dim: true
+  name: lake_min_elev
+- default: 1,
+  description: 'option to use lake depth data. Lake depth data is available from 3.6
+    geogrid program. If one didn''t process
+
+    the lake depth data, but this switch is set to 1, the program will stop and tell
+    one to go back to geogrid
+
+    program.
+
+    = 0, do not use lake depth data.
+
+    lightning_option (max_dom)                     ; Lightning parameterization option
+    to allow flash rate prediction without chemistry'
+  is_multi_dim: false
+  name: use_lakedepth
+- default: '0.'
+  description: Start time for calling lightning parameterization. Recommends at least
+    10 minutes for spin-up.
+  is_multi_dim: true
+  name: lightning_start_seconds
+- default: '0.'
+  description: time interval (seconds) for calling lightning parameterization. Default
+    uses model time step
+  is_multi_dim: true
+  name: lightning_dt
+- default: '1.0'
+  description: 'Factor to adjust the predicted number of flashes. Recommends 1.0 for
+    lightning_option = 11
+
+    between dx=10 and 50 km. Manual tuning recommended for all other options independently
+
+    for each nest.
+
+    cellcount_method (max_dom)                     ; Method for counting storm cells.
+    Used by CRM options (lightning_options=1,2).'
+  is_multi_dim: true
+  name: flashrate_factor
+- default: '1.'
+  description: Denominator of user-specified prescribed IC:CG
+  is_multi_dim: false
+  name: iccg_prescribed_den
+- default: '0.'
+  description: Numerator of user-specified prescribed IC:CG
+  is_multi_dim: false
+  name: iccg_prescribed_num
+- default: '0.'
+  description: 'Adjustment from LNB in km. Used by lightning_option=11. Default is
+    0, but recommends 2 km
+
+    iccg_method (max_dom)                          ; IC:CG partitioning method (IC:
+    intra-cloud; CG: cloud-to-ground)'
+  is_multi_dim: true
+  name: cldtop_adjustment
+- default: 0,
+  description: 'activate urban canopy model (in Noah LSM only)
+
+    = 0: no
+
+    = 1: Single-layer, UCM'
+  is_multi_dim: true
+  name: sf_urban_physics
+- default: 0,
+  description: minutes between boundary-layer physics calls
+  is_multi_dim: true
+  name: bldt
+- default: 0,
+  description: whether to turn on top-down, radiation-driven mixing (1=yes)
+  is_multi_dim: false
+  name: ysu_topdown_pblmix
+- default: 0,   additional t-averaged stuff for cu physics
+  description: 'cu_phys = 3, 5 and 93 only)
+
+    kf_edrates (max_dom)                = 0,   Add entrainment/detrainment rates and
+    convective timescale output variables for KF-based'
+  is_multi_dim: false
+  name: cu_diag
+- default: 1,
+  description: 'whether to turn on new day-time EDMF QNSE (0=no)
+
+    topo_wind (max_dom)                 = 0, turn off,
+
+    = 1, turn on topographic surface wind correction from Jimenez
+
+    (YSU PBL only, and require extra input from geogrid)'
+  is_multi_dim: true
+  name: mfshconv
+- default: .false., default off
+  description: '= .true. do MYNN tke advection
+
+    icloud_bl                           option to couple the subgrid-scale clouds
+    from the PBL scheme (MYNN only)
+
+    to radiation schemes
+
+    0: no coupling; 1: activate coupling to radiation (default)
+
+    bl_mynn_cloudmix                    option to activate mixing of qc and qi in
+    MYNN
+
+    0: no mixing of qc & qi; 1: mixing activated (default).
+
+    Note qnc and qni are mixed when scalar_pblmix =1.
+
+    bl_mynn_mixlength                   option to change mixing length formulation
+    in MYNN
+
+    0:original as in Nakanishi and Niino 2009,
+
+    1:RAP/HRRR (default, including BouLac in free atmosphere),
+
+    2:experimental (includes cloud-specific mixing length and a scale-aware mixing
+
+    length, following Ito et al. 2015, BLM). Option 2 has been well tested with
+
+    the edmf options.
+
+    bl_mynn_cloudpdf                    option to switch to different cloud PDFs to
+    represent subgrid clouds
+
+    0: original (Sommeria and Deardorf 1977);
+
+    1: Kuwano et al 2010?, similar to option 0, but uses resolved scale gradients
+
+    as opposed to higher order moments ;
+
+    2: from Chaboureau and Bechtold (2002, JAS, with mods, default)
+
+    bl_mynn_edmf                        option to activate mass-flux scheme in MYNN
+
+    1: for StEM; 2: for TEMF; default =0, just regular MYNN.
+
+    Related (hidden) options:
+
+    bl_mynn_edmf_mom                    option to activate momentum transport in MYNN
+    mass-flux scheme
+
+    (assuming bl_mynn_edmf > 0)
+
+    0: no momentum transport; 1: momentum transport activated (default)
+
+    bl_mynn_edmf_tke                    option to activate TKE transport in MYNN mass-flux
+    scheme
+
+    (assuming bl_mynn_edmf > 0)
+
+    0: no TKE transport (default);1: activate TKE transport'
+  is_multi_dim: true
+  name: bl_mynn_tkeadvect
+- default: '0'
+  description: default), 1 (mixed layer model), 2 (3d ocean)
+  is_multi_dim: false
+  name: sf_ocean_physics
+- default: 1,   Shallow convection used with Grell 3D ensemble schemes
+  description: cu_physics = 3 or 5)
+  is_multi_dim: false
+  name: ishallow
+- default: 0,
+  description: 'chemistry option - use WRF-Chem
+
+    mp_physics (max_dom)                microphysics option
+
+    = 0, no microphysics
+
+    = 1, Kessler scheme
+
+    = 2, Lin et al. scheme
+
+    = 3, WSM 3-class simple ice scheme
+
+    = 4, WSM 5-class scheme'
+  is_multi_dim: false
+  name: chem_opt
+- default: 0, default off
+  description: = 1 adds MYNN tke budget terms to output
+  is_multi_dim: true
+  name: bl_mynn_tkebudget
+- default: '1'
+  description: mix scalar fields consistent with PBL option (exch_h)
+  is_multi_dim: true
+  name: scalar_pblmix
+- default: 0,   closure choice
+  description: place holder only)
+  is_multi_dim: false
+  name: clos_choice
+- default: '1'
+  description: mix tracer fields consistent with PBL option (exch_h)
+  is_multi_dim: true
+  name: tracer_pblmix
+- default: 1, 11 and 99 only)
+  description: new in 3.8)
+  is_multi_dim: false
+  name: cumulus schemes (cu_phys
+- default: .false.
+  description: 'sub-grid cloud effect to the optical depth in radiation
+
+    currently it works only for GF, G3, GD and KF scheme
+
+    One also needs to set cu_diag = 1 for GF, G3 and GD schemes'
+  is_multi_dim: true
+  name: cu_rad_feedback
+- default: 30,  averaging time for variables used by convective transport
+  description: call cu_phys options)  and radiation routines (only cu_phys=3,5 and
+    93) (minutes)
+  is_multi_dim: false
+  name: convtrans_avglen_m
+- default: '1'
+  description: use mosaic soil categories in RUC; default is 0
+  is_multi_dim: false
+  name: mosaic_soil
+- default: 0,
+  description: 'minutes between cumulus physics calls
+
+    kfeta_trigger                       KF trigger option (cu_physics=1 only):
+
+    = 1, default option'
+  is_multi_dim: false
+  name: cudt
+- default: '0'
+  description: 'diagnostic TKE and mixing length from Shin-Hong PBL
+
+    opt_thcnd                           option to treat thermal conductivity in Noah
+    LSM (new in 3.8)'
+  is_multi_dim: true
+  name: shinhong_tke_diag
+- default: 1,
+  description: 'heat and moisture fluxes from the surface
+
+    (only works for sf_sfclay_physics = 1,5,7,11)
+
+    1 = with fluxes from the surface
+
+    0 = no flux from the surface
+
+    with bl_pbl_physics=0 this uses tke_drag_coefficient
+
+    and tke_heat_flux in vertical diffusion
+
+    2 = use drag from sf_sfclay_physics and heat flux from
+
+    tke_heat_flux with bl_pbl_physics=0'
+  is_multi_dim: false
+  name: isfflx
+- default: 1,
+  description: 'sets XLAND (1=land,2=water) for ideal cases with no input land-use
+
+    run-time switch for wrf.exe physics_init (default 1 as before)'
+  is_multi_dim: false
+  name: ideal_xland
+- default: '3'
+  description: number of mosaic landuse categories in a grid cell
+  is_multi_dim: false
+  name: mosaic_cat
+- default: 0,
+  description: 'snow-cover effects
+
+    (only works for sf_surface_physics = 1)
+
+    1 = with snow-cover effect
+
+    0 = without snow-cover effect'
+  is_multi_dim: false
+  name: ifsnow
+- default: '1'
+  description: use mosaic landuse categories in RUC; default is 0
+  is_multi_dim: false
+  name: mosaic_lu
+- default: 1,
+  description: 'cloud effect to the optical depth in radiation
+
+    (only works for ra_sw_physics = 1,4 and ra_lw_physics = 1,4)
+
+    Since 3.6, this also controls the cloud fraction options
+
+    1 = with cloud effect, and use cloud fraction option 1
+
+    (Xu-Randall method)
+
+    0 = without cloud effect'
+  is_multi_dim: false
+  name: icloud
+- default: with cloud effect, and use cloud fraction option 2
+  description: '0/1 based
+
+    on threshold
+
+    3 = with cloud effect, and use cloud fraction option 3, based on
+
+    Sundqvist et al. (1989) (since 3.7)'
+  is_multi_dim: false
+  name: '2'
+- default: '1.'
+  description: 'scattering tuning parameter (default 1. is 1.e-5 m2/kg)
+
+    (works for ra_sw_physics = 1 option only)'
+  is_multi_dim: false
+  name: swrad_scat
+- default: 3,
+  description: 'where landuse and soil category data come from:
+
+    1 = WPS/geogrid but with dominant categories recomputed'
+  is_multi_dim: false
+  name: surface_input_source
+- default: GRIB data from another model
+  description: 'only possible
+
+    (VEGCAT/SOILCAT are in met_em files from WPS)'
+  is_multi_dim: false
+  name: '2'
+- default: 0,
+  description: '1 = allows radar reflectivity to be computed using mp-scheme-specific
+
+    parameters.  Currently works for mp_physics = 2,4,6,7,8,10,14,16
+
+
+    Namelist variables for lake module:'
+  is_multi_dim: false
+  name: do_radar_ref
+- default: use dominant land and soil categories from WPS/geogrid
+  description: default since 3.8)
+  is_multi_dim: false
+  name: '3'
+- default: 5,
+  description: 'number of soil layers in land surface model
+
+    = 5: thermal diffusion scheme
+
+    = 4: Noah landsurface model
+
+    = 6 or 9: RUC landsurface model
+
+    = 10: CLM4 landsurface model
+
+    = 2: Pleim-Xu landsurface model
+
+    = 3: SSiB landsurface model'
+  is_multi_dim: false
+  name: num_soil_layers
+- default: 21,
+  description: 'number of land categories in input data.
+
+    24 - for USGS (default); 20 for MODIS
+
+    28 - for USGS if including lake category
+
+    21 - for MODIS if including lake category (default since 3.8)
+
+    40 - for NCLD'
+  is_multi_dim: false
+  name: num_land_cat
+- default: 16,
+  description: number of soil categories in input data
+  is_multi_dim: false
+  name: num_soil_cat
+- default: '1'
+  description: 'PXLSM Soil moisture initialization option
+
+    0 - From analysis, 1 - From moisture availability
+
+    or SLMO in LANDUSE.TBL'
+  is_multi_dim: true
+  name: pxlsm_smois_init
+- default: 1,
+  description: Grell-Devenyi only
+  is_multi_dim: false
+  name: maxiens
+- default: 0,
+  description: no action taken, no adjustment to any moist field
+  is_multi_dim: false
+  name: mp_zero_out
+- default: 3,
+  description: G-D only
+  is_multi_dim: false
+  name: maxens
+- default: 0.7e9
+  description: CCN for NSSL scheme (18). Also sets same value to ccn_conc for mp_physics=18
+  is_multi_dim: false
+  name: nssl_cccn
+- default: '1.e-8'
+  description: 'critical value for moist array threshold, below which
+
+    ; moist arrays (except for Qv) are set to zero (kg/kg)'
+  is_multi_dim: false
+  name: mp_zero_out_thresh
+- default: 3,
+  description: G-D only
+  is_multi_dim: false
+  name: maxens2
+- default: '0'
+  description: for running gsfcgce microphysics with graupel
+  is_multi_dim: false
+  name: gsfcgce_hail
+- default: '16'
+  description: G-D only
+  is_multi_dim: false
+  name: maxens3
+- default: '0'
+  description: 'hail switch for WSM6, WDM6 and Morrison schemes: 0 - off, 1 - on (new
+    in 3.6.1)'
+  is_multi_dim: false
+  name: hail_opt
+- default: '0'
+  description: for running with snow, ice and graupel/hail
+  is_multi_dim: false
+  name: gsfcgce_2ice
+- default: '0'
+  description: 'switch to use mix-activate scheme (Only for Morrison, WDM6, WDM5,
+
+    and NSSL_2MOMCCN/NSSL_2MOM'
+  is_multi_dim: false
+  name: progn
+- default: '144'
+  description: 'G-D only
+
+    These are recommended numbers. If you would like to use
+
+    any other number, consult the code, know what you are doing.'
+  is_multi_dim: false
+  name: ensdim
+- default: 1.E8
+  description: CCN concentration, used by WDM schemes (new in 3.6.1)
+  is_multi_dim: false
+  name: ccn_conc
+- default: '100.'
+  description: 'tsk < seaice_threshold, if water point and 5-layer slab
+
+    ; scheme, set to land point and permanent ice; if water point
+
+    ; and Noah scheme, set to land point, permanent ice, set temps
+
+    ; from 2 m to surface, and set smois and sh2o. The default value has changed
+
+    ; from 271 to 100 K in v3.5.1 to avoid mixed-up use with fractional seaice input
+
+    ; Used by land model option 1,2,3,4 and 8'
+  is_multi_dim: false
+  name: seaice_threshold
+- default: '0'
+  description: normal
+  is_multi_dim: false
+  name: no_mp_heating
+- default: 30,
+  description: 'minutes between radiation physics calls
+
+    recommend 1 min per km of dx (e.g. 10 for 10 km);
+
+    use the same value for all nests.'
+  is_multi_dim: true
+  name: radt
+- default: '0'
+  description: 'time-varying sea-surface temp (0=no, 1=yes). If selected real
+
+    ; puts SST, XICE, ALBEDO and VEGFRA in wrflowinp_d01 file, and wrf updates
+
+    ; these from it at same interval as boundary file. Also requires
+
+    ; namelists in &time_control: auxinput4_interval, auxinput4_end_h,
+
+    ; auxinput4_inname = "wrflowinp_d<domain>",
+
+    ; and in V3.2 io_form_auxinput4'
+  is_multi_dim: false
+  name: sst_update
+- default: .true.
+  description: 'use monthly albedo map instead of table value
+
+    ; (must be used for NMM and recommended for sst_update=1)'
+  is_multi_dim: false
+  name: usemonalb
+- default: '1'
+  description: 'whether to use effective radii computed in mp schemes in RRTMG (new
+    in 3.8).
+
+    0: do not use; 1: use effective radii
+
+    (The mp schemes that compute effective radii are 3,4,6,8,14,16,17-21)'
+  is_multi_dim: false
+  name: use_mp_re
+- default: input value from auxiliary input 5, as in aer_aod550_opt
+  description: '3 = Angstrom exponent value estimated from the aerosol type defined
+    in aer_type, and modulated
+
+    with the RH in WRF. Default operation is aer_angexp_opt = 1, and aer_angexp_val=1.3.
+
+    aer_angexp_val                      = 1.3
+
+    aer_ssa_opt                         = [1,2,3] similar to aer_angexp_opt.
+
+    aer_ssa_val                         = 0.85
+
+    aer_asy_opt                         = [1,2,3] similar to aer_angexp_opt.
+
+    aer_asy_val                         = 0.9
+
+    aer_type                            = [1,2,3] : 1 for rural, 2 is urban and 3
+    is maritime.'
+  is_multi_dim: false
+  name: '2'
+- default: .true.
+  description: use snow albedo from geogrid; false means using values from table
+  is_multi_dim: false
+  name: rdmaxalb
+- default: ozone input option for radiation
+  description: 'currently rrtmg only)
+
+    = 0, using profile inside the code'
+  is_multi_dim: false
+  name: o3input
+- default: .false.
+  description: 'use LAI from input; false means using values from table
+
+    if sst_update=1, LAI will also be in wrflowinp file'
+  is_multi_dim: false
+  name: rdlai2d
+- default: '-1.'
+  description: 'bucket reset value for water accumulations (value in mm, -1.=inactive)
+
+    bucket_J                            = -1.      ; bucket reset value for energy
+    accumulations (value in J, -1.=inactive)'
+  is_multi_dim: false
+  name: bucket_mm
+scm:
+- default: '8'
+  description: number of SCM input forcing layers
+  is_multi_dim: false
+  name: num_force_layers
+- default: .true.
+  description: turn on cloud liquid water advection in SCM
+  is_multi_dim: false
+  name: scm_ql_adv
+- default: '2'
+  description: SCM landuse category (2 is dryland, cropland and pasture)
+  is_multi_dim: false
+  name: scm_lu_index
+- default: '-96.700'
+  description: SCM longitude
+  is_multi_dim: false
+  name: scm_lon
+- default: .false.
+  description: Turn on large scale theta forcing in SCM
+  is_multi_dim: false
+  name: scm_force_th_largescale
+- default: '4'
+  description: SCM soil category (4 is silt loam)
+  is_multi_dim: false
+  name: scm_isltyp
+- default: .true.
+  description: turn on vertical advection in SCM
+  is_multi_dim: false
+  name: scm_vert_adv
+- default: '0.5'
+  description: SCM vegetation fraction
+  is_multi_dim: false
+  name: scm_vegfra
+- default: 1,
+  description: switch for single column forcing (=0 off)
+  is_multi_dim: false
+  name: scm_force
+- default: .false.
+  description: Turn on large scale qv forcing in SCM
+  is_multi_dim: false
+  name: scm_force_qv_largescale
+- default: .true.
+  description: turn on theta advection in SCM
+  is_multi_dim: false
+  name: scm_th_adv
+- default: .false.
+  description: Turn on large scale wind forcing in SCM
+  is_multi_dim: false
+  name: scm_force_wind_largescale
+- default: 5,
+  description: 'Number of SCM soil forcing layer
+
+    scm_soilT_force                     = .false.  ; Turn on soil temp forcing in
+    SCM'
+  is_multi_dim: false
+  name: num_force_soil_layers
+- default: '0.0'
+  description: SCM canopy water
+  is_multi_dim: false
+  name: scm_canwat
+- default: .false.
+  description: Turn on large scale cloud water forcing in SCM
+  is_multi_dim: false
+  name: scm_force_ql_largescale
+- default: .true.
+  description: turn on wind advection in SCM
+  is_multi_dim: false
+  name: scm_wind_adv
+- default: .false.
+  description: Turn on soil moisture forcing in SCM
+  is_multi_dim: false
+  name: scm_soilq_force
+- default: '37.600'
+  description: SCM latitude
+  is_multi_dim: false
+  name: scm_lat
+- default: '4000.'
+  description: DX for SCM forcing (in meters)
+  is_multi_dim: false
+  name: scm_force_dx
+- default: .true.
+  description: turn on moisture advection in SCM
+  is_multi_dim: false
+  name: scm_qv_adv
+stoch:
+- default: '0.0833'
+  description: variance of noise for theta perturb
+  is_multi_dim: false
+  name: zsigma2_eta
+- default: '1'
+  description: min. forcing wavenumber in lon. for psi perturb
+  is_multi_dim: false
+  name: kminforc
+- default: '1'
+  description: min. forcing wavenumber in lat. for psi perturb
+  is_multi_dim: false
+  name: lminforc
+- default: '1.0E-05'
+  description: 'total backscattered dissipation for streamfunction;
+
+    ; determines amplitude of streamfunction perturbations'
+  is_multi_dim: false
+  name: tot_backscat_psi
+- default: '1'
+  description: min. forcing wavenumber in lon. for theta perturb
+  is_multi_dim: false
+  name: kminforct
+- default: '1'
+  description: min. forcing wavenumber in lat. for theta perturb
+  is_multi_dim: false
+  name: lminforct
+- default: '1.0E-06'
+  description: total backscattered dissipation for potential temperature
+  is_multi_dim: false
+  name: tot_backscat_t
+- default: '1000000'
+  description: max. forcing wavenumber in lon. for psi perturb
+  is_multi_dim: false
+  name: kmaxforc
+- default: '10800.0'
+  description: decorrelation time scale of noise for streamfunction perturbations
+  is_multi_dim: false
+  name: ztau_psi
+- default: '1'
+  description: 'stochastic kinetic-energy backscatter scheme, 1: on'
+  is_multi_dim: false
+  name: skebs
+- default: '1000000'
+  description: max. forcing wavenumber in lat. for psi perturb
+  is_multi_dim: false
+  name: lmaxforc
+- default: '1'
+  description: 'generate array with random perturbations for user determined use,
+    1: on'
+  is_multi_dim: false
+  name: rand_perturb
+- default: '1000000'
+  description: max. forcing wavenumber in lon. for theta perturb
+  is_multi_dim: false
+  name: kmaxforct
+- default: '0.03'
+  description: 'standard deviation of random perturbations at each gridpoint
+
+    ; determines amplitude of random perturbations'
+  is_multi_dim: false
+  name: gridpt_stddev_rand_pert
+- default: '1000000'
+  description: 'max. forcing wavenumber in lat. for theta perturb
+
+    perturb_chem_bdy                               ; Options for perturbing lateral
+    boundaries of chemical tracers:'
+  is_multi_dim: false
+  name: lmaxforct
+- default: '3.0'
+  description: cutoff tails of pdf above this threshold standard deviation
+  is_multi_dim: false
+  name: stddev_cutoff_rand_pert
+- default: 'off'
+  description: 1 = on with RAND_PERTURB pattern
+  is_multi_dim: false
+  name: '0'
+- default: '500000.0'
+  description: correlation length scale in meters
+  is_multi_dim: false
+  name: lengthscale_rand_pert
+- default: '0'
+  description: 'No boundary perturbations
+
+    1         ; Use SKEBS pattern for boundary perturbations
+
+    2         ; Use other user-provided pattern for boundary perturbations'
+  is_multi_dim: false
+  name: perturb_bdy
+- default: '21600.0'
+  description: decorrelation time scale in s
+  is_multi_dim: false
+  name: timescale_rand_pert
+- default: '1'
+  description: 'creates different seed for random number streams in either stochastic
+    scheme
+
+    ; must be different for each member in ensemble forecasts'
+  is_multi_dim: false
+  name: nens
+- default: '1.0E-05'
+  description: Controls amplitude of rotational wind perturbations
+  is_multi_dim: false
+  name: tot_backscat_psi
+- default: '1.0E-06'
+  description: Controls amplitude of potential temperature perturbations
+  is_multi_dim: false
+  name: tot_backscat_t
+- default: '1'
+  description: 'an integer that controls the random number stream which will then
+
+    change the run. When running an ensemble, this can be
+
+    ensemble member number, so that each ensemble member gets a
+
+    different random number stream, hence a different perturbed run.'
+  is_multi_dim: false
+  name: nens
+- default: '10800.0'
+  description: decorr. time of noise for psi perturb
+  is_multi_dim: false
+  name: ztau_psi
+- default: '10800.0'
+  description: decorr. time of noise for theta perturb
+  is_multi_dim: false
+  name: ztau_t
+- default: '-1.83'
+  description: spectral slope of forcing for psi
+  is_multi_dim: false
+  name: rexponent_psi
+- default: '-1.83'
+  description: spectral slope of forcing for theta
+  is_multi_dim: false
+  name: rexponent_t
+- default: '0.0833'
+  description: variance of noise for psi perturb
+  is_multi_dim: false
+  name: zsigma2_eps
+tc:
+- default: '-999.'
+  description: vmax of bogus storm in meters per second
+  is_multi_dim: false
+  name: vmax_meters_per_second(max_bogus)
+- default: '-999.'
+  description: maximum radius outward from storm center
+  is_multi_dim: false
+  name: rmax
+- default: .false.
+  description: T/F for only removing the original TC
+  is_multi_dim: false
+  name: remove_storm
+- default: .false.
+  description: T/F for inserting a bogus tropical storm (TC)
+  is_multi_dim: false
+  name: insert_bogus_storm
+- default: '1'
+  description: Number of bogus TC
+  is_multi_dim: false
+  name: num_storm
+- default: '-999.'
+  description: center latitude of the bogus TC
+  is_multi_dim: false
+  name: latc_loc
+- default: '-999.'
+  description: 'ratio for representative maximum winds, 0.75 for 45 km grid, and
+
+    0.9 for 15 km grid.'
+  is_multi_dim: false
+  name: vmax_ratio(max_bogus)
+- default: '-999.'
+  description: top pressure limit for the tc bogus scheme
+  is_multi_dim: false
+  name: rankine_lid
+- default: '-999.'
+  description: center longitude of the bogus TC
+  is_multi_dim: false
+  name: lonc_loc
+time_control:
+- default: 12,
+  description: number of times in each chemistry emission file.
+  is_multi_dim: false
+  name: frames_per_emissfile
+- default: .true.,
+  description: 'what to do when encountering an error in the user-specified files
+
+    .false., : abort when encountering an error in iofields_filename file'
+  is_multi_dim: false
+  name: ignore_iofields_warning
+- default: 00,
+  description: two digit minute of ending time
+  is_multi_dim: true
+  name: end_minute
+- default: 1,
+  description: 'style to use for the chemistry emission files.
+
+    ; 0 = Do not read emissions from files.
+
+    ; 1 = Cycle between two 12 hour files (set frames_per_emissfile=12)
+
+    ; 2 = Dated files with length set by frames_per_emissfile'
+  is_multi_dim: false
+  name: io_style_emiss
+- default: t,
+  description: write input-formatted data as output
+  is_multi_dim: false
+  name: write_input
+- default: 00,
+  description: 'two digit second of ending time
+
+    It also controls when the nest domain integrations end
+
+    All start and end times are used by real.exe.'
+  is_multi_dim: true
+  name: end_second
+- default: 0,
+  description: 50,100,200,300 values give increasing prints
+  is_multi_dim: false
+  name: debug_level
+- default: 180,
+  description: interval in minutes when writing input-formatted data
+  is_multi_dim: false
+  name: inputout_interval
+- default: 0,
+  description: 'print out time series of model diagnostics
+
+    ; 0 = no print
+
+    ; 1 = domain averaged 3-hourly hydrostatic surface pressure tendency
+
+    (Dpsfc/Dt), and dry-hydrostatic column pressure tendency (Dmu/Dt)
+
+    will appear in stdout file
+
+    ; 2 = in addition to those above, domain averaged rainfall,
+
+    surface evaporation, and sensible and latent heat fluxes will be output'
+  is_multi_dim: false
+  name: diag_print
+- default: 10800,
+  description: 'time interval between incoming real data, which will be the interval
+
+    between the lateral boundary condition file'
+  is_multi_dim: false
+  name: interval_seconds
+- default: 1,
+  description: run time in days
+  is_multi_dim: false
+  name: run_days
+- default: '''wrfinput_d<domain>_<date>'''
+  description: 'you may change the output file name
+
+    inputout_begin_y                    = 0
+
+    inputout_begin_mo                   = 0
+
+    inputout_begin_d                    = 0
+
+    inputout_begin_h                    = 3
+
+    inputout_begin_m                    = 0
+
+    inputout_begin_s                    = 0
+
+    inputout_end_y                      = 0
+
+    inputout_end_mo                     = 0
+
+    inputout_end_d                      = 0
+
+    inputout_end_h                      = 12
+
+    inputout_end_m                      = 0'
+  is_multi_dim: false
+  name: input_outname
+- default: 0,
+  description: 'run time in hours
+
+    Note: if it is more than 1 day, one may use both run_days and run_hours
+
+    or just run_hours. e.g. if the total run length is 36 hrs, you may
+
+    set run_days = 1, and run_hours = 12, or run_days = 0, and run_hours = 36'
+  is_multi_dim: false
+  name: run_hours
+- default: .false.,
+  description: whether to write out wrfinput for all processing times
+  is_multi_dim: false
+  name: all_ic_times
+- default: '0'
+  description: 'the above shows that the input-formatted data are output
+
+    starting from hour 3 to hour 12 in 180 min interval.'
+  is_multi_dim: false
+  name: inputout_end_s
+- default: T,
+  description: whether nested run will have input files for domains other than 1
+  is_multi_dim: true
+  name: input_from_file
+- default: 0,
+  description: run time in minutes
+  is_multi_dim: false
+  name: run_minutes
+- default: .false.,
+  description: adjust output times to the nearest hour
+  is_multi_dim: false
+  name: adjust_output_times
+- default: .false.,
+  description: whether to change the alarms from what is previously set
+  is_multi_dim: false
+  name: override_restart_timers
+- default: 0,
+  description: 'field selection from nest input for its initialization
+
+    0: all fields are used; 2: only static and time-varying, masked land
+
+    surface fields are used. In V3.2, this requires the use of
+
+    io_form_auxinput2'
+  is_multi_dim: true
+  name: fine_input_stream
+- default: 0,
+  description: run time in seconds
+  is_multi_dim: false
+  name: run_seconds
+- default: .false.,
+  description: whether to output history file at the start of restart run
+  is_multi_dim: false
+  name: write_hist_at_0h_rst
+- default: .true.,
+  description: 'asks the model to write-out an empty file with the name ''wrfoutReady_d<domain>_<date>.
+
+    Useful in production runs so that post-processing code can check on the
+
+    completeness of this file'
+  is_multi_dim: false
+  name: output_ready_flag
+- default: 60,
+  description: history output file interval in minutes
+  is_multi_dim: true
+  name: history_interval
+- default: 2001,
+  description: four digit year of starting time
+  is_multi_dim: true
+  name: start_year
+- default: 1,
+  description: 'number of output times per history output file,
+
+    used to split output into multiple files
+
+    into smaller pieces'
+  is_multi_dim: true
+  name: frames_per_outfile
+- default: '"met_em.d<domain>.<date>"'
+  description: Input to real from WPS (default since 3.0)
+  is_multi_dim: false
+  name: auxinput1_inname
+- default: 06,
+  description: two digit month of starting time
+  is_multi_dim: true
+  name: start_month
+- default: 10,
+  description: interval in minutes
+  is_multi_dim: true
+  name: auxhist2_interval
+- default: F,
+  description: whether this run is a restart run
+  is_multi_dim: false
+  name: restart
+- default: '"met_nm.d<domain>.<date>"'
+  description: Input to real from WPS
+  is_multi_dim: false
+  name: auxinput1_inname
+- default: 11,
+  description: two digit day of starting time
+  is_multi_dim: true
+  name: start_day
+- default: '"rainfall"'
+  description: 'file name for extra output; if not specified,
+
+    auxhist2_d<domain>_<date> will be used
+
+    also note that to write variables in output other
+
+    than the history file requires Registry.EM file change'
+  is_multi_dim: false
+  name: auxhist2_outname
+- default: F,
+  description: whether this run is a cycling run, if so, initializes look-up table
+    for Thompson schemes only
+  is_multi_dim: false
+  name: cycling
+- default: 12,
+  description: two digit hour of starting time
+  is_multi_dim: true
+  name: start_hour
+- default: 2,
+  description: output in netCDF
+  is_multi_dim: false
+  name: io_form_auxhist2
+- default: '6'
+  description: end of observation time in hours.
+  is_multi_dim: false
+  name: auxinput11_end_h
+- default: 00,
+  description: two digit minute of starting time
+  is_multi_dim: true
+  name: start_minute
+- default: 1000,
+  description: number of output times in this file
+  is_multi_dim: false
+  name: frames_per_auxhist2
+- default: 1440,
+  description: restart output file interval in minutes
+  is_multi_dim: false
+  name: restart_interval
+- default: 00,
+  description: 'two digit second of starting time
+
+    Note: the start time is used to name the first wrfout file.
+
+    It also controls the start time for nest domains, and the time to restart'
+  is_multi_dim: true
+  name: start_second
+- default: F,
+  description: whether to overwrite simulation_start_date with forecast start time
+  is_multi_dim: false
+  name: reset_simulation_start
+- default: '2'
+  description: IO format, required in V3.2
+  is_multi_dim: false
+  name: io_form_auxinput4
+- default: 00,
+  description: 'FOR NMM: starting hour of the forecast'
+  is_multi_dim: true
+  name: tstart
+- default: '1'
+  description: adds 7 history-interval max diagnostic fields
+  is_multi_dim: false
+  name: nwp_diagnostics
+- default: '1'
+  description: adds 36 surface diagnostic arrays (max/min/mean/std)
+  is_multi_dim: false
+  name: output_diagnostics
+- default: 2,
+  description: 2 = netCDF
+  is_multi_dim: false
+  name: io_form_history
+- default: '''wrfxtrm_d<domain>_<date>'''
+  description: file name for added diagnostics
+  is_multi_dim: false
+  name: auxhist3_outname
+- default: 2001,
+  description: four digit year of ending time
+  is_multi_dim: true
+  name: end_year
+- default: '2'
+  description: netcdf
+  is_multi_dim: false
+  name: io_form_auxhist3
+- default: 2,
+  description: 2 = netCDF
+  is_multi_dim: false
+  name: io_form_restart
+- default: '1440'
+  description: minutes between outputs (1440 gives daily max/min)
+  is_multi_dim: false
+  name: auxhist3_interval
+- default: 06,
+  description: two digit month of ending time
+  is_multi_dim: true
+  name: end_month
+- default: 2,
+  description: 2 = netCDF
+  is_multi_dim: false
+  name: io_form_input
+- default: '360'
+  description: minutes generally matches time given by interval_seconds
+  is_multi_dim: false
+  name: auxinput4_interval
+- default: 12,
+  description: two digit day of ending time
+  is_multi_dim: true
+  name: end_day
+- default: '1'
+  description: 'output times per file
+
+    Note: do restart only at multiple of auxhist3_intervals'
+  is_multi_dim: false
+  name: frames_per_auxhist3
+- default: 2,
+  description: netCDF format
+  is_multi_dim: false
+  name: io_form_boundary
+- default: '10'
+  description: 'interval in minutes for observation data. It should be
+
+    set as or more frequently as obs_ionf (with unit of
+
+    coarse domain time step).'
+  is_multi_dim: false
+  name: auxinput11_interval
+- default: .true.,
+  description: only a single write, not the write/read/write sequence, new in 3.6
+  is_multi_dim: false
+  name: ncd_nofill
+- default: 12,
+  description: two digit hour of ending time
+  is_multi_dim: true
+  name: end_hour
+
+afwa:
+- default: 0,
+  description: 'Cloud option, 1: on'
+  is_multi_dim: true
+  name: afwa_cloud_opt
+- default: 264.15,
+  description: CCN temperature for precipitation type calculation
+  is_multi_dim: false
+  name: afwa_ptype_ccn_tmp
+- default: 0,
+  description: 'Radar option, 1: on'
+  is_multi_dim: true
+  name: afwa_radar_opt
+- default: 0,
+  description: 'AFWA Diagnostic option, 1: on'
+  is_multi_dim: true
+  name: afwa_diag_opt
+- default: 0,
+  description: 'Thermal indices option, 1: on'
+  is_multi_dim: true
+  name: afwa_therm_opt
+- default: 50,
+  description: Total melting energy for precipitation type calculation
+  is_multi_dim: false
+  name: afwa_ptype_tot_melt
+- default: 0,
+  description: 'Severe Wx option, 1: on'
+  is_multi_dim: true
+  name: afwa_severe_opt
+- default: 0,
+  description: 'Turbulence option, 1: on'
+  is_multi_dim: true
+  name: afwa_turb_opt
+- default: 0,
+  description: 'Icing option, 1: on'
+  is_multi_dim: true
+  name: afwa_icing_opt
+- default: 0,
+  description: 'Buoyancy option, 1: on'
+  is_multi_dim: true
+  name: afwa_buoy_opt
+- default: 0,
+  description: 'Precip type option, 1: on'
+  is_multi_dim: true
+  name: afwa_ptype_opt
+- default: 0,
+  description: 'Visibility option, 1: on'
+  is_multi_dim: true
+  name: afwa_vis_opt
+- default: 0,
+  description: 'Hailcast option, 1: on'
+  is_multi_dim: true
+  name: afwa_hailcast_opt
+- default: 0,
+  description: 'Vert Int Liquid option, 1: on'
+  is_multi_dim: true
+  name: afwa_vil_opt
+bdy_control:
+- default: .false.,
+  description: open boundary conditions at y end (north)
+  is_multi_dim: true
+  name: open_ye
+- default: .false.,
+  description: nested boundary conditions (must be used for nests)
+  is_multi_dim: true
+  name: nested
+- default: .false.,
+  description: 'polar boundary condition
+
+    (v=0 at polarward-most v-point)'
+  is_multi_dim: false
+  name: polar
+- default: .false.,
+  description: 'model run after ndown only: do not use microphysics variables in bdy
+    file'
+  is_multi_dim: false
+  name: have_bcs_moist
+- default: 1,
+  description: fundamental timesteps between calls to Euler advection, dynamics (NMM
+    only)
+  is_multi_dim: false
+  name: idtadt
+- default: .false.,
+  description: 'model run after ndown only: do not use scalar variables in bdy file'
+  is_multi_dim: false
+  name: have_bcs_scalar
+- default: .false.,
+  description: conservative Eulerian passive advection (NMM only)
+  is_multi_dim: false
+  name: euler_adv
+- default: '1'
+  description: fundamental timesteps between calls to Euler advection, chemistry (NMM
+    only)
+  is_multi_dim: false
+  name: idtadc
+- default: 1,
+  description: number of points in specified zone (spec b.c. option)
+  is_multi_dim: false
+  name: spec_zone
+- default: 4,
+  description: number of points in relaxation zone (spec b.c. option)
+  is_multi_dim: false
+  name: relax_zone
+- default: .false.,
+  description: 'specified boundary conditions (only can be used for domain 1)
+
+    the above 4 are used for real-data runs'
+  is_multi_dim: true
+  name: specified
+- default: '0.'
+  description: 'exponential multiplier for relaxation zone ramp for specified=.t.
+
+    (0.=linear ramp default, e.g. 0.33=~3*dx exp decay factor)'
+  is_multi_dim: false
+  name: spec_exp
+- default: .false.
+  description: constant boundary condition used with DFI
+  is_multi_dim: false
+  name: constant_bc
+- default: 0,
+  description: 'whether to call spec_bdy_final for mu (since 3.7):'
+  is_multi_dim: false
+  name: spec_bdy_final_mu
+- default: 5,
+  description: total number of rows for specified boundary value nudging
+  is_multi_dim: false
+  name: spec_bdy_width
+- default: .false.,
+  description: symmetric boundary conditions at x start (west)
+  is_multi_dim: true
+  name: symmetric_xs
+- default: .false.,
+  description: periodic boundary conditions in x direction
+  is_multi_dim: true
+  name: periodic_x
+- default: .false.,
+  description: symmetric boundary conditions at x end (east)
+  is_multi_dim: true
+  name: symmetric_xe
+- default: .false.,
+  description: open boundary conditions at x start (west)
+  is_multi_dim: true
+  name: open_xs
+- default: .false.,
+  description: open boundary conditions at x end (east)
+  is_multi_dim: true
+  name: open_xe
+- default: .false.,
+  description: periodic boundary conditions in y direction
+  is_multi_dim: true
+  name: periodic_y
+- default: .false.,
+  description: symmetric boundary conditions at y start (south)
+  is_multi_dim: true
+  name: symmetric_ys
+- default: .false.,
+  description: symmetric boundary conditions at y end (north)
+  is_multi_dim: true
+  name: symmetric_ye
+- default: .false.,
+  description: open boundary conditions at y start (south)
+  is_multi_dim: true
+  name: open_ys
+dfi_control:
+- default: '0'
+  description: 'which DFI option to use (3 is recommended)
+
+    ;   0 = no digital filter initialization
+
+    ;   1 = digital filter launch (DFL)
+
+    ;   2 = diabatic DFI (DDFI)
+
+    ;   3 = twice DFI (TDFI)'
+  is_multi_dim: false
+  name: dfi_opt
+- default: .true.
+  description: 'whether to write wrfinput file with filtered
+
+    ;   model state before beginning forecast'
+  is_multi_dim: false
+  name: dfi_write_filtered_input
+- default: '00'
+  description: two-digit second of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_second
+- default: '00'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_minute
+- default: '03'
+  description: two-digit month of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_month
+- default: '2004'
+  description: four-digit year of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_year
+- default: .false.
+  description: whether to write wrfout files during filtering integration
+  is_multi_dim: false
+  name: dfi_write_dfi_history
+- default: '00'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_second
+- default: '14'
+  description: two-digit day of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_day
+- default: '03'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_month
+- default: '3600'
+  description: cutoff period, in seconds, for the filter
+  is_multi_dim: false
+  name: dfi_cutoff_seconds
+- default: '13'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_day
+- default: '0'
+  description: DFI radar da switch
+  is_multi_dim: false
+  name: dfi_radar
+- default: '12'
+  description: two-digit hour of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_hour
+- default: '2004'
+  description: four-digit year of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_year
+- default: '1000'
+  description: 'maximum number of time steps for filtering period
+
+    ;   this value can be larger than necessary'
+  is_multi_dim: false
+  name: dfi_time_dim
+- default: '00'
+  description: two-digit minute of stop time for backward DFI integration
+  is_multi_dim: false
+  name: dfi_bckstop_minute
+- default: '12'
+  description: two-digit month of stop time for forward DFI integration
+  is_multi_dim: false
+  name: dfi_fwdstop_hour
+- default: '7'
+  description: 'digital filter type to use (7 is recommended)
+
+    ;   0 = uniform
+
+    ;   1 = Lanczos
+
+    ;   2 = Hamming
+
+    ;   3 = Blackman
+
+    ;   4 = Kaiser
+
+    ;   5 = Potter
+
+    ;   6 = Dolph window
+
+    ;   7 = Dolph
+
+    ;   8 = recursive high-order'
+  is_multi_dim: false
+  name: dfi_nfilter
+diags:
+- default: 0,
+  description: 'Vertically interpolate diagnostics to z-levels
+
+    0=NO, 1=YES'
+  is_multi_dim: false
+  name: z_lev_diags
+- default: 2,
+  description: Number of height levels to interpolate to
+  is_multi_dim: false
+  name: num_z_levels
+- default: 0,
+  description: 'Number of pressure levels to interpolate to, for example,
+
+    could be 2'
+  is_multi_dim: false
+  name: num_press_levels
+- default: 0,
+  description: 'Which pressure levels (Pa) to interpolate to, for example
+
+    could be 85000, 70000'
+  is_multi_dim: false
+  name: press_levels
+- default: '2'
+  description: 'Which half level pressure to use: 1=total (p+pb); 2=hydrostatic
+
+    (p_hyd).  The p_hyd option is the default and less noisy.  Total
+
+    pressure is consistent with what is done in various post-proc
+
+    packages.'
+  is_multi_dim: false
+  name: use_tot_or_hyd_p
+- default: 1,
+  description: 'Vertically interpolate diagnostics to p-levels
+
+    0=NO, 1=YES'
+  is_multi_dim: false
+  name: p_lev_diags
+- default: 0,
+  description: 'List of height values (m) to interpolate data to.
+
+    ;   Positive numbers are for height above mean sea level (i.e. a flight level)
+
+    ;   Negative numbers are for levels above ground
+
+    /'
+  is_multi_dim: false
+  name: z_levels
+domains:
+- default: '42000.'
+  description: 'FOR NMM:  defines the pressure interface dividing
+
+    ;           the terrain following portion of the hybrid vertical
+
+    ;           coordinate (p > ptsgm) and the purely
+
+    ;           isobaric portion of the vertical coordinate (p < ptsgm)'
+  is_multi_dim: false
+  name: ptsgm
+- default: 91,
+  description: end index in x (west-east) direction (staggered dimension)
+  is_multi_dim: true
+  name: e_we
+- default: .true.,
+  description: whether to compute RH with respect to water (true) or ice (false)
+  is_multi_dim: false
+  name: rh2qv_wrt_liquid
+- default: 1,
+  description: 'parent-to-nest time step ratio; it can be different
+
+    from the parent_grid_ratio (NMM: must be 3)'
+  is_multi_dim: true
+  name: parent_time_step_ratio
+- default: 1,
+  description: 'which methed to use to computer mixing ratio from RH:
+
+    default is option 1, the old MM5 method; option 2 uses a WMO
+
+    recommended method (WMO-No. 49, corrigendum, August 2000) -
+
+    there is a difference between the two methods though small'
+  is_multi_dim: false
+  name: rh2qv_method
+- default: 1,
+  description: start index in y (south-north) direction (leave as is)
+  is_multi_dim: true
+  name: s_sn
+- default: 1,
+  description: feedback from nest to its parent domain; 0 = no feedback
+  is_multi_dim: false
+  name: feedback
+- default: .false.
+  description: 'If set to .false., it will vertically interpolate temperature
+
+    instead of potential temperature, which may reduce bias when
+
+    compared with input data'
+  is_multi_dim: false
+  name: interp_theta
+- default: '0'
+  description: 'smoothing option for parent domain, used only with feedback
+
+    option on. 0: no smoothing; 1: 1-2-1 smoothing; 2: smoothing-desmoothing'
+  is_multi_dim: false
+  name: smooth_option
+- default: 82,
+  description: end index in y (south-north) direction (staggered dimension)
+  is_multi_dim: true
+  name: e_sn
+- default: 2,
+  description: '= 1: default method'
+  is_multi_dim: false
+  name: hypsometric_opt
+- default: '4'
+  description: 'number of vertical soil levels or layers input
+
+    ; from WPS metgrid program'
+  is_multi_dim: false
+  name: num_metgrid_soil_levels
+- default: '27'
+  description: 'number of vertical levels of 3d meteorological fields coming
+
+    ; from WPS metgrid program'
+  is_multi_dim: false
+  name: num_metgrid_levels
+- default: 60,
+  description: 'time step for integration in integer seconds
+
+    recommend 6*dx (in km) for typical real-data cases'
+  is_multi_dim: false
+  name: time_step
+- default: '500'
+  description: ignore isobaric level above surface if delta p (Pa) < zap_close_levels
+  is_multi_dim: false
+  name: zap_close_levels
+- default: 1,
+  description: start index in z (vertical) direction (leave as is)
+  is_multi_dim: true
+  name: s_vert
+- default: '5000'
+  description: p_top (Pa) to use in the model
+  is_multi_dim: false
+  name: p_top_requested
+- default: '2'
+  description: 'vertical interpolation
+
+    ; 1 = linear in pressure
+
+    ; 2 = linear in log(pressure)'
+  is_multi_dim: false
+  name: interp_type
+- default: '2'
+  description: 'vertical extrapolation of non-temperature fields
+
+    ; 1 = extrapolate using the two lowest levels
+
+    ; 2 = use lowest level as constant below ground'
+  is_multi_dim: false
+  name: extrap_type
+- default: '2'
+  description: 'vertical extrapolation for potential temperature
+
+    ; 1 = isothermal
+
+    ; 2 = -6.5 K/km lapse rate for temperature
+
+    ; 3 = constant theta'
+  is_multi_dim: false
+  name: t_extrap_type
+- default: 30,
+  description: 'end index in z (vertical) direction (staggered dimension)
+
+    Note: this refers to full levels including surface and top
+
+    vertical dimensions need to be the same for all nests
+
+    Note: most variables are unstaggered (= staggered dim - 1)'
+  is_multi_dim: true
+  name: e_vert
+- default: .true.
+  description: 'in vertical interpolation, use levels below input surface level
+
+    ; T = use input isobaric levels below input surface
+
+    ; F = extrapolate when WRF location is below input surface value'
+  is_multi_dim: false
+  name: use_levels_below_ground
+- default: '1'
+  description: vertical refinement factor for ndown, not used for concurrent vertical
+    grid refinement
+  is_multi_dim: false
+  name: vert_refine_fact
+- default: '0'
+  description: 'vertical refinement method (new in 3.7)
+
+    0: no vertical refinement
+
+    1: integer vertical refinement
+
+    2: use specified or computed eta levels for vertical refinement'
+  is_multi_dim: true
+  name: vert_refine_method
+- default: .true.
+  description: 'use the input surface level data in the vertical interp and extrap
+
+    ; T = use the input surface data
+
+    ; F = do not use the input surface data'
+  is_multi_dim: false
+  name: use_surface
+- default: 10000,
+  description: 'grid length in x direction; ARW: unit in meters, NMM: unit in degrees
+    (e.g. 0.667)'
+  is_multi_dim: true
+  name: dx
+- default: '2'
+  description: 'vertical interpolation order
+
+    ; 1 = linear
+
+    ; 2 = quadratic
+
+    ; 9 = cubic spline'
+  is_multi_dim: false
+  name: lagrange_order
+- default: '30000'
+  description: 'Minimum height (actually it is pressure in Pa) to allow using the
+
+    ; level of max wind information in real.  With a value of 300 hPa, then
+
+    ; a max wind value at 500 hPa will be ignored.
+
+    ; ARW real only.
+
+    use_maxw_level                                 ; 0=do not use max wind speed level
+    in vertical interpolation inside
+
+    ; of the ARW real program, 1 = use level
+
+    use_trop_level                                 ; as above, with tropopause level
+    data'
+  is_multi_dim: false
+  name: maxw_above_this_level
+- default: 10000,
+  description: 'grid length in y direction; ARW: unit in meters, NMM: unit in degrees
+    (e.g. 0.0658)'
+  is_multi_dim: true
+  name: dy
+- default: .false.
+  description: 'place the surface value into the lowest eta location
+
+    ; T = use surface value as lowest eta (u,v,t,q)
+
+    ; F = use traditional interpolation'
+  is_multi_dim: false
+  name: lowest_lev_from_sfc
+- default: '1'
+  description: 'use the surface level as the lower boundary when interpolating
+
+    ; through this many eta levels
+
+    ; 0 = perform traditional trapping interpolation
+
+    ; n = first n eta levels directly use surface level'
+  is_multi_dim: false
+  name: force_sfc_in_vinterp
+- default: '19000.'
+  description: used in mass model for idealized cases
+  is_multi_dim: true
+  name: ztop
+- default: '5000'
+  description: 'Pressure threshold (Pa).  For using the level of max winds, when the
+
+    ; pressure differnce between neighboring values exceeds this maximum,
+
+    ; the variable is NOT inserted into the column for vertical interpolation.
+
+    ; ARW real only.'
+  is_multi_dim: false
+  name: maxw_horiz_pres_diff
+- default: 0,
+  description: numerator for fractional time step
+  is_multi_dim: false
+  name: time_step_fract_num
+- default: 1,
+  description: domain identifier
+  is_multi_dim: true
+  name: grid_id
+- default: '5000'
+  description: 'Pressure threshold (Pa).  For using the tropopause level, when the
+
+    ; pressure differnce between neighboring values exceeds this maximum,
+
+    ; the variable is NOT inserted into the column for vertical interpolation.
+
+    ; ARW real only.'
+  is_multi_dim: false
+  name: trop_horiz_pres_diff
+- default: 1,
+  description: 'denominator for fractional time step
+
+    Example, if you want to use 60.3 sec as your time step,
+
+    set time_step = 60, time_step_fract_num = 3, and
+
+    time_step_fract_den = 10'
+  is_multi_dim: false
+  name: time_step_fract_den
+- default: 0,
+  description: id of the parent domain
+  is_multi_dim: true
+  name: parent_id
+- default: 60,
+  description: time step for DFI, may be different from regular time_step
+  is_multi_dim: false
+  name: time_step_dfi
+- default: .false.
+  description: 'Optional method to compute model''s surface pressure when incoming
+
+    ; data only has surface pressure and terrain, but not SLP'
+  is_multi_dim: false
+  name: sfcp_to_sfcp
+- default: 0,
+  description: starting LLC I-indices from the parent domain
+  is_multi_dim: true
+  name: i_parent_start
+- default: 1,
+  description: number of domains - set it to > 1 if it is a nested run
+  is_multi_dim: false
+  name: max_dom
+- default: .false.
+  description: 'Smooth the outer rows and columns of domain 1''s topography w.r.t.
+
+    ; the input data'
+  is_multi_dim: false
+  name: smooth_cg_topo
+- default: 0,
+  description: starting LLC J-indices from the parent domain
+  is_multi_dim: true
+  name: j_parent_start
+- default: .false.
+  description: 'whether to use diurnally averaged surface temp as skin temp. The
+
+    diurnall averaged surface temp can be computed using WPS utility
+
+    avg_tsfc.exe. May use this option when SKINTEMP is not present.'
+  is_multi_dim: false
+  name: use_tavg_for_tsk
+- default: 1,
+  description: start index in x (west-east) direction (leave as is)
+  is_multi_dim: true
+  name: s_we
+- default: 1,
+  description: 'parent-to-nest domain grid size ratio: for real-data cases
+
+    the ratio has to be odd; for idealized cases,
+
+    the ratio can be even if feedback is set to 0. (NMM: must be 3)'
+  is_multi_dim: true
+  name: parent_grid_ratio
+- default: .false.
+  description: 'whetger to aggregate the grass, shrubs, trees in dominant landuse;
+
+    default is false.'
+  is_multi_dim: false
+  name: aggregate_lu
+? 'domains
+
+  '
+: - default: -1,
+    description: number of processors in x for decomposition
+    is_multi_dim: false
+    name: nproc_x
+  - default: -1,
+    description: 'number of processors in y for decomposition
+
+      -1: code will do automatic decomposition
+
+      >1: for both: will be used for decomposition'
+    is_multi_dim: false
+    name: nproc_y
+  - default: .false.
+    description: T/F use adaptive time stepping, ARW only
+    is_multi_dim: false
+    name: use_adaptive_time_step
+  - default: .true.
+    description: 'if adaptive time stepping, T/F modify the
+
+      time steps so that the exact history time is reached'
+    is_multi_dim: false
+    name: step_to_output_time
+  - default: 1.2,1.2
+    description: 'vertical and horizontal CFL <= to this value implies
+
+      no reason to reduce the time step, and to increase it'
+    is_multi_dim: true
+    name: target_cfl
+  - default: .84,.84
+    description: horizontal CFL <= to this value implies
+    is_multi_dim: true
+    name: target_hcfl
+  - default: 5,51
+    description: 'percentage of previous time step to increase, if the
+
+      max(vert cfl, horiz cfl) <= target_cfl, then the time
+
+      will increase by max_step_increase_pct. Use something
+
+      large for nests (51% suggested)'
+    is_multi_dim: true
+    name: max_step_increase_pct
+  - default: '4'
+    description: total number of moves
+    is_multi_dim: false
+    name: num_moves
+  - default: -1,-1
+    description: 'flag = -1 implies use 6 * dx (defined in start_em),
+
+      starting_time_step = 100 means the starting time step
+
+      for the coarse grid is 100 s'
+    is_multi_dim: true
+    name: starting_time_step
+  - default: '8'
+    description: 'how many coarse grid cells the moving nest is allowed to get
+
+      near the mother domain boundary'
+    is_multi_dim: true
+    name: corral_dist
+  - default: 2,2,2,2,
+    description: a list of nest domain id's, one per move
+    is_multi_dim: false
+    name: move_id(max_moves)
+  - default: -1,-1
+    description: 'flag = -1 implies max time step is 3 * starting_time_step,
+
+      max_time_step = 100 means that the time step will not
+
+      exceed 100 s'
+    is_multi_dim: true
+    name: max_time_step
+  - default: 60,120,150,180,
+    description: time in minutes since the start of this domain
+    is_multi_dim: false
+    name: move_interval(max_moves)
+  - default: 1,1,0,-1,
+    description: the number of parent domain grid cells to move in i direction
+    is_multi_dim: false
+    name: move_cd_x(max_moves)
+  - default: -1,-1
+    description: 'flag = -1 implies max time step is 0.5 * starting_time_step,
+
+      min_time_step = 100 means that the time step will not
+
+      be less than 100 s'
+    is_multi_dim: true
+    name: min_time_step
+  - default: 1,0,-1,1,
+    description: 'the number of parent domain grid cells to move in j direction
+
+      positive is to move in increasing i and j direction, and
+
+      negative is to move in decreasing i and j direction.
+
+      0 means no move. The limitation now is to move only 1 grid cell
+
+      at each move.'
+    is_multi_dim: false
+    name: move_cd_y(max_moves)
+  - default: '15'
+    description: how often the new vortex position is computed
+    is_multi_dim: true
+    name: vortex_interval
+  - default: '1'
+    description: 'default, all fine grid domains adaptive dt driven by coarse-grid
+
+      ; 2 = Fine grid domain #2 determines the fundamental adaptive dt.'
+    is_multi_dim: false
+    name: adaptation_domain
+  - default: '40'
+    description: used to compute the search radius for the new vortex position
+    is_multi_dim: true
+    name: max_vortex_speed
+  - default: 1,
+    description: number of tiles per patch (alternative to above two items)
+    is_multi_dim: false
+    name: numtiles
+  - default: '50000'
+    description: pressure value in Pa where the vortex is tracked
+    is_multi_dim: false
+    name: track_level
+  - default: '0.'
+    description: time (in minutes) to start the moving nests
+    is_multi_dim: true
+    name: time_to_move
+  - default: 0,
+    description: number of points in tile x direction
+    is_multi_dim: false
+    name: tile_sz_x
+  - default: 0,
+    description: 'number of points in tile y direction
+
+      can be determined automatically'
+    is_multi_dim: false
+    name: tile_sz_y
+dynamics:
+- default: 0,
+  description: 'upper level damping flag
+
+    0 = without damping
+
+    1 = with diffusive damping, maybe used for real-data cases
+
+    (dampcoef nondimensional ~0.01-0.1)'
+  is_multi_dim: false
+  name: damp_opt
+- default: 5,
+  description: horizontal scalar advection order
+  is_multi_dim: true
+  name: h_sca_adv_order
+- default: with Rayleigh  damping
+  description: 'dampcoef inverse time scale [1/s] e.g. .003; idealized case only
+
+    not for real-data cases)'
+  is_multi_dim: false
+  name: '2'
+- default: .f.,
+  description: whether to use vertical velocity from input file
+  is_multi_dim: false
+  name: use_input_w
+- default: 3,
+  description: vertical scalar advection order
+  is_multi_dim: true
+  name: v_sca_adv_order
+- default: .false.
+  description: T/F replace the entire j=1 (jds-1) with the values from j=2 (jds-2)
+  is_multi_dim: false
+  name: swap_pole_with_next_j
+- default: 0,
+  description: 6th-order numerical diffusion
+  is_multi_dim: false
+  name: diff_6th_opt
+- default: 0,
+  description: horizontal diffusion constant (m^2/s). A typical value should be 0.1*DX
+    in meters.
+  is_multi_dim: true
+  name: khdif
+- default: 3,
+  description: 'time-integration scheme option:
+
+    2 = Runge-Kutta 2nd order
+
+    3 = Runge-Kutta 3rd order'
+  is_multi_dim: false
+  name: rk_ord
+- default: '0'
+  description: '1: use theta_m=theta(1+1.61Qv)
+
+    0: use dry theta in dynamics'
+  is_multi_dim: false
+  name: use_theta_m
+- default: 1,
+  description: 'advection options for momentum variables:
+
+    1=original, 3 = 5th-order WENO
+
+    ; advection options for scalar variables: 0=simple, 1=positive definite,
+
+    2=monotonic, 3=5th order WENO, 4=5th-order WENO with positive definite filter'
+  is_multi_dim: true
+  name: momentum_adv_opt
+- default: .false.
+  description: T/F average the field at each i location in the j-loop with a number
+    of grid points based on a map-factor ratio
+  is_multi_dim: false
+  name: actual_distance_average
+- default: '0'
+  description: 'whether to include QV and QC tendencies in advection (new in 3.7)
+
+    0 = default, old behavior
+
+    1 = include QV and QC tendencies - this helps to produce correct solution
+
+    in an idealized ''moist benchmark'' test case (Bryan, 2014).
+
+    In real data testing, time step needs to be reduce to maintain stable solution'
+  is_multi_dim: false
+  name: use_q_diabatic
+- default: 0,
+  description: vertical diffusion constant (m^2/s). A typical value should be 100.
+  is_multi_dim: true
+  name: kvdif
+- default: '0.25'
+  description: Smagorinsky coeff
+  is_multi_dim: false
+  name: c_s
+- default: '1'
+  description: for moisture
+  is_multi_dim: true
+  name: moist_adv_opt
+- default: '0'
+  description: for running without gravity wave drag
+  is_multi_dim: false
+  name: gwd_opt
+- default: '1'
+  description: for scalars
+  is_multi_dim: true
+  name: scalar_adv_opt
+- default: '0'
+  description: nonlinear backscatter and anisotropy (NBA) off
+  is_multi_dim: true
+  name: sfs_opt
+- default: '1'
+  description: for chem variables
+  is_multi_dim: true
+  name: chem_adv_opt
+- default: 0.1,
+  description: divergence damping (0.1 is typical)
+  is_multi_dim: true
+  name: smdiv
+- default: '0'
+  description: no added output
+  is_multi_dim: true
+  name: m_opt
+- default: '0.15'
+  description: TKE coeff
+  is_multi_dim: false
+  name: c_k
+- default: '1'
+  description: for tracer variables (WRF-Chem activated)
+  is_multi_dim: true
+  name: tracer_adv_opt
+- default: '1'
+  description: for tke
+  is_multi_dim: true
+  name: tke_adv_opt
+- default: 0.01,
+  description: 'external-mode filter coef for mass coordinate model
+
+    (0.01 is typical for real-data cases)'
+  is_multi_dim: true
+  name: emdiv
+- default: 4 /
+  description: 'number of sound steps per time-step (0=set automatically)
+
+    (if using a time_step much larger than 6*dx (in km),
+
+    proportionally increase number of sound steps - also
+
+    best to use even numbers)'
+  is_multi_dim: true
+  name: time_step_sound
+- default: '0'
+  description: ''
+  is_multi_dim: true
+  name: tracer_opt
+- default: 0,
+  description: whether to output time-averaged mass-coupled advective velocities
+  is_multi_dim: true
+  name: do_avgflx_em
+- default: no 6th-order diffusion
+  description: default)
+  is_multi_dim: false
+  name: '0'
+- default: .1,
+  description: time off-centering for vertical sound waves
+  is_multi_dim: true
+  name: epssm
+- default: 6th-order numerical diffusion
+  description: 'not recommended)
+
+    2 = 6th-order numerical diffusion but prohibit up-gradient diffusion'
+  is_multi_dim: false
+  name: '1'
+- default: 0.12,
+  description: '6th-order numerical diffusion non-dimensional rate (max value 1.0
+
+    corresponds to complete removal of 2dx wave in one timestep)'
+  is_multi_dim: false
+  name: diff_6th_factor
+- default: 3,
+  description: vertical momentum advection order
+  is_multi_dim: true
+  name: v_mom_adv_order
+- default: 'no'
+  description: 'default)
+
+    1 = yes'
+  is_multi_dim: false
+  name: '0'
+- default: 0,
+  description: whether to output time-averaged convective mass-fluxes from Grell-Devenyi
+    ensemble scheme
+  is_multi_dim: true
+  name: do_avgflx_cugd
+- default: .true.,
+  description: whether running the model in hydrostatic or non-hydro mode
+  is_multi_dim: true
+  name: non_hydrostatic
+- default: 0.,
+  description: damping coefficient (see above)
+  is_multi_dim: true
+  name: dampcoef
+- default: 'no'
+  description: default)
+  is_multi_dim: false
+  name: '0'
+- default: 5000.,
+  description: damping depth (m) from model top
+  is_multi_dim: true
+  name: zdamp
+- default: .false.,
+  description: Coriolis only acts on wind perturbation (idealized)
+  is_multi_dim: true
+  name: pert_coriolis
+- default: 'yes'
+  description: only takes effect if do_avgflx_em=1 and cu_physics= 93
+  is_multi_dim: false
+  name: '1'
+- default: .false.,
+  description: Zero vertical motion at top of domain
+  is_multi_dim: true
+  name: top_lid
+- default: .true.,
+  description: whether to do Coriolis calculations (idealized) (inactive)
+  is_multi_dim: true
+  name: do_coriolis
+- default: 0,
+  description: 'vertical velocity damping flag (for operational use)
+
+    0 = without damping
+
+    1 = with    damping'
+  is_multi_dim: false
+  name: w_damping
+- default: .true.,
+  description: 'used with diff_opt = 2; value of ".true." is recommended, except for
+
+    highly idealized numerical tests; damp_opt must not be 1 if ".true."
+
+    is chosen. .false. means subtract 1-d base-state profile before mixing'
+  is_multi_dim: true
+  name: mix_full_fields
+- default: 290.,
+  description: real-data, em ONLY, base sea-level temp (K)
+  is_multi_dim: false
+  name: base_temp
+- default: 0,
+  description: 'turbulence and mixing option:
+
+    0 = no turbulence or explicit
+
+    spatial numerical filters (km_opt IS IGNORED).
+
+    1 = evaluates 2nd order
+
+    diffusion term on coordinate surfaces.
+
+    uses kvdif for vertical diff unless PBL option
+
+    is used. may be used with km_opt = 1 and 4.
+
+    (= 1, recommended for real-data cases)
+
+    2 = evaluates mixing terms in
+
+    physical space (stress form) (x,y,z).
+
+    turbulence parameterization is chosen
+
+    by specifying km_opt.'
+  is_multi_dim: true
+  name: diff_opt
+- default: '0'
+  description: 0=anistropic vertical/horizontal diffusion coeffs, 1=isotropic
+  is_multi_dim: true
+  name: mix_isotropic
+- default: .true.,
+  description: whether to do curvature calculations (idealized) (inactive)
+  is_multi_dim: true
+  name: do_curvature
+- default: '0.1'
+  description: non-dimensional upper limit for diffusion coeffs
+  is_multi_dim: true
+  name: mix_upper_bound
+- default: 10^5
+  description: real-data, em ONLY, base sea-level pres (Pa), DO NOT CHANGE
+  is_multi_dim: false
+  name: base_pres
+- default: 1,
+  description: eddy coefficient option
+  is_multi_dim: true
+  name: km_opt
+- default: .true.,
+  description: whether to do horizontal pressure gradient calculations (idealized)
+    (inactive)
+  is_multi_dim: true
+  name: do_gradp
+- default: .f.,
+  description: whether to use base state parameters from the namelist
+  is_multi_dim: false
+  name: use_baseparam_fr_nml
+- default: 0.,
+  description: surface drag coefficient (Cd, dimensionless) for diff_opt=2 only
+  is_multi_dim: true
+  name: tke_drag_coefficient
+- default: 50.,
+  description: real-data, em ONLY, lapse rate (K), DO NOT CHANGE
+  is_multi_dim: false
+  name: base_lapse
+- default: '45.'
+  description: the latitude above which the polar filter is turned on
+  is_multi_dim: false
+  name: fft_filter_lat
+- default: with w-Rayleigh damping
+  description: 'dampcoef inverse time scale [1/s] e.g. .2;
+
+    for real-data cases)'
+  is_multi_dim: false
+  name: '3'
+- default: 0.,
+  description: surface thermal flux (H/(rho*cp), K m/s) for diff_opt=2 only
+  is_multi_dim: true
+  name: tke_heat_flux
+- default: 200.,
+  description: real-data, em ONLY, reference temp in stratosphere, US Standard atmosphere
+    216.5 K
+  is_multi_dim: false
+  name: iso_temp
+- default: constant
+  description: use khdif kvdif)
+  is_multi_dim: false
+  name: '1'
+- default: .true.
+  description: T/F mu coupled scalar arrays are run through the polar filters
+  is_multi_dim: false
+  name: coupled_filtering
+- default: 5,
+  description: horizontal momentum advection order (5=5th, etc.)
+  is_multi_dim: true
+  name: h_mom_adv_order
+- default: '5500.'
+  description: 'real-data, em ONLY, base state pressure (Pa) at bottom of the stratosphere,
+
+    US Standard atmosphere 55 hPa'
+  is_multi_dim: false
+  name: base_pres_strat
+- default: 1.5 order TKE closure
+  description: 3D)
+  is_multi_dim: false
+  name: '2'
+- default: .false.
+  description: T/F remove negative values of scalar arrays by setting minimum value
+    to zero
+  is_multi_dim: false
+  name: pos_def
+- default: Smagorinsky first order closure
+  description: '3D)
+
+    Note: option 2 and 3 are not recommended for DX > 2 km
+
+    4 = horizontal Smagorinsky first order closure
+
+    (recommended for real-data cases)'
+  is_multi_dim: false
+  name: '3'
+- default: '0.'
+  description: 'real-data, em ONLY, base state lapse rate ( dT / d(lnP) ) in stratosphere,
+
+    approx to US Standard atmosphere -12 K'
+  is_multi_dim: false
+  name: base_lapse_strat
+fdda:
+- default: '0'
+  description: 1=no wind-nudging within pbl
+  is_multi_dim: true
+  name: obs_no_pbl_nudge_uv
+- default: '0'
+  description: 0= nudging ends as a step function, 1= ramping nudging down at end
+    of period
+  is_multi_dim: false
+  name: if_ramping
+- default: '0'
+  description: 1=no temperature-nudging within pbl
+  is_multi_dim: true
+  name: obs_no_pbl_nudge_t
+- default: '60.0'
+  description: 'time (min) for ramping function, 60.0=ramping starts at last analysis
+    time,
+
+    -60.0=ramping ends at last analysis time'
+  is_multi_dim: false
+  name: dtramp_min
+- default: '0'
+  description: 1=no moisture-nudging within pbl
+  is_multi_dim: true
+  name: obs_no_pbl_nudge_q
+- default: '1'
+  description: grid-nudging fdda on (=0 off) for each domain
+  is_multi_dim: true
+  name: grid_fdda
+- default: '0'
+  description: 'horizontal spreading scheme for surf obs;
+
+    0=wrf scheme, 1=original mm5 scheme'
+  is_multi_dim: false
+  name: obs_sfc_scheme_horiz
+- default: '0'
+  description: 'surface fdda switch
+
+    0: off;
+
+    1: nudging selected surface fields;
+
+    2: FASDAS (flux-adjusting surface data assimilation system)'
+  is_multi_dim: true
+  name: grid_sfdda
+- default: '0'
+  description: 'vertical spreading scheme for surf obs
+
+    0=regime vif scheme, 1=original simple scheme'
+  is_multi_dim: false
+  name: obs_sfc_scheme_vert
+- default: '6'
+  description: time (in hours) to stop sfc nudging after start of forecast
+  is_multi_dim: true
+  name: sgfdda_end_h
+- default: '20'
+  description: Max pressure gap between soundings, in cb
+  is_multi_dim: false
+  name: obs_max_sndng_gap
+- default: '"wrfsfdda_d<domain>"'
+  description: defined name for sfc nudgingi in input file (from program obsgrid)
+  is_multi_dim: false
+  name: sgfdda_inname
+- default: '180'
+  description: time interval (in min) between sfc analysis times (must use minutes)
+  is_multi_dim: true
+  name: sgfdda_interval_m
+- default: '50'
+  description: Vert infl full weight  height for lowest model level (LML) obs, regime
+    1, winds
+  is_multi_dim: false
+  name: obs_nudgezfullr1_uv
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 4, winds
+  is_multi_dim: false
+  name: obs_nudgezrampr4_uv
+- default: '2'
+  description: sfc analysis data io format (2 = netCDF)
+  is_multi_dim: false
+  name: io_form_sgfdda
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 1, winds
+  is_multi_dim: false
+  name: obs_nudgezrampr1_uv
+- default: '0.0003'
+  description: nudging coefficient for sfc u and v (sec-1)
+  is_multi_dim: true
+  name: guv_sfc
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 2, winds
+  is_multi_dim: false
+  name: obs_nudgezfullr2_uv
+- default: '0.0003'
+  description: nudging coefficient for sfc temp (sec-1)
+  is_multi_dim: true
+  name: gt_sfc
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 2, winds
+  is_multi_dim: false
+  name: obs_nudgezrampr2_uv
+- default: '-5000'
+  description: Vert infl full weight  height for LML obs, regime 4, winds
+  is_multi_dim: false
+  name: obs_nudgezfullr4_uv
+- default: '0.0003'
+  description: nudging coefficient for sfc qvapor (sec-1)
+  is_multi_dim: true
+  name: gq_sfc
+- default: '250.0'
+  description: 'radius of influence used to determine the confidence (or weights)
+    for
+
+    the analysis, which is based on the distance between the grid point to the nearest
+
+    obs. The analysis without nearby observation is used at a reduced weight.'
+  is_multi_dim: false
+  name: rinblw
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 1, temperature
+  is_multi_dim: false
+  name: obs_nudgezfullr1_t
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 1, temperature
+  is_multi_dim: false
+  name: obs_nudgezrampr1_t
+- default: '1'
+  description: PXLSM Soil nudging option (requires wrfsfdda file)
+  is_multi_dim: true
+  name: pxlsm_soil_nudge
+- default: 0,
+  description: 1= nudging tendencies are set to zero in between fdda calls
+  is_multi_dim: true
+  name: fgdtzero
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 2, temperature
+  is_multi_dim: false
+  name: obs_nudgezfullr2_t
+- default: 0,
+  description: 1= no nudging of ph in the pbl, 0= nuding in the pbl
+  is_multi_dim: false
+  name: if_no_pbl_nudging_ph
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 2, temperature
+  is_multi_dim: false
+  name: obs_nudgezrampr2_t
+- default: 3,
+  description: top wave number to nudge in y direction
+  is_multi_dim: true
+  name: ywavenum
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 2, moisture
+  is_multi_dim: false
+  name: obs_nudgezfullr2_q
+- default: 0,
+  description: 0= nudge ph in all layers, 1= limit nudging to levels above k_zfac_ph
+  is_multi_dim: true
+  name: if_zfac_ph
+- default: '-5000'
+  description: Vert infl full weight  height for LML obs, regime 4, temperature
+  is_multi_dim: false
+  name: obs_nudgezfullr4_t
+- default: 10,
+  description: 10= model level below which nudging is switched off for ph
+  is_multi_dim: true
+  name: k_zfac_ph
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 4, temperature
+  is_multi_dim: false
+  name: obs_nudgezrampr4_t
+- default: 1,
+  description: 'depth in k between k_zfac_X to dk_zfac_X where nudging increases
+
+    linearly to full strength
+
+    dk_zfac_t  (max_dom)                = 1,
+
+    dk_zfac_ph (max_dom)                = 1,
+
+    gph (max_dom)                       = 0.0003,'
+  is_multi_dim: true
+  name: dk_zfac_uv
+- default: '50'
+  description: Vert infl full weight  height for LML obs, regime 1, moisture
+  is_multi_dim: false
+  name: obs_nudgezfullr1_q
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 1, moisture
+  is_multi_dim: false
+  name: obs_nudgezrampr1_q
+- default: 3,
+  description: top wave number to nudge in x direction
+  is_multi_dim: true
+  name: xwavenum
+- default: '1'
+  description: 'whether to nudge wind: (=0 off)'
+  is_multi_dim: true
+  name: obs_nudge_wind
+- default: '1'
+  description: 'obs-nudging fdda on (=0 off) for each domain
+
+    also need to set auxinput11_interval and auxinput11_end_h
+
+    in time_control namelist'
+  is_multi_dim: true
+  name: obs_nudge_opt
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 2, moisture
+  is_multi_dim: false
+  name: obs_nudgezrampr2_q
+- default: '150000'
+  description: 'max number of observations used on a domain during any
+
+    given time window'
+  is_multi_dim: false
+  name: max_obs
+- default: '-5000'
+  description: Vert infl full weight  height for LML obs, regime 4, moisture
+  is_multi_dim: false
+  name: obs_nudgezfullr4_q
+- default: '0'
+  description: obs nudging start time in minutes
+  is_multi_dim: false
+  name: fdda_start
+- default: '50'
+  description: Vert infl ramp-to-zero height for LML obs, regime 4, moisture
+  is_multi_dim: false
+  name: obs_nudgezrampr4_q
+- default: '180'
+  description: obs nudging end time in minutes
+  is_multi_dim: false
+  name: fdda_end
+- default: '50'
+  description: Min depth through which vertical infl fcn remains 1.0
+  is_multi_dim: false
+  name: obs_nudgezfullmin
+- default: '0'
+  description: 1= no nudging of temp in the pbl, 0=nudging in the pbl
+  is_multi_dim: true
+  name: if_no_pbl_nudging_t
+- default: '0'
+  description: whether to nudge surface pressure (not used)
+  is_multi_dim: false
+  name: obs_nudge_pstr
+- default: '7.5'
+  description: Max pressure change (cb) allowed within horiz radius of influence
+  is_multi_dim: false
+  name: obs_dpsmx
+- default: '360'
+  description: time interval (in min) between analysis times (must use minutes)
+  is_multi_dim: true
+  name: gfdda_interval_m
+- default: 6.E-4,
+  description: 'nudging coefficient for wind, unit: s-1'
+  is_multi_dim: false
+  name: obs_coef_wind
+- default: '50'
+  description: Min depth (m) through which vert infl fcn decreases from 1 to 0
+  is_multi_dim: false
+  name: obs_nudgezrampmin
+- default: '"wrffdda_d<domain>"'
+  description: defined name in real
+  is_multi_dim: false
+  name: gfdda_inname
+- default: '1'
+  description: 'whether to nudge temperature: (=0 off)'
+  is_multi_dim: false
+  name: obs_nudge_temp
+- default: '3000'
+  description: Max depth (m) in which vert infl function is nonzero
+  is_multi_dim: false
+  name: obs_nudgezmax
+- default: '6'
+  description: time (in hours) to stop nudging after start of forecast
+  is_multi_dim: true
+  name: gfdda_end_h
+- default: 6.E-4,
+  description: 'nudging coefficient for temperature, unit: s-1'
+  is_multi_dim: false
+  name: obs_coef_temp
+- default: '2'
+  description: analysis data io format (2 = netCDF)
+  is_multi_dim: false
+  name: io_form_gfdda
+- default: '1.0'
+  description: Scale factor applied to time window for surface obs
+  is_multi_dim: false
+  name: obs_sfcfact
+- default: '0'
+  description: calculation frequency (minutes) for grid-nudging (0=every step)
+  is_multi_dim: true
+  name: fgdt
+- default: '1'
+  description: 'whether to nudge water vapor mixing ratio: (=0 off)'
+  is_multi_dim: false
+  name: obs_nudge_mois
+- default: 6.E-4,
+  description: 'nudging coefficient for water vapor mixing ratio, unit: s-1'
+  is_multi_dim: false
+  name: obs_coef_mois
+- default: '1.0'
+  description: Scale factor applied to horiz radius of influence for surface obs
+  is_multi_dim: false
+  name: obs_sfcfacr
+- default: '0'
+  description: 1= no nudging of u and v in the pbl, 0=nudging in the pbl
+  is_multi_dim: true
+  name: if_no_pbl_nudging_uv
+- default: '10'
+  description: 10=model level below which nudging is switched off for qvapor
+  is_multi_dim: true
+  name: k_zfac_q
+- default: 10,
+  description: freq in coarse grid timesteps for diag prints
+  is_multi_dim: false
+  name: obs_npfi
+- default: '0'
+  description: 1= no nudging of qvapor in the pbl, 0=nudging in the pbl
+  is_multi_dim: true
+  name: if_no_pbl_nudging_q
+- default: '0.'
+  description: 'nudging coefficient for surface pressure, unit: s-1 (not used)'
+  is_multi_dim: false
+  name: obs_coef_pstr
+- default: '0'
+  description: 0= nudge u and v in all layers, 1= limit nudging to levels above k_zfac_uv
+  is_multi_dim: true
+  name: if_zfac_uv
+- default: '10'
+  description: 10=model level below which nudging is switched off for u and v
+  is_multi_dim: true
+  name: k_zfac_uv
+- default: 200.,
+  description: horizonal radius of influence in km
+  is_multi_dim: false
+  name: obs_rinxy
+- default: '0'
+  description: 0= nudge temp in all layers, 1= limit nudging to levels above k_zfac_t
+  is_multi_dim: true
+  name: if_zfac_t
+- default: 0.1,
+  description: vertical radius of influence in eta
+  is_multi_dim: false
+  name: obs_rinsig
+- default: '10'
+  description: 10=model level below which nudging is switched off for temp
+  is_multi_dim: true
+  name: k_zfac_t
+- default: '0.66667'
+  description: 'half-period time window over which an observation
+
+    will be used for nudging (hours)'
+  is_multi_dim: true
+  name: obs_twindo
+- default: '0'
+  description: 0= nudge qvapor in all layers, 1= limit nudging to levels above k_zfac_q
+  is_multi_dim: true
+  name: if_zfac_q
+- default: '0.0003'
+  description: nudging coefficient for qvapor (sec-1)
+  is_multi_dim: true
+  name: gq
+- default: 1000,
+  description: Maximum allowed obs entries in diagnostic printout
+  is_multi_dim: false
+  name: obs_prt_max
+- default: '0.0003'
+  description: nudging coefficient for u and v (sec-1)
+  is_multi_dim: true
+  name: guv
+- default: '2'
+  description: freq in coarse grid timesteps for obs input and err calc
+  is_multi_dim: true
+  name: obs_ionf
+- default: '0'
+  description: 'for dynamic initialization using a ramp-down function to gradually
+
+    turn off the FDDA before the pure forecast (=1 on)'
+  is_multi_dim: false
+  name: obs_idynin
+- default: '40'
+  description: 'time period in minutes over which the nudging is ramped down
+
+    from one to zero.'
+  is_multi_dim: false
+  name: obs_dtramp
+- default: '0.0003'
+  description: nudging coefficient for temp (sec-1)
+  is_multi_dim: true
+  name: gt
+- default: 10,
+  description: Frequency in obs index for diagnostic printout
+  is_multi_dim: true
+  name: obs_prt_freq
+- default: '0'
+  description: '1 = prevent to nudge toward negative QV
+
+    /'
+  is_multi_dim: false
+  name: obs_scl_neg_qv_innov
+- default: .true.
+  description: print obs input diagnostics (=.false. off)
+  is_multi_dim: false
+  name: obs_ipf_in4dob
+- default: .true.
+  description: print obs error diagnostics (=.false. off)
+  is_multi_dim: false
+  name: obs_ipf_errob
+- default: .true.
+  description: Enable obs init warning messages
+  is_multi_dim: false
+  name: obs_ipf_init
+- default: .true.
+  description: print obs nudge diagnostics (=.false. off)
+  is_multi_dim: false
+  name: obs_ipf_nudob
+grib2:
+- default: 255,
+  description: 'Background generating process identifier, typically defined
+
+    by the originating center to identify the background data that
+
+    was used in creating the data. This is octet 13 of Section 4
+
+    in the grib2 message'
+  is_multi_dim: false
+  name: background_proc_id
+- default: 255,
+  description: 'Production status of processed data in the grib2 message.
+
+    See Code Table 1.3 of the grib2 manual. This is octet 20 of
+
+    Section 1 in the grib2 record'
+  is_multi_dim: false
+  name: production_status
+- default: 255,
+  description: 'Analysis or generating forecast process identifier, typically
+
+    defined by the originating center to identify the forecast process
+
+    that was used to generate the data. This is octet 14 of Section
+
+    4 in the grib2 message'
+  is_multi_dim: false
+  name: forecast_proc_id
+- default: 40,
+  description: 'The compression method to encode the output grib2 message.
+
+    Only 40 for jpeg2000 or 41 for PNG are supported'
+  is_multi_dim: false
+  name: compression
+namelist_quilt:
+- default: '0,        default value is 0: no quilting'
+  description: '> 0 quilting I/O
+
+    nio_groups                          = 1,        default 1. May be set to higher
+    value for nesting IO
+
+    or history and restart IO'
+  is_multi_dim: false
+  name: nio_tasks_per_group
+noah_mp:
+- default: 1,
+  description: 'Noah-MP Runoff and Groundwater option
+
+    ;    1 = TOPMODEL with groundwater
+
+    ;    2 = TOPMODEL with equilibrium water table
+
+    ;    3 = original surface and subsurface runoff (free drainage)
+
+    ;    4 = BATS surface and subsurface runoff (free drainage)'
+  is_multi_dim: false
+  name: opt_run
+- default: 1,
+  description: 'Noah-MP Stomatal Resistance option:
+
+    ;    1 = Ball-Berry; 2 = Jarvis'
+  is_multi_dim: false
+  name: opt_crs
+- default: 4,
+  description: 'Noah-MP Dynamic Vegetation option:
+
+    ;    1 = Off (LAI from table; FVEG = shdfac)
+
+    ;    2 = On  (LAI predicted;  FVEG calculated)
+
+    ;    3 = Off (LAI from table; FVEG calculated)
+
+    ;    4 = Off (LAI from table; FVEG = maximum veg. fraction)
+
+    ;    5 = On  (LAI predicted;  FVEG = maximum veg. fraction)'
+  is_multi_dim: false
+  name: dveg
+- default: 1,
+  description: 'Noah-MP Snow/Soil temperature time scheme
+
+    ;    1 = semi-implicit
+
+    ;    2 = full-implicit
+
+    ;    3 = semi-implicit where Ts uses snow cover fraction'
+  is_multi_dim: false
+  name: opt_stc
+- default: 1,
+  description: 'Noah-MP Supercooled Liquid Water option
+
+    ;    1 = No iteration; 2 = Koren''s iteration'
+  is_multi_dim: false
+  name: opt_frz
+- default: 2,
+  description: 'Noah-MP Ground Surface Albedo option
+
+    ;    1 = BATS; 2 = CLASS'
+  is_multi_dim: false
+  name: opt_alb
+- default: '1'
+  description: 'Noah-MP surface layer drag coefficient calculation
+
+    ;    1 = Monin-Obukhov; 2 = original Noah (Chen97);
+
+    ;    3 = MYJ consistent; 4 = YSU consistent.
+
+    ;    options 3 and 4 removed in 3.7'
+  is_multi_dim: false
+  name: opt_sfc
+- default: 2,
+  description: 'Noah-MP Soil Temperature Lower Boundary Condition
+
+    ;    1 = Zero heat flux
+
+    ;    2 = TBOT at 8 m from input file'
+  is_multi_dim: false
+  name: opt_tbot
+- default: 1,
+  description: 'Noah-MP glacier treatment option (new in 3.8)
+
+    ;    1 = includes phase change
+
+    ;    2 = slab ice (Noah)'
+  is_multi_dim: false
+  name: opt_gla
+- default: 1,
+  description: 'Noah-MP Precipitation Partitioning between snow and rain
+
+    ;    1 = Jordan (1991)
+
+    ;    2 = BATS:  Snow when SFCTMP < TFRZ+2.2
+
+    ;    3 = Snow when SFCTMP < TFRZ
+
+    ;    4 = Use WRF precipitation partitioning'
+  is_multi_dim: false
+  name: opt_snf
+- default: 1,
+  description: 'Noah-MP Soil Moisture Factor for Stomatal Resistance
+
+    ;    1 = Noah; 2 = CLM; 3 = SSiB'
+  is_multi_dim: false
+  name: opt_btr
+- default: 1,
+  description: 'Noah-MP Soil Permeability option
+
+    ;    1 = Linear effects, more permeable;
+
+    ;    2 = Non-linear effects, less permeable'
+  is_multi_dim: false
+  name: opt_inf
+- default: 1,
+  description: 'Noah-MP surface evaporation resistence option (new in 3.8)
+
+    ;    1 -> Sakaguchi and Zeng, 2009
+
+    ;    2 -> Sellers (1992)
+
+    ;    3 -> adjusted Sellers to decrease RSURF for wet soil
+
+    ;    4 -> option 1 for non-snow; rsurf = rsurf_snow for snow (set in MPTABLE);
+    AD v3.8
+
+    /'
+  is_multi_dim: false
+  name: opt_rsf
+- default: 3,
+  description: 'Noah-MP Radiative Transfer option
+
+    ;    1 = Modified two-stream;
+
+    ;    2 = Two-stream applied to grid-cell
+
+    ;    3 = Two-stream applied to vegetated fraction'
+  is_multi_dim: false
+  name: opt_rad
+physics:
+- default: '0'
+  description: 'switch to use mix-activate scheme (Only for Morrison, WDM6, WDM5,
+
+    and NSSL_2MOMCCN/NSSL_2MOM'
+  is_multi_dim: false
+  name: progn
+- default: 1.E8
+  description: CCN concentration, used by WDM schemes (new in 3.6.1)
+  is_multi_dim: false
+  name: ccn_conc
+- default: '0'
+  description: normal
+  is_multi_dim: false
+  name: no_mp_heating
+- default: 1,
+  description: lake model on/off
+  is_multi_dim: true
+  name: sf_lake_physics
+- default: 30,
+  description: 'minutes between radiation physics calls
+
+    recommend 1 min per km of dx (e.g. 10 for 10 km);
+
+    use the same value for all nests.'
+  is_multi_dim: true
+  name: radt
+- default: 50,
+  description: 'default lake depth (If there is no lake_depth information in the input
+    data, then lake depth
+
+    is assumed to be 50m)'
+  is_multi_dim: true
+  name: lakedepth_default
+- default: '1'
+  description: 'whether to use effective radii computed in mp schemes in RRTMG (new
+    in 3.8).
+
+    0: do not use; 1: use effective radii
+
+    (The mp schemes that compute effective radii are 3,4,6,8,14,16,17-21)'
+  is_multi_dim: false
+  name: use_mp_re
+- default: 5,
+  description: 'minimum elevation of lakes. May be used to determine whether a water
+    point is a lake in the absence of lake
+
+    category. If the landuse type includes ''lake'' (i.e. Modis_lake and USGS_LAKE),
+    this variable is of no effects.'
+  is_multi_dim: true
+  name: lake_min_elev
+- default: input value from auxiliary input 5, as in aer_aod550_opt
+  description: '3 = Angstrom exponent value estimated from the aerosol type defined
+    in aer_type, and modulated
+
+    with the RH in WRF. Default operation is aer_angexp_opt = 1, and aer_angexp_val=1.3.
+
+    aer_angexp_val                      = 1.3
+
+    aer_ssa_opt                         = [1,2,3] similar to aer_angexp_opt.
+
+    aer_ssa_val                         = 0.85
+
+    aer_asy_opt                         = [1,2,3] similar to aer_angexp_opt.
+
+    aer_asy_val                         = 0.9
+
+    aer_type                            = [1,2,3] : 1 for rural, 2 is urban and 3
+    is maritime.'
+  is_multi_dim: false
+  name: '2'
+- default: 1,
+  description: 'option to use lake depth data. Lake depth data is available from 3.6
+    geogrid program. If one didn''t process
+
+    the lake depth data, but this switch is set to 1, the program will stop and tell
+    one to go back to geogrid
+
+    program.
+
+    = 0, do not use lake depth data.
+
+    lightning_option (max_dom)                     ; Lightning parameterization option
+    to allow flash rate prediction without chemistry'
+  is_multi_dim: false
+  name: use_lakedepth
+- default: ozone input option for radiation
+  description: 'currently rrtmg only)
+
+    = 0, using profile inside the code'
+  is_multi_dim: false
+  name: o3input
+- default: '0.'
+  description: Start time for calling lightning parameterization. Recommends at least
+    10 minutes for spin-up.
+  is_multi_dim: true
+  name: lightning_start_seconds
+- default: '0.'
+  description: time interval (seconds) for calling lightning parameterization. Default
+    uses model time step
+  is_multi_dim: true
+  name: lightning_dt
+- default: aerosol input option for radiation
+  description: 'currently rrtmg only)
+
+    = 0, none'
+  is_multi_dim: false
+  name: aer_opt
+- default: 0,
+  description: 'activate urban canopy model (in Noah LSM only)
+
+    = 0: no
+
+    = 1: Single-layer, UCM'
+  is_multi_dim: true
+  name: sf_urban_physics
+- default: '1.0'
+  description: 'Factor to adjust the predicted number of flashes. Recommends 1.0 for
+    lightning_option = 11
+
+    between dx=10 and 50 km. Manual tuning recommended for all other options independently
+
+    for each nest.
+
+    cellcount_method (max_dom)                     ; Method for counting storm cells.
+    Used by CRM options (lightning_options=1,2).'
+  is_multi_dim: true
+  name: flashrate_factor
+- default: 0,
+  description: minutes between boundary-layer physics calls
+  is_multi_dim: true
+  name: bldt
+- default: '1.'
+  description: Denominator of user-specified prescribed IC:CG
+  is_multi_dim: false
+  name: iccg_prescribed_den
+- default: '0.'
+  description: Numerator of user-specified prescribed IC:CG
+  is_multi_dim: false
+  name: iccg_prescribed_num
+- default: 0,
+  description: whether to turn on top-down, radiation-driven mixing (1=yes)
+  is_multi_dim: false
+  name: ysu_topdown_pblmix
+- default: '0.'
+  description: 'Adjustment from LNB in km. Used by lightning_option=11. Default is
+    0, but recommends 2 km
+
+    iccg_method (max_dom)                          ; IC:CG partitioning method (IC:
+    intra-cloud; CG: cloud-to-ground)'
+  is_multi_dim: true
+  name: cldtop_adjustment
+- default: 1,
+  description: 'whether to turn on new day-time EDMF QNSE (0=no)
+
+    topo_wind (max_dom)                 = 0, turn off,
+
+    = 1, turn on topographic surface wind correction from Jimenez
+
+    (YSU PBL only, and require extra input from geogrid)'
+  is_multi_dim: true
+  name: mfshconv
+- default: .false., default off
+  description: '= .true. do MYNN tke advection
+
+    icloud_bl                           option to couple the subgrid-scale clouds
+    from the PBL scheme (MYNN only)
+
+    to radiation schemes
+
+    0: no coupling; 1: activate coupling to radiation (default)
+
+    bl_mynn_cloudmix                    option to activate mixing of qc and qi in
+    MYNN
+
+    0: no mixing of qc & qi; 1: mixing activated (default).
+
+    Note qnc and qni are mixed when scalar_pblmix =1.
+
+    bl_mynn_mixlength                   option to change mixing length formulation
+    in MYNN
+
+    0:original as in Nakanishi and Niino 2009,
+
+    1:RAP/HRRR (default, including BouLac in free atmosphere),
+
+    2:experimental (includes cloud-specific mixing length and a scale-aware mixing
+
+    length, following Ito et al. 2015, BLM). Option 2 has been well tested with
+
+    the edmf options.
+
+    bl_mynn_cloudpdf                    option to switch to different cloud PDFs to
+    represent subgrid clouds
+
+    0: original (Sommeria and Deardorf 1977);
+
+    1: Kuwano et al 2010?, similar to option 0, but uses resolved scale gradients
+
+    as opposed to higher order moments ;
+
+    2: from Chaboureau and Bechtold (2002, JAS, with mods, default)
+
+    bl_mynn_edmf                        option to activate mass-flux scheme in MYNN
+
+    1: for StEM; 2: for TEMF; default =0, just regular MYNN.
+
+    Related (hidden) options:
+
+    bl_mynn_edmf_mom                    option to activate momentum transport in MYNN
+    mass-flux scheme
+
+    (assuming bl_mynn_edmf > 0)
+
+    0: no momentum transport; 1: momentum transport activated (default)
+
+    bl_mynn_edmf_tke                    option to activate TKE transport in MYNN mass-flux
+    scheme
+
+    (assuming bl_mynn_edmf > 0)
+
+    0: no TKE transport (default);1: activate TKE transport'
+  is_multi_dim: true
+  name: bl_mynn_tkeadvect
+- default: '0'
+  description: default), 1 (mixed layer model), 2 (3d ocean)
+  is_multi_dim: false
+  name: sf_ocean_physics
+- default: '0'
+  description: 1 = Simulates the effects of wind turbines in the atmospheric evolution
+  is_multi_dim: false
+  name: windfarm_opt
+- default: '0'
+  description: 'whether to use lat-lon or i-j coordinate as wind turbine locations
+
+    ; 0 = The coordinate of the turbines are defined in terms of lat-lon
+
+    ; 1 = The coordinate of the turbines are defined in terms of grid points'
+  is_multi_dim: false
+  name: windfarm_ij
+- default: 0, default off
+  description: = 1 adds MYNN tke budget terms to output
+  is_multi_dim: true
+  name: bl_mynn_tkebudget
+- default: '1'
+  description: mix scalar fields consistent with PBL option (exch_h)
+  is_multi_dim: true
+  name: scalar_pblmix
+- default: '1'
+  description: mix tracer fields consistent with PBL option (exch_h)
+  is_multi_dim: true
+  name: tracer_pblmix
+- default: '0'
+  description: 'diagnostic TKE and mixing length from Shin-Hong PBL
+
+    opt_thcnd                           option to treat thermal conductivity in Noah
+    LSM (new in 3.8)'
+  is_multi_dim: true
+  name: shinhong_tke_diag
+- default: '1'
+  description: use mosaic landuse categories in RUC; default is 0
+  is_multi_dim: false
+  name: mosaic_lu
+- default: '3'
+  description: number of mosaic landuse categories in a grid cell
+  is_multi_dim: false
+  name: mosaic_cat
+- default: '1'
+  description: use mosaic soil categories in RUC; default is 0
+  is_multi_dim: false
+  name: mosaic_soil
+- default: 1,   Shallow convection used with Grell 3D ensemble schemes
+  description: cu_physics = 3 or 5)
+  is_multi_dim: false
+  name: ishallow
+- default: 0,   closure choice
+  description: place holder only)
+  is_multi_dim: false
+  name: clos_choice
+- default: 1, 11 and 99 only)
+  description: new in 3.8)
+  is_multi_dim: false
+  name: cumulus schemes (cu_phys
+- default: 0,   additional t-averaged stuff for cu physics
+  description: 'cu_phys = 3, 5 and 93 only)
+
+    kf_edrates (max_dom)                = 0,   Add entrainment/detrainment rates and
+    convective timescale output variables for KF-based'
+  is_multi_dim: false
+  name: cu_diag
+- default: .false.
+  description: 'sub-grid cloud effect to the optical depth in radiation
+
+    currently it works only for GF, G3, GD and KF scheme
+
+    One also needs to set cu_diag = 1 for GF, G3 and GD schemes'
+  is_multi_dim: true
+  name: cu_rad_feedback
+- default: 30,  averaging time for variables used by convective transport
+  description: call cu_phys options)  and radiation routines (only cu_phys=3,5 and
+    93) (minutes)
+  is_multi_dim: false
+  name: convtrans_avglen_m
+- default: 0,
+  description: 'minutes between cumulus physics calls
+
+    kfeta_trigger                       KF trigger option (cu_physics=1 only):
+
+    = 1, default option'
+  is_multi_dim: false
+  name: cudt
+- default: 1,
+  description: 'heat and moisture fluxes from the surface
+
+    (only works for sf_sfclay_physics = 1,5,7,11)
+
+    1 = with fluxes from the surface
+
+    0 = no flux from the surface
+
+    with bl_pbl_physics=0 this uses tke_drag_coefficient
+
+    and tke_heat_flux in vertical diffusion
+
+    2 = use drag from sf_sfclay_physics and heat flux from
+
+    tke_heat_flux with bl_pbl_physics=0'
+  is_multi_dim: false
+  name: isfflx
+- default: 1,
+  description: 'sets XLAND (1=land,2=water) for ideal cases with no input land-use
+
+    run-time switch for wrf.exe physics_init (default 1 as before)'
+  is_multi_dim: false
+  name: ideal_xland
+- default: 0,
+  description: 'snow-cover effects
+
+    (only works for sf_surface_physics = 1)
+
+    1 = with snow-cover effect
+
+    0 = without snow-cover effect'
+  is_multi_dim: false
+  name: ifsnow
+- default: 1,
+  description: 'cloud effect to the optical depth in radiation
+
+    (only works for ra_sw_physics = 1,4 and ra_lw_physics = 1,4)
+
+    Since 3.6, this also controls the cloud fraction options
+
+    1 = with cloud effect, and use cloud fraction option 1
+
+    (Xu-Randall method)
+
+    0 = without cloud effect'
+  is_multi_dim: false
+  name: icloud
+- default: with cloud effect, and use cloud fraction option 2
+  description: '0/1 based
+
+    on threshold
+
+    3 = with cloud effect, and use cloud fraction option 3, based on
+
+    Sundqvist et al. (1989) (since 3.7)'
+  is_multi_dim: false
+  name: '2'
+- default: '1.'
+  description: 'scattering tuning parameter (default 1. is 1.e-5 m2/kg)
+
+    (works for ra_sw_physics = 1 option only)'
+  is_multi_dim: false
+  name: swrad_scat
+- default: 3,
+  description: 'where landuse and soil category data come from:
+
+    1 = WPS/geogrid but with dominant categories recomputed'
+  is_multi_dim: false
+  name: surface_input_source
+- default: GRIB data from another model
+  description: 'only possible
+
+    (VEGCAT/SOILCAT are in met_em files from WPS)'
+  is_multi_dim: false
+  name: '2'
+- default: use dominant land and soil categories from WPS/geogrid
+  description: default since 3.8)
+  is_multi_dim: false
+  name: '3'
+- default: 5,
+  description: 'number of soil layers in land surface model
+
+    = 5: thermal diffusion scheme
+
+    = 4: Noah landsurface model
+
+    = 6 or 9: RUC landsurface model
+
+    = 10: CLM4 landsurface model
+
+    = 2: Pleim-Xu landsurface model
+
+    = 3: SSiB landsurface model'
+  is_multi_dim: false
+  name: num_soil_layers
+- default: 21,
+  description: 'number of land categories in input data.
+
+    24 - for USGS (default); 20 for MODIS
+
+    28 - for USGS if including lake category
+
+    21 - for MODIS if including lake category (default since 3.8)
+
+    40 - for NCLD'
+  is_multi_dim: false
+  name: num_land_cat
+- default: 16,
+  description: number of soil categories in input data
+  is_multi_dim: false
+  name: num_soil_cat
+- default: '1'
+  description: 'PXLSM Soil moisture initialization option
+
+    0 - From analysis, 1 - From moisture availability
+
+    or SLMO in LANDUSE.TBL'
+  is_multi_dim: true
+  name: pxlsm_smois_init
+- default: 1,
+  description: Grell-Devenyi only
+  is_multi_dim: false
+  name: maxiens
+- default: 3,
+  description: G-D only
+  is_multi_dim: false
+  name: maxens
+- default: 3,
+  description: G-D only
+  is_multi_dim: false
+  name: maxens2
+- default: '16'
+  description: G-D only
+  is_multi_dim: false
+  name: maxens3
+- default: '144'
+  description: 'G-D only
+
+    These are recommended numbers. If you would like to use
+
+    any other number, consult the code, know what you are doing.'
+  is_multi_dim: false
+  name: ensdim
+- default: .false.
+  description: 'Option to activate UA Noah changes: a different snow-cover physics
+    in
+
+    Noah, aimed particularly toward improving treatment of snow as it relates
+
+    to the vegetation canopy. Also uses new columns added in VEGPARM.TBL'
+  is_multi_dim: false
+  name: ua_phys
+- default: '100.'
+  description: 'tsk < seaice_threshold, if water point and 5-layer slab
+
+    ; scheme, set to land point and permanent ice; if water point
+
+    ; and Noah scheme, set to land point, permanent ice, set temps
+
+    ; from 2 m to surface, and set smois and sh2o. The default value has changed
+
+    ; from 271 to 100 K in v3.5.1 to avoid mixed-up use with fractional seaice input
+
+    ; Used by land model option 1,2,3,4 and 8'
+  is_multi_dim: false
+  name: seaice_threshold
+- default: '0'
+  description: 'time-varying sea-surface temp (0=no, 1=yes). If selected real
+
+    ; puts SST, XICE, ALBEDO and VEGFRA in wrflowinp_d01 file, and wrf updates
+
+    ; these from it at same interval as boundary file. Also requires
+
+    ; namelists in &time_control: auxinput4_interval, auxinput4_end_h,
+
+    ; auxinput4_inname = "wrflowinp_d<domain>",
+
+    ; and in V3.2 io_form_auxinput4'
+  is_multi_dim: false
+  name: sst_update
+- default: .true.
+  description: 'use monthly albedo map instead of table value
+
+    ; (must be used for NMM and recommended for sst_update=1)'
+  is_multi_dim: false
+  name: usemonalb
+- default: .true.
+  description: use snow albedo from geogrid; false means using values from table
+  is_multi_dim: false
+  name: rdmaxalb
+- default: .false.
+  description: 'use LAI from input; false means using values from table
+
+    if sst_update=1, LAI will also be in wrflowinp file'
+  is_multi_dim: false
+  name: rdlai2d
+- default: '-1.'
+  description: 'bucket reset value for water accumulations (value in mm, -1.=inactive)
+
+    bucket_J                            = -1.      ; bucket reset value for energy
+    accumulations (value in J, -1.=inactive)'
+  is_multi_dim: false
+  name: bucket_mm
+- default: '0'
+  description: update deep soil temperature (1, yes; 0, no)
+  is_multi_dim: false
+  name: tmn_update
+- default: 0,
+  description: 'chemistry option - use WRF-Chem
+
+    mp_physics (max_dom)                microphysics option
+
+    = 0, no microphysics
+
+    = 1, Kessler scheme
+
+    = 2, Lin et al. scheme
+
+    = 3, WSM 3-class simple ice scheme
+
+    = 4, WSM 5-class scheme'
+  is_multi_dim: false
+  name: chem_opt
+- default: '150'
+  description: days over which tmn is computed using skin temperature
+  is_multi_dim: false
+  name: lagday
+- default: '0'
+  description: calculate skin SST
+  is_multi_dim: false
+  name: sst_skin
+- default: '0'
+  description: slope effects for solar radiation (1=on, 0=off)
+  is_multi_dim: true
+  name: slope_rad
+- default: '0'
+  description: neighboring-point shadow effects for solar radiation (1=on, 0=off)
+  is_multi_dim: true
+  name: topo_shading
+- default: '25000.'
+  description: max shadow length in meters for topo_shading=1
+  is_multi_dim: false
+  name: shadlen
+- default: '0'
+  description: 'activate ocean model (0=no, 1=1d mixed layer; 2=3D PWP, no bathy)
+
+    ; works with sf_surface_physics = 1 only'
+  is_multi_dim: false
+  name: sf_ocean_physics
+- default: '50'
+  description: oml model can be initialized with a constant depth everywhere (m)
+  is_multi_dim: false
+  name: oml_hml0
+- default: '0.14'
+  description: oml deep water lapse rate (K m-1)
+  is_multi_dim: false
+  name: oml_gamma
+- default: '0.'
+  description: 'Relaxation time (in second) of mixed layer ocean model back to original
+    values
+
+    (an example value is 259200 sec. (3 days)) (new in 3.8)'
+  is_multi_dim: false
+  name: oml_relaxation_time
+- default: '1.'
+  description: '3D PWP time step (min).  It can be set to be the same as WRF time
+    step
+
+    ; in corresponding nested grids, but omdt should be no less than 1.0 minute.'
+  is_multi_dim: false
+  name: omdt
+- default: '30'
+  description: 'number of vertical levels in 3DPWP. Note that the depth of each ocean
+
+    ; model layers is specified in OM_DEPTH in wrfinput_d01'
+  is_multi_dim: false
+  name: ocean_levels
+- default: 0,
+  description: '1 = allows radar reflectivity to be computed using mp-scheme-specific
+
+    parameters.  Currently works for mp_physics = 2,4,6,7,8,10,14,16
+
+
+    Namelist variables for lake module:'
+  is_multi_dim: false
+  name: do_radar_ref
+- default: '0'
+  description: Forward trajectory calculation (Lee and Chen 2013)
+  is_multi_dim: false
+  name: traj_opt
+- default: '50'
+  description: number of trajectories to be released
+  is_multi_dim: false
+  name: num_traj
+- default: '0'
+  description: 'alternative Ck, Cd formulation for tropical storm application
+
+    ; sf_sfclay=1 and 11
+
+    ; 0=default
+
+    ; 1=Donelan Cd + const z0q
+
+    ; 2=Donelan Cd + Garratt
+
+    ; sf_sfclay=5
+
+    ;   (default) =0: z0, zt, and zq from COARE3.0 (Fairall et al 2003)
+
+    ;             =1: z0 from Davis et al (2008), zt & zq from COARE3.0
+
+    ;             =2: z0 from Davis et al (2008), zt & zq from Garratt (1992)'
+  is_multi_dim: false
+  name: isftcflx
+- default: '0'
+  description: 'treat sea-ice as fractional field (1) or ice/no-ice flag (0)
+
+    works for sf_sfclay_physics=1,2,5,or 7.
+
+    If fractional_seaice = 1, also set seaice_threshold = 0.'
+  is_multi_dim: false
+  name: fractional_seaice
+- default: '0'
+  description: 'option to set albedo over sea ice
+
+    ; 0 = seaice albedo is a constant value from namelist option seaice_albedo_default
+
+    ; 1 = seaice albedo is f(Tair,Tskin,Snow) follwing Mills (2011) for Arctic Ocean
+
+    ; 2 = seaice albedo read in from input variable ALBSI'
+  is_multi_dim: false
+  name: seaice_albedo_opt
+- default: '0.65'
+  description: default value of seaice albedo for seaice_albedo_opt=0
+  is_multi_dim: false
+  name: seaice_albedo_default
+- default: '0'
+  description: 'method for treating snow depth on sea ice
+
+    ; 0 = snow depth on sea ice is bounded by seaice_snowdepth_min and seaice_snowdepth_max
+
+    ; 1 = snow depth on sea ice read in from input array SNOWSI (bounded by
+
+    ;     seaice_snowdepth_min and seaice_snodepth_max)'
+  is_multi_dim: false
+  name: seaice_snowdepth_opt
+- default: 1.E10
+  description: maximum allowed accumulation of snow (m) on sea ice
+  is_multi_dim: false
+  name: seaice_snowdepth_max
+- default: '0.001'
+  description: minimum snow depth (m) on sea ice
+  is_multi_dim: false
+  name: seaice_snowdepth_min
+- default: '0'
+  description: 'option for treating seaice thickness
+
+    ; 0 = seaice thickness is uniform value taken from namelist variable seaice_thickness_default
+
+    ; 1 = seaice_thickness is read in from input variable ICEDEPTH'
+  is_multi_dim: false
+  name: seaice_thickness_opt
+- default: '3.0'
+  description: default value of seaice thickness for seaice_thickness_opt=0
+  is_multi_dim: false
+  name: seaice_thickness_default
+- default: .false.
+  description: set Tice to Tsk to avoid unrealistically low sea ice temperatures
+  is_multi_dim: false
+  name: tice2tsk_if2cold
+- default: 0,
+  description: no action taken, no adjustment to any moist field
+  is_multi_dim: false
+  name: mp_zero_out
+- default: '0'
+  description: 'thermal roughness length for sfclay and myjsfc (0 = old, 1 = veg dependent
+    Chen-Zhang Czil)
+
+    ;     for mynn sfc (0=Zilitinkevitch,1=Chen-Zhang,2=mod Yang,3=const zt)'
+  is_multi_dim: false
+  name: iz0tlnd
+- default: 0.7e9
+  description: CCN for NSSL scheme (18). Also sets same value to ccn_conc for mp_physics=18
+  is_multi_dim: false
+  name: nssl_cccn
+- default: 10.,
+  description: limit on temp tendency from mp latent heating from radar data assimilation
+  is_multi_dim: false
+  name: mp_tend_lim
+- default: '1.e-8'
+  description: 'critical value for moist array threshold, below which
+
+    ; moist arrays (except for Qv) are set to zero (kg/kg)'
+  is_multi_dim: false
+  name: mp_zero_out_thresh
+- default: 0.,
+  description: 'number of minutes in precipitation bucket (ARW only) - will add three
+
+    new 2d output fields: prec_acc_c, prec_acc_nc and snow_acc_nc'
+  is_multi_dim: true
+  name: prec_acc_dt
+- default: '0'
+  description: for running gsfcgce microphysics with graupel
+  is_multi_dim: false
+  name: gsfcgce_hail
+- default: 0,
+  description: 1 = improve effect of topography for surface winds.
+  is_multi_dim: true
+  name: topo_wind
+- default: '0'
+  description: 'hail switch for WSM6, WDM6 and Morrison schemes: 0 - off, 1 - on (new
+    in 3.6.1)'
+  is_multi_dim: false
+  name: hail_opt
+- default: '0'
+  description: for running with snow, ice and graupel/hail
+  is_multi_dim: false
+  name: gsfcgce_2ice
+scm:
+- default: .true.
+  description: turn on cloud liquid water advection in SCM
+  is_multi_dim: false
+  name: scm_ql_adv
+- default: '4'
+  description: SCM soil category (4 is silt loam)
+  is_multi_dim: false
+  name: scm_isltyp
+- default: .false.
+  description: Turn on large scale qv forcing in SCM
+  is_multi_dim: false
+  name: scm_force_qv_largescale
+- default: '0.5'
+  description: SCM vegetation fraction
+  is_multi_dim: false
+  name: scm_vegfra
+- default: .true.
+  description: turn on vertical advection in SCM
+  is_multi_dim: false
+  name: scm_vert_adv
+- default: .false.
+  description: Turn on large scale cloud water forcing in SCM
+  is_multi_dim: false
+  name: scm_force_ql_largescale
+- default: '0.0'
+  description: SCM canopy water
+  is_multi_dim: false
+  name: scm_canwat
+- default: .true.
+  description: turn on theta advection in SCM
+  is_multi_dim: false
+  name: scm_th_adv
+- default: 5,
+  description: 'Number of SCM soil forcing layer
+
+    scm_soilT_force                     = .false.  ; Turn on soil temp forcing in
+    SCM'
+  is_multi_dim: false
+  name: num_force_soil_layers
+- default: .false.
+  description: Turn on large scale wind forcing in SCM
+  is_multi_dim: false
+  name: scm_force_wind_largescale
+- default: '37.600'
+  description: SCM latitude
+  is_multi_dim: false
+  name: scm_lat
+- default: '4000.'
+  description: DX for SCM forcing (in meters)
+  is_multi_dim: false
+  name: scm_force_dx
+- default: .true.
+  description: turn on wind advection in SCM
+  is_multi_dim: false
+  name: scm_wind_adv
+- default: .false.
+  description: Turn on soil moisture forcing in SCM
+  is_multi_dim: false
+  name: scm_soilq_force
+- default: .true.
+  description: turn on moisture advection in SCM
+  is_multi_dim: false
+  name: scm_qv_adv
+- default: '-96.700'
+  description: SCM longitude
+  is_multi_dim: false
+  name: scm_lon
+- default: '8'
+  description: number of SCM input forcing layers
+  is_multi_dim: false
+  name: num_force_layers
+- default: .false.
+  description: Turn on large scale theta forcing in SCM
+  is_multi_dim: false
+  name: scm_force_th_largescale
+- default: '2'
+  description: SCM landuse category (2 is dryland, cropland and pasture)
+  is_multi_dim: false
+  name: scm_lu_index
+- default: 1,
+  description: switch for single column forcing (=0 off)
+  is_multi_dim: false
+  name: scm_force
+stoch:
+- default: '3.0'
+  description: cutoff tails of pdf above this threshold standard deviation
+  is_multi_dim: false
+  name: stddev_cutoff_rand_pert
+- default: '1000000'
+  description: 'max. forcing wavenumber in lat. for theta perturb
+
+    perturb_chem_bdy                               ; Options for perturbing lateral
+    boundaries of chemical tracers:'
+  is_multi_dim: false
+  name: lmaxforct
+- default: '500000.0'
+  description: correlation length scale in meters
+  is_multi_dim: false
+  name: lengthscale_rand_pert
+- default: '21600.0'
+  description: decorrelation time scale in s
+  is_multi_dim: false
+  name: timescale_rand_pert
+- default: 'off'
+  description: 1 = on with RAND_PERTURB pattern
+  is_multi_dim: false
+  name: '0'
+- default: '0'
+  description: 'No boundary perturbations
+
+    1         ; Use SKEBS pattern for boundary perturbations
+
+    2         ; Use other user-provided pattern for boundary perturbations'
+  is_multi_dim: false
+  name: perturb_bdy
+- default: '1'
+  description: 'creates different seed for random number streams in either stochastic
+    scheme
+
+    ; must be different for each member in ensemble forecasts'
+  is_multi_dim: false
+  name: nens
+- default: '1.0E-05'
+  description: Controls amplitude of rotational wind perturbations
+  is_multi_dim: false
+  name: tot_backscat_psi
+- default: '1.0E-06'
+  description: Controls amplitude of potential temperature perturbations
+  is_multi_dim: false
+  name: tot_backscat_t
+- default: '1'
+  description: 'an integer that controls the random number stream which will then
+
+    change the run. When running an ensemble, this can be
+
+    ensemble member number, so that each ensemble member gets a
+
+    different random number stream, hence a different perturbed run.'
+  is_multi_dim: false
+  name: nens
+- default: '10800.0'
+  description: decorr. time of noise for psi perturb
+  is_multi_dim: false
+  name: ztau_psi
+- default: '10800.0'
+  description: decorr. time of noise for theta perturb
+  is_multi_dim: false
+  name: ztau_t
+- default: '-1.83'
+  description: spectral slope of forcing for psi
+  is_multi_dim: false
+  name: rexponent_psi
+- default: '-1.83'
+  description: spectral slope of forcing for theta
+  is_multi_dim: false
+  name: rexponent_t
+- default: '0.0833'
+  description: variance of noise for psi perturb
+  is_multi_dim: false
+  name: zsigma2_eps
+- default: '1'
+  description: 'stochastic kinetic-energy backscatter scheme, 1: on'
+  is_multi_dim: false
+  name: skebs
+- default: '0.0833'
+  description: variance of noise for theta perturb
+  is_multi_dim: false
+  name: zsigma2_eta
+- default: '1'
+  description: min. forcing wavenumber in lon. for psi perturb
+  is_multi_dim: false
+  name: kminforc
+- default: '1'
+  description: min. forcing wavenumber in lat. for psi perturb
+  is_multi_dim: false
+  name: lminforc
+- default: '1.0E-05'
+  description: 'total backscattered dissipation for streamfunction;
+
+    ; determines amplitude of streamfunction perturbations'
+  is_multi_dim: false
+  name: tot_backscat_psi
+- default: '1'
+  description: min. forcing wavenumber in lon. for theta perturb
+  is_multi_dim: false
+  name: kminforct
+- default: '1'
+  description: min. forcing wavenumber in lat. for theta perturb
+  is_multi_dim: false
+  name: lminforct
+- default: '1.0E-06'
+  description: total backscattered dissipation for potential temperature
+  is_multi_dim: false
+  name: tot_backscat_t
+- default: '1000000'
+  description: max. forcing wavenumber in lon. for psi perturb
+  is_multi_dim: false
+  name: kmaxforc
+- default: '10800.0'
+  description: decorrelation time scale of noise for streamfunction perturbations
+  is_multi_dim: false
+  name: ztau_psi
+- default: '1000000'
+  description: max. forcing wavenumber in lat. for psi perturb
+  is_multi_dim: false
+  name: lmaxforc
+- default: '1'
+  description: 'generate array with random perturbations for user determined use,
+    1: on'
+  is_multi_dim: false
+  name: rand_perturb
+- default: '1000000'
+  description: max. forcing wavenumber in lon. for theta perturb
+  is_multi_dim: false
+  name: kmaxforct
+- default: '0.03'
+  description: 'standard deviation of random perturbations at each gridpoint
+
+    ; determines amplitude of random perturbations'
+  is_multi_dim: false
+  name: gridpt_stddev_rand_pert
+tc:
+- default: .false.
+  description: T/F for only removing the original TC
+  is_multi_dim: false
+  name: remove_storm
+- default: '-999.'
+  description: maximum radius outward from storm center
+  is_multi_dim: false
+  name: rmax
+- default: .false.
+  description: T/F for inserting a bogus tropical storm (TC)
+  is_multi_dim: false
+  name: insert_bogus_storm
+- default: '1'
+  description: Number of bogus TC
+  is_multi_dim: false
+  name: num_storm
+- default: '-999.'
+  description: 'ratio for representative maximum winds, 0.75 for 45 km grid, and
+
+    0.9 for 15 km grid.'
+  is_multi_dim: false
+  name: vmax_ratio(max_bogus)
+- default: '-999.'
+  description: center latitude of the bogus TC
+  is_multi_dim: false
+  name: latc_loc
+- default: '-999.'
+  description: top pressure limit for the tc bogus scheme
+  is_multi_dim: false
+  name: rankine_lid
+- default: '-999.'
+  description: center longitude of the bogus TC
+  is_multi_dim: false
+  name: lonc_loc
+- default: '-999.'
+  description: vmax of bogus storm in meters per second
+  is_multi_dim: false
+  name: vmax_meters_per_second(max_bogus)
+time_control:
+- default: 1,
+  description: run time in days
+  is_multi_dim: false
+  name: run_days
+- default: 00,
+  description: two digit minute of starting time
+  is_multi_dim: true
+  name: start_minute
+- default: 1000,
+  description: number of output times in this file
+  is_multi_dim: false
+  name: frames_per_auxhist2
+- default: 2,
+  description: 2 = netCDF
+  is_multi_dim: false
+  name: io_form_input
+- default: 06,
+  description: two digit month of ending time
+  is_multi_dim: true
+  name: end_month
+- default: 2001,
+  description: four digit year of starting time
+  is_multi_dim: true
+  name: start_year
+- default: 1440,
+  description: restart output file interval in minutes
+  is_multi_dim: false
+  name: restart_interval
+- default: F,
+  description: whether to overwrite simulation_start_date with forecast start time
+  is_multi_dim: false
+  name: reset_simulation_start
+- default: 00,
+  description: 'two digit second of starting time
+
+    Note: the start time is used to name the first wrfout file.
+
+    It also controls the start time for nest domains, and the time to restart'
+  is_multi_dim: true
+  name: start_second
+- default: '2'
+  description: IO format, required in V3.2
+  is_multi_dim: false
+  name: io_form_auxinput4
+- default: '1'
+  description: adds 7 history-interval max diagnostic fields
+  is_multi_dim: false
+  name: nwp_diagnostics
+- default: 00,
+  description: 'FOR NMM: starting hour of the forecast'
+  is_multi_dim: true
+  name: tstart
+- default: 2,
+  description: 2 = netCDF
+  is_multi_dim: false
+  name: io_form_history
+- default: '1'
+  description: adds 36 surface diagnostic arrays (max/min/mean/std)
+  is_multi_dim: false
+  name: output_diagnostics
+- default: '''wrfxtrm_d<domain>_<date>'''
+  description: file name for added diagnostics
+  is_multi_dim: false
+  name: auxhist3_outname
+- default: '2'
+  description: netcdf
+  is_multi_dim: false
+  name: io_form_auxhist3
+- default: 2,
+  description: 2 = netCDF
+  is_multi_dim: false
+  name: io_form_restart
+- default: 2001,
+  description: four digit year of ending time
+  is_multi_dim: true
+  name: end_year
+- default: '1440'
+  description: minutes between outputs (1440 gives daily max/min)
+  is_multi_dim: false
+  name: auxhist3_interval
+- default: 00,
+  description: 'two digit second of ending time
+
+    It also controls when the nest domain integrations end
+
+    All start and end times are used by real.exe.'
+  is_multi_dim: true
+  name: end_second
+- default: 0,
+  description: run time in seconds
+  is_multi_dim: false
+  name: run_seconds
+- default: 2,
+  description: netCDF format
+  is_multi_dim: false
+  name: io_form_boundary
+- default: '360'
+  description: minutes generally matches time given by interval_seconds
+  is_multi_dim: false
+  name: auxinput4_interval
+- default: 12,
+  description: two digit day of ending time
+  is_multi_dim: true
+  name: end_day
+- default: '1'
+  description: 'output times per file
+
+    Note: do restart only at multiple of auxhist3_intervals'
+  is_multi_dim: false
+  name: frames_per_auxhist3
+- default: '10'
+  description: 'interval in minutes for observation data. It should be
+
+    set as or more frequently as obs_ionf (with unit of
+
+    coarse domain time step).'
+  is_multi_dim: false
+  name: auxinput11_interval
+- default: .true.,
+  description: only a single write, not the write/read/write sequence, new in 3.6
+  is_multi_dim: false
+  name: ncd_nofill
+- default: '6'
+  description: end of observation time in hours.
+  is_multi_dim: false
+  name: auxinput11_end_h
+- default: 12,
+  description: two digit hour of ending time
+  is_multi_dim: true
+  name: end_hour
+- default: 12,
+  description: number of times in each chemistry emission file.
+  is_multi_dim: false
+  name: frames_per_emissfile
+- default: .true.,
+  description: 'what to do when encountering an error in the user-specified files
+
+    .false., : abort when encountering an error in iofields_filename file'
+  is_multi_dim: false
+  name: ignore_iofields_warning
+- default: 00,
+  description: two digit minute of ending time
+  is_multi_dim: true
+  name: end_minute
+- default: 1,
+  description: 'style to use for the chemistry emission files.
+
+    ; 0 = Do not read emissions from files.
+
+    ; 1 = Cycle between two 12 hour files (set frames_per_emissfile=12)
+
+    ; 2 = Dated files with length set by frames_per_emissfile'
+  is_multi_dim: false
+  name: io_style_emiss
+- default: t,
+  description: write input-formatted data as output
+  is_multi_dim: false
+  name: write_input
+- default: .true.,
+  description: 'asks the model to write-out an empty file with the name ''wrfoutReady_d<domain>_<date>.
+
+    Useful in production runs so that post-processing code can check on the
+
+    completeness of this file'
+  is_multi_dim: false
+  name: output_ready_flag
+- default: 60,
+  description: history output file interval in minutes
+  is_multi_dim: true
+  name: history_interval
+- default: 0,
+  description: 50,100,200,300 values give increasing prints
+  is_multi_dim: false
+  name: debug_level
+- default: 180,
+  description: interval in minutes when writing input-formatted data
+  is_multi_dim: false
+  name: inputout_interval
+- default: 0,
+  description: run time in minutes
+  is_multi_dim: false
+  name: run_minutes
+- default: 0,
+  description: 'print out time series of model diagnostics
+
+    ; 0 = no print
+
+    ; 1 = domain averaged 3-hourly hydrostatic surface pressure tendency
+
+    (Dpsfc/Dt), and dry-hydrostatic column pressure tendency (Dmu/Dt)
+
+    will appear in stdout file
+
+    ; 2 = in addition to those above, domain averaged rainfall,
+
+    surface evaporation, and sensible and latent heat fluxes will be output'
+  is_multi_dim: false
+  name: diag_print
+- default: 10800,
+  description: 'time interval between incoming real data, which will be the interval
+
+    between the lateral boundary condition file'
+  is_multi_dim: false
+  name: interval_seconds
+- default: '''wrfinput_d<domain>_<date>'''
+  description: 'you may change the output file name
+
+    inputout_begin_y                    = 0
+
+    inputout_begin_mo                   = 0
+
+    inputout_begin_d                    = 0
+
+    inputout_begin_h                    = 3
+
+    inputout_begin_m                    = 0
+
+    inputout_begin_s                    = 0
+
+    inputout_end_y                      = 0
+
+    inputout_end_mo                     = 0
+
+    inputout_end_d                      = 0
+
+    inputout_end_h                      = 12
+
+    inputout_end_m                      = 0'
+  is_multi_dim: false
+  name: input_outname
+- default: '0'
+  description: 'the above shows that the input-formatted data are output
+
+    starting from hour 3 to hour 12 in 180 min interval.'
+  is_multi_dim: false
+  name: inputout_end_s
+- default: .false.,
+  description: whether to write out wrfinput for all processing times
+  is_multi_dim: false
+  name: all_ic_times
+- default: T,
+  description: whether nested run will have input files for domains other than 1
+  is_multi_dim: true
+  name: input_from_file
+- default: .false.,
+  description: adjust output times to the nearest hour
+  is_multi_dim: false
+  name: adjust_output_times
+- default: .false.,
+  description: whether to change the alarms from what is previously set
+  is_multi_dim: false
+  name: override_restart_timers
+- default: 0,
+  description: 'field selection from nest input for its initialization
+
+    0: all fields are used; 2: only static and time-varying, masked land
+
+    surface fields are used. In V3.2, this requires the use of
+
+    io_form_auxinput2'
+  is_multi_dim: true
+  name: fine_input_stream
+- default: 0,
+  description: 'run time in hours
+
+    Note: if it is more than 1 day, one may use both run_days and run_hours
+
+    or just run_hours. e.g. if the total run length is 36 hrs, you may
+
+    set run_days = 1, and run_hours = 12, or run_days = 0, and run_hours = 36'
+  is_multi_dim: false
+  name: run_hours
+- default: .false.,
+  description: whether to output history file at the start of restart run
+  is_multi_dim: false
+  name: write_hist_at_0h_rst
+- default: 12,
+  description: two digit hour of starting time
+  is_multi_dim: true
+  name: start_hour
+- default: 1,
+  description: 'number of output times per history output file,
+
+    used to split output into multiple files
+
+    into smaller pieces'
+  is_multi_dim: true
+  name: frames_per_outfile
+- default: '"met_em.d<domain>.<date>"'
+  description: Input to real from WPS (default since 3.0)
+  is_multi_dim: false
+  name: auxinput1_inname
+- default: 06,
+  description: two digit month of starting time
+  is_multi_dim: true
+  name: start_month
+- default: 10,
+  description: interval in minutes
+  is_multi_dim: true
+  name: auxhist2_interval
+- default: F,
+  description: whether this run is a restart run
+  is_multi_dim: false
+  name: restart
+- default: '"met_nm.d<domain>.<date>"'
+  description: Input to real from WPS
+  is_multi_dim: false
+  name: auxinput1_inname
+- default: '"rainfall"'
+  description: 'file name for extra output; if not specified,
+
+    auxhist2_d<domain>_<date> will be used
+
+    also note that to write variables in output other
+
+    than the history file requires Registry.EM file change'
+  is_multi_dim: false
+  name: auxhist2_outname
+- default: 11,
+  description: two digit day of starting time
+  is_multi_dim: true
+  name: start_day
+- default: F,
+  description: whether this run is a cycling run, if so, initializes look-up table
+    for Thompson schemes only
+  is_multi_dim: false
+  name: cycling
+- default: 2,
+  description: output in netCDF
+  is_multi_dim: false
+  name: io_form_auxhist2
+
