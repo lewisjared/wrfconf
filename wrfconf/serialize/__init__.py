@@ -1,4 +1,4 @@
-from io import StringIO
+from six import StringIO
 
 from .representer import Representer
 from .serializer import Serializer

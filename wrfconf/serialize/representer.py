@@ -5,7 +5,7 @@ class RepresenterError(Exception):
     pass
 
 
-class BaseRepresenter:
+class BaseRepresenter(object):
     wrf_representers = {}
 
     def represent(self, section_name, data):

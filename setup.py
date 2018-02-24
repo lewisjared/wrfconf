@@ -25,7 +25,8 @@ setup(name='wrfconf',
           'Topic :: Scientific/Engineering :: Atmospheric Science'
       ],
       install_requires=[
-          'pyyaml'
+          'pyyaml',
+          'six'
       ],
       packages=find_packages(exclude='tests'),
       entry_points={
