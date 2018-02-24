@@ -1,7 +1,7 @@
 import argparse
 
 from wrfconf.conf.parse_namelist import process_namelist
-from wrfconf.process import create_namelists
+from wrfconf.process import process_conf_file
 
 def gen_params_parser(subparsers):
     gen = subparsers.add_parser('gen_params', help='Generate a configuration file containing the valid WRF parameters')
@@ -19,7 +19,7 @@ def run_command(args):
     if args.cmd == 'gen_params':
         print(process_namelist(args.input))
     elif args.cmd == 'create':
-        create_namelists(args.input, args.namelist, args.wps)
+        process_conf_file(args.input, args.namelist, args.wps)
 
 
 def main():
