@@ -26,6 +26,7 @@ def main():
     parser = argparse.ArgumentParser(prog='wrfconf',
                                      description="Generate WRF configuration from structured YAML files")
     subparsers = parser.add_subparsers(dest='cmd')
+    subparsers.required = True
 
     create_parser(subparsers)
     gen_params_parser(subparsers)
