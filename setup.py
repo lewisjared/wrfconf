@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 from wrfconf import __version__
 
-with open(path.join(path.abspath(path.dirname(__file__)), 'README.md')) as f:
+with open(path.join(path.abspath(path.dirname(__file__)), 'README.rst')) as f:
     long_description = f.read()
 
 setup(name='wrfconf',
@@ -16,11 +16,13 @@ setup(name='wrfconf',
       license='MIT',
       keywords='wrf config generate generator science forecast',
       classifiers=[
-          'Development Status :: 3 - Alpha',
+          'Development Status :: 4 - Beta',
+          'Intended Audience :: Science/Research',
           'Intended Audience :: System Administrators',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 2'
-          'Programming Language :: Python :: 3'
+          'Programming Language :: Python :: 3',
+          'Topic :: Scientific/Engineering :: Atmospheric Science'
       ],
       install_requires=[
           'pyyaml'
