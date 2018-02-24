@@ -9,7 +9,7 @@ with open(path.join(path.abspath(path.dirname(__file__)), 'README.rst')) as f:
 
 setup(name='wrfconf',
       version=__version__,
-      description='Configuration generator for WRF',
+      description='Configuration generator for WRF namelists',
       long_description=long_description,
       author='Jared Lewis',
       author_email='jared@bodekerscientific.com',
@@ -20,7 +20,7 @@ setup(name='wrfconf',
           'Intended Audience :: Science/Research',
           'Intended Audience :: System Administrators',
           'License :: OSI Approved :: MIT License',
-          'Programming Language :: Python :: 2'
+          'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 3',
           'Topic :: Scientific/Engineering :: Atmospheric Science'
       ],
