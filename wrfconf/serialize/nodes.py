@@ -13,17 +13,14 @@ class ScalarNode(Node):
     id = 'scalar'
 
     def __init__(self, tag, value, start_mark=None, end_mark=None):
-        self.tag = tag
-        self.value = value
-        self.start_mark = start_mark
-        self.end_mark = end_mark
-
+        super(ScalarNode, self).__init__(tag, value, start_mark, end_mark)
 
 
 class CollectionNode(Node):
-    def __init__(self, tag, value):
-        self.tag = tag
-        self.value = value
+    id = 'collection'
+
+    def __init__(self, tag, value, start_mark=None, end_mark=None):
+        super(CollectionNode, self).__init__(tag, value, start_mark, end_mark)
 
 
 class SectionNode(CollectionNode):
@@ -32,8 +29,3 @@ class SectionNode(CollectionNode):
 
 class SequenceNode(CollectionNode):
     id = 'sequence'
-    end_mark = ','
-
-
-class KeyValueNode(CollectionNode):
-    id = 'keyvalue'

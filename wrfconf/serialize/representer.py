@@ -26,7 +26,7 @@ class BaseRepresenter(object):
         cls.wrf_representers[data_type] = representer
 
     def represent_scalar(self, tag, value, level):
-        node = ScalarNode(tag, value)
+        node = ScalarNode(tag, value, end_mark=',')
         return node
 
     def represent_sequence(self, tag, sequence, level):
@@ -48,6 +48,7 @@ class BaseRepresenter(object):
                 pass
         for item_key, item_value in mapping:
             node_key = self.represent_data(item_key, level + 1)
+            node_key.end_mark = None
             node_value = self.represent_data(item_value, level + 1)
             value.append((node_key, node_value))
         return node
@@ -105,12 +106,6 @@ class Representer(BaseRepresenter):
     def represent_dict(self, data, level):
         return self.represent_section('tag:yaml.org,2002:map', data, level)
 
-    def represent_set(self, data, level):
-        value = {}
-        for key in data:
-            value[key] = None
-        return self.represent_mapping('tag:yaml.org,2002:set', value, level)
-
 
 Representer.add_representer(str,
                             Representer.represent_str)
@@ -132,6 +127,3 @@ Representer.add_representer(tuple,
 
 Representer.add_representer(dict,
                             Representer.represent_dict)
-
-Representer.add_representer(set,
-                            Representer.represent_set)

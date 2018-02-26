@@ -11,9 +11,9 @@ run_info:
 
 domain:
   parent_id: [1, 1]
-  parent_grid_ratio: 1, 3,
-  i_parent_start: 1, 34,
-  j_parent_start: 1, 25,
+  parent_grid_ratio: [1, 3]
+  i_parent_start: [1, 34]
+  j_parent_start: [1, 25]
   e_we: [ 85, 73]
   e_sn: [ 93, 79]
   dx: [36000, 12000]
@@ -52,8 +52,8 @@ namelist:
     input_from_file: [True, True, True, True]
     history_interval: [ 60, 60, 60, 60]
     frames_per_outfile: [ 1000, 1000, 1000, 1000]
-    restart: False,
-    restart_interval: 5000,
+    restart: False
+    restart_interval: 5000
     io_form_history: 2
     io_form_restart: 2
     io_form_input: 2
@@ -82,22 +82,22 @@ namelist:
     bldt:               [ 0, 0, 0, 0]
     cu_physics:         [ 1, 1, 0, 0]
     cudt:               [ 5, 5, 5, 5]
-    isfflx: 1,
-    ifsnow: 1,
-    icloud: 1,
-    surface_input_source: 3,
+    isfflx: 1
+    ifsnow: 1
+    icloud: 1
+    surface_input_source: 3
     num_soil_layers:    4
     num_land_cat:       21
     sf_urban_physics:   [ 0, 0, 0, 0]
 
   dynamics:
-    w_damping: 0,
+    w_damping: 0
     diff_opt: [ 1, 1, 1, 1]
     km_opt: [ 4, 4, 4, 4]
     diff_6th_opt: [ 0, 0, 0, 0]
     diff_6th_factor: 0.12, 0.12, 0.12, 0.12
     base_temp: 290.
-    damp_opt: 0,
+    damp_opt: 0
     zdamp: [5000., 5000., 5000., 5000.]
     dampcoef: [0.2, 0.2, 0.2, 0.2]
     khdif: [ 0, 0, 0, 0]
@@ -107,13 +107,13 @@ namelist:
     scalar_adv_opt: [ 1, 1, 1, 0]
 
   bdy_control:
-    spec_bdy_width: 5,
-    spec_zone: 1,
-    relax_zone: 4,
+    spec_bdy_width: 5
+    spec_zone: 1
+    relax_zone: 4
     specified: [True, False,False,False]
     nested: [False, True, True,True]
 
   namelist_quilt:
-    nio_tasks_per_group: 0,
-    nio_groups: 1,
+    nio_tasks_per_group: 0
+    nio_groups: 1
 

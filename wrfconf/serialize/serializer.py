@@ -44,10 +44,10 @@ class Serializer:
             if indent:
                 self.emit(' ' * indent)
             self.emit(node.value)
+            self.emit(node.end_mark)
         elif isinstance(node, SequenceNode):
             for item in node.value:
                 self.serialize_node(item)
-                self.emit(node.end_mark)
         elif isinstance(node, SectionNode):
             for key, value in node.value:
                 self.serialize_node(key, indent=2)
