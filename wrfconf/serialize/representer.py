@@ -1,3 +1,5 @@
+import warnings
+
 from .nodes import ScalarNode, SectionNode, SequenceNode
 
 
@@ -29,11 +31,11 @@ class BaseRepresenter(object):
         node = ScalarNode(value, end_mark=',')
         return node
 
-    def represent_sequence(self, sequence):
+    def represent_sequence(self, sequence, **kwargs):
         value = []
         node = SequenceNode(value)
         for item in sequence:
-            node_item = self.represent_data(item)
+            node_item = self.represent_data(item, **kwargs)
             value.append(node_item)
         return node
 
@@ -57,6 +59,8 @@ class BaseRepresenter(object):
 class Representer(BaseRepresenter):
 
     def represent_str(self, data, is_value=False):
+        if ',' in data:
+            warnings.warn('Value was potentially incorrectly intepreted as a string, please check: {}'.format(data))
         if is_value:
             return self.represent_scalar("'{}'".format(data))
 
@@ -104,7 +108,7 @@ class Representer(BaseRepresenter):
         #            pairs = False
         #            break
         # if not pairs:
-        return self.represent_sequence(data)
+        return self.represent_sequence(data, **kwargs)
 
     def represent_dict(self, data, **kwargs):
         return self.represent_section(data)
