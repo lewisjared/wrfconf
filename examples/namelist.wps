@@ -8,8 +8,8 @@
 /
 
 &geogrid
-  dx = 	36000,	12000,
-  dy = 	36000,	12000,
+  dx = 36000,
+  dy = 36000,
   e_sn = 	93,	79,
   e_we = 	85,	73,
   geog_data_path = '/mnt/data/WRF/WPS_GEOG',
