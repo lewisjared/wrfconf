@@ -1,15 +1,26 @@
 from datetime import timedelta
 from os.path import join
+from collections import OrderedDict
 
 import yaml
 
 from wrfconf.serialize import dump
 from wrfconf.utils import make_list, convert_str_to_dt, convert_dt_to_str, merge_dicts
 
+def ordered_load(stream, Loader=yaml.Loader, object_pairs_hook=OrderedDict):
+    class OrderedLoader(Loader):
+        pass
+    def construct_mapping(loader, node):
+        loader.flatten_mapping(node)
+        return object_pairs_hook(loader.construct_pairs(node))
+    OrderedLoader.add_constructor(
+        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+        construct_mapping)
+    return yaml.load(stream, OrderedLoader)
 
 
 def create_wrf_namelist(conf, wrf_dir):
-    wrf_config = {}
+    wrf_config = OrderedDict()
     run_info = conf['run_info']
     domain = conf['domain']
     start_time = convert_str_to_dt(run_info['start_date'])
@@ -52,7 +63,7 @@ def create_wrf_namelist(conf, wrf_dir):
 
 
 def create_wps_namelist(conf, wps_dir):
-    wrf_config = {}
+    wrf_config = OrderedDict()
     run_info = conf['run_info']
     domain = conf['domain']
     end_time = convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
@@ -81,7 +92,7 @@ def create_wps_namelist(conf, wps_dir):
 def process_conf_file(conf_file, wrf_dir, wps_dir):
     try:
         with open(conf_file) as fh:
-            conf = yaml.load(fh)
+            conf = ordered_load(fh, yaml.SafeLoader)
     except IOError as e:
         raise Exception('Could not open file: {}'.format(conf_file))
 

@@ -1,5 +1,5 @@
 import warnings
-
+from collections import OrderedDict
 from .nodes import ScalarNode, SectionNode, SequenceNode
 
 
@@ -133,4 +133,7 @@ Representer.add_representer(tuple,
                             Representer.represent_list)
 
 Representer.add_representer(dict,
+                            Representer.represent_dict)
+
+Representer.add_representer(OrderedDict,
                             Representer.represent_dict)

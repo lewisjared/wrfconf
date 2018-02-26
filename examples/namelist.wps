@@ -7,11 +7,6 @@
   wrf_core = 'ARW',
 /
 
-&ungrib
-  out_format = 'WPS',
-  prefix = 'FILE',
-/
-
 &geogrid
   dx = 	36000,	12000,
   dy = 	36000,	12000,
@@ -31,6 +26,11 @@
   stand_lon = 169.228,
   truelat1 = -41.276,
   truelat2 = -41.276,
+/
+
+&ungrib
+  out_format = 'WPS',
+  prefix = 'FILE',
 /
 
 &metgrid
