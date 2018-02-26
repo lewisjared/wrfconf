@@ -33,11 +33,12 @@ class Serializer:
             raise SerializerError("serializer is closed")
 
         self.emit('&{}\n'.format(section_name))
-        self.serialize_node(node, None)
+        self.serialize_node(node)
         self.emit('/\n\n')
 
     def emit(self, chars):
-        self.stream.write(chars)
+        if chars is not None:
+            self.stream.write(chars)
 
     def serialize_node(self, node, indent=0):
         if isinstance(node, ScalarNode):

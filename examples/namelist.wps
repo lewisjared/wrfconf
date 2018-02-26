@@ -1,10 +1,15 @@
 &share
-  end_date = 	2018-02-23_12:00:00,	2018-02-23_12:00:00,
+  end_date = 	'2018-02-23_12:00:00',	'2018-02-23_12:00:00',
   interval_seconds = 10800,
   io_form_geogrid = 2,
   max_dom = 2,
-  start_date = 	2018-02-22_00:00:00,	2018-02-22_00:00:00,
+  start_date = 	'2018-02-22_00:00:00',	'2018-02-22_00:00:00',
   wrf_core = 'ARW',
+/
+
+&ungrib
+  out_format = 'WPS',
+  prefix = 'FILE',
 /
 
 &geogrid
@@ -13,7 +18,7 @@
   e_sn = 	93,	79,
   e_we = 	85,	73,
   geog_data_path = '/mnt/data/WRF/WPS_GEOG',
-  geog_data_res = 	10m,	2m,
+  geog_data_res = 	'10m',	'2m',
   i_parent_start = 	1,	34,
   j_parent_start = 	1,	25,
   opt_geogrid_tbl_path = 'geogrid/',
@@ -26,11 +31,6 @@
   stand_lon = 169.228,
   truelat1 = -41.276,
   truelat2 = -41.276,
-/
-
-&ungrib
-  out_format = 'WPS',
-  prefix = 'FILE',
 /
 
 &metgrid

@@ -39,7 +39,7 @@ def create_wrf_namelist(conf, wrf_dir):
 
     wrf_config['domains'] = {
         'max_dom': max_dom,
-        'grid_id': range(1, max_dom + 1),
+        'grid_id': list(range(1, max_dom + 1)),
         'parent_time_step_ratio': domain['parent_grid_ratio']
     }
     for k in domain_keys_to_copy:
