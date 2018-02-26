@@ -9,13 +9,13 @@ class BaseRepresenter(object):
     wrf_representers = {}
 
     def represent(self, section_name, data):
-        node = self.represent_data(data, 0)
+        node = self.represent_data(data)
         self.serialize(section_name, node)
 
-    def represent_data(self, data, level):
+    def represent_data(self, data, **kwargs):
         data_types = type(data).__mro__
         if data_types[0] in self.wrf_representers:
-            node = self.wrf_representers[data_types[0]](self, data, level)
+            node = self.wrf_representers[data_types[0]](self, data, **kwargs)
 
             return node
 
@@ -25,19 +25,19 @@ class BaseRepresenter(object):
             cls.wrf_representers = cls.wrf_representers.copy()
         cls.wrf_representers[data_type] = representer
 
-    def represent_scalar(self, value, level):
+    def represent_scalar(self, value):
         node = ScalarNode(value, end_mark=',')
         return node
 
-    def represent_sequence(self, sequence, level):
+    def represent_sequence(self, sequence):
         value = []
         node = SequenceNode(value)
         for item in sequence:
-            node_item = self.represent_data(item, level + 1)
+            node_item = self.represent_data(item)
             value.append(node_item)
         return node
 
-    def represent_section(self, mapping, level):
+    def represent_section(self, mapping):
         value = []
         node = SectionNode(value)
         if hasattr(mapping, 'items'):
@@ -47,33 +47,36 @@ class BaseRepresenter(object):
             except TypeError:
                 pass
         for item_key, item_value in mapping:
-            node_key = self.represent_data(item_key, level + 1)
+            node_key = self.represent_data(item_key)
             node_key.end_mark = None
-            node_value = self.represent_data(item_value, level + 1)
+            node_value = self.represent_data(item_value, is_value=True)
             value.append((node_key, node_value))
         return node
 
 
 class Representer(BaseRepresenter):
 
-    def represent_str(self, data, level):
-        return self.represent_scalar(data, level)
+    def represent_str(self, data, is_value=False):
+        if is_value:
+            return self.represent_scalar("'{}'".format(data))
 
-    def represent_bool(self, data, level):
+        return self.represent_scalar(data)
+
+    def represent_bool(self, data, **kwargs):
         if data:
             value = '.true.'
         else:
             value = '.false.'
-        return self.represent_scalar(value, level)
+        return self.represent_scalar(value)
 
-    def represent_int(self, data, level):
-        return self.represent_scalar(str(data), level)
+    def represent_int(self, data, **kwargs):
+        return self.represent_scalar(str(data))
 
     inf_value = 1e300
     while repr(inf_value) != repr(inf_value * inf_value):
         inf_value *= inf_value
 
-    def represent_float(self, data, level):
+    def represent_float(self, data, **kwargs):
         if data != data or (data == 0.0 and data == 1.0):
             value = '.nan'
         elif data == self.inf_value:
@@ -91,9 +94,9 @@ class Representer(BaseRepresenter):
             # '.0' before the 'e' symbol.
             if '.' not in value and 'e' in value:
                 value = value.replace('e', '.0e', 1)
-        return self.represent_scalar(value, level)
+        return self.represent_scalar(value)
 
-    def represent_list(self, data, level):
+    def represent_list(self, data, **kwargs):
         # pairs = (len(data) > 0 and isinstance(data, list))
         # if pairs:
         #    for item in data:
@@ -101,10 +104,10 @@ class Representer(BaseRepresenter):
         #            pairs = False
         #            break
         # if not pairs:
-        return self.represent_sequence(data, level)
+        return self.represent_sequence(data)
 
-    def represent_dict(self, data, level):
-        return self.represent_section(data, level)
+    def represent_dict(self, data, **kwargs):
+        return self.represent_section(data)
 
 
 Representer.add_representer(str,
