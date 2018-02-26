@@ -25,21 +25,21 @@ class BaseRepresenter(object):
             cls.wrf_representers = cls.wrf_representers.copy()
         cls.wrf_representers[data_type] = representer
 
-    def represent_scalar(self, tag, value, level):
-        node = ScalarNode(tag, value, end_mark=',')
+    def represent_scalar(self, value, level):
+        node = ScalarNode(value, end_mark=',')
         return node
 
-    def represent_sequence(self, tag, sequence, level):
+    def represent_sequence(self, sequence, level):
         value = []
-        node = SequenceNode(tag, value)
+        node = SequenceNode(value)
         for item in sequence:
             node_item = self.represent_data(item, level + 1)
             value.append(node_item)
         return node
 
-    def represent_section(self, tag, mapping, level):
+    def represent_section(self, mapping, level):
         value = []
-        node = SectionNode(tag, value)
+        node = SectionNode(value)
         if hasattr(mapping, 'items'):
             mapping = list(mapping.items())
             try:
@@ -57,17 +57,17 @@ class BaseRepresenter(object):
 class Representer(BaseRepresenter):
 
     def represent_str(self, data, level):
-        return self.represent_scalar('tag:yaml.org,2002:str', data, level)
+        return self.represent_scalar(data, level)
 
     def represent_bool(self, data, level):
         if data:
             value = '.true.'
         else:
             value = '.false.'
-        return self.represent_scalar('tag:yaml.org,2002:bool', value, level)
+        return self.represent_scalar(value, level)
 
     def represent_int(self, data, level):
-        return self.represent_scalar('tag:yaml.org,2002:int', str(data), level)
+        return self.represent_scalar(str(data), level)
 
     inf_value = 1e300
     while repr(inf_value) != repr(inf_value * inf_value):
@@ -91,7 +91,7 @@ class Representer(BaseRepresenter):
             # '.0' before the 'e' symbol.
             if '.' not in value and 'e' in value:
                 value = value.replace('e', '.0e', 1)
-        return self.represent_scalar('tag:yaml.org,2002:float', value, level)
+        return self.represent_scalar(value, level)
 
     def represent_list(self, data, level):
         # pairs = (len(data) > 0 and isinstance(data, list))
@@ -101,10 +101,10 @@ class Representer(BaseRepresenter):
         #            pairs = False
         #            break
         # if not pairs:
-        return self.represent_sequence('tag:yaml.org,2002:seq', data, level)
+        return self.represent_sequence(data, level)
 
     def represent_dict(self, data, level):
-        return self.represent_section('tag:yaml.org,2002:map', data, level)
+        return self.represent_section(data, level)
 
 
 Representer.add_representer(str,
