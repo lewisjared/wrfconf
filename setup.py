@@ -26,7 +26,8 @@ setup(name='wrfconf',
       ],
       install_requires=[
           'pyyaml',
-          'six'
+          'six',
+          'marshmallow'
       ],
       packages=find_packages(exclude='tests'),
       entry_points={
