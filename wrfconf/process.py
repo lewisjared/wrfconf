@@ -1,25 +1,28 @@
+from collections import OrderedDict
 from datetime import timedelta
 from os.path import join
-from collections import OrderedDict
 
 import yaml
 
 from wrfconf.serialize import dump
 from wrfconf.utils import make_list, convert_str_to_dt, convert_dt_to_str, merge_dicts
 
+
 def ordered_load(stream, Loader=yaml.Loader, object_pairs_hook=OrderedDict):
     class OrderedLoader(Loader):
         pass
+
     def construct_mapping(loader, node):
         loader.flatten_mapping(node)
         return object_pairs_hook(loader.construct_pairs(node))
+
     OrderedLoader.add_constructor(
         yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
         construct_mapping)
     return yaml.load(stream, OrderedLoader)
 
 
-def create_wrf_namelist(conf, wrf_dir):
+def create_wrf_namelist(conf, stream=None):
     wrf_config = OrderedDict()
     run_info = conf['run_info']
     domain = conf['domain']
@@ -56,13 +59,10 @@ def create_wrf_namelist(conf, wrf_dir):
     for k in domain_keys_to_copy:
         wrf_config['domains'][k] = domain[k]
 
-    res = dump(merge_dicts(wrf_config, conf['namelist']))
-
-    with open(join(wrf_dir, 'namelist.input'), 'w') as fh:
-        fh.writelines(res)
+    return dump(merge_dicts(wrf_config, conf['namelist']), stream)
 
 
-def create_wps_namelist(conf, wps_dir):
+def create_wps_namelist(conf, stream=None):
     wrf_config = OrderedDict()
     run_info = conf['run_info']
     domain = conf['domain']
@@ -86,9 +86,7 @@ def create_wps_namelist(conf, wps_dir):
         if k in domain:
             wrf_config['geogrid'][k] = domain[k]
 
-    res = dump(merge_dicts(wrf_config, conf['wps']))
-    with open(join(wps_dir, 'namelist.wps'), 'w') as fh:
-        fh.writelines(res)
+    return dump(merge_dicts(wrf_config, conf['wps']), stream)
 
 
 def process_conf_file(conf_file, wrf_dir, wps_dir):
@@ -98,5 +96,5 @@ def process_conf_file(conf_file, wrf_dir, wps_dir):
     except IOError as e:
         raise Exception('Could not open file: {}'.format(conf_file))
 
-    create_wrf_namelist(conf, wrf_dir)
-    create_wps_namelist(conf, wps_dir)
+    create_wrf_namelist(conf, open(join(wrf_dir, 'namelist.input'), 'w'))
+    create_wps_namelist(conf, open(join(wps_dir, 'namelist.wps'), 'w'))
