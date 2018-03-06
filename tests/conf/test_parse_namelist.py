@@ -61,12 +61,13 @@ For observation nudging:
  auxinput11_end_h                    = 6        ; end of observation time in hours""")
         self.assertEqual(get_next_item(lines), """output_diagnostics                  = 1        ; adds 36 surface diagnostic arrays (max/min/mean/std)""")
 
+
 class TestConfigItem(TestCase):
     def test_basic_parse(self):
         i = ConfigItem(' time_step_fract_num                 = 0,	; numerator for fractional time step\n')
         self.assertFalse(i.is_section)
         self.assertEqual(i.name, 'time_step_fract_num')
-        self.assertEqual(i.default, '0,')
+        self.assertEqual(i.default, '0')
         self.assertEqual(i.description, 'numerator for fractional time step')
 
     def test_multiline(self):
@@ -74,5 +75,5 @@ class TestConfigItem(TestCase):
         self.assertFalse(i.is_section)
         self.assertEqual(i.name, 'e_vert')
         self.assertTrue(i.is_multi_dim)
-        self.assertEqual(i.default, '30,')
+        self.assertEqual(i.default, '30')
         self.assertEqual(i.description, 'end index in z (vertical) direction (staggered dimension)\nNote: this refers to full levels including surface and top\nvertical dimensions need to be the same for all nests\nNote: most variables are unstaggered (= staggered dim - 1)')

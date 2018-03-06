@@ -3,7 +3,7 @@ from collections import defaultdict
 
 import yaml
 
-default_parser = re.compile('^[a-z0-9 _()\t]*?=(.+?)[;\(\|]?(.*)$', re.DOTALL)
+default_parser = re.compile('^[a-z0-9 _()\t]*?=.s*?([0-9\w,<>\'\s]+)[;\(\|]?(.*)$', re.DOTALL)
 
 
 def is_command(l):
@@ -48,7 +48,7 @@ class ConfigItem(object):
 
             res = default_parser.search(l, )
             if res:
-                self.default = res.group(1).strip()
+                self.default = res.group(1).strip().strip(',')
                 self.description = res.group(2).strip()
                 self.description = '\n'.join([a.strip() for a in self.description.split('\n')])
                 pass
