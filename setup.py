@@ -2,13 +2,14 @@ from os import path
 
 from setuptools import setup, find_packages
 
-from wrfconf import __version__
+version = None
+exec(open('wrfconf/version.py').read())
 
 with open(path.join(path.abspath(path.dirname(__file__)), 'README.rst')) as f:
     long_description = f.read()
 
 setup(name='wrfconf',
-      version=__version__,
+      version=version,
       description='Configuration generator for WRF namelists',
       long_description=long_description,
       author='Jared Lewis',
