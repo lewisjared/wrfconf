@@ -59,7 +59,7 @@ def create_wrf_namelist(conf, stream=None):
     for k in domain_keys_to_copy:
         wrf_config['domains'][k] = domain[k]
 
-    return dump(merge_dicts(wrf_config, conf['namelist']), stream)
+    return dump(merge_dicts(wrf_config, conf['wrf']), stream)
 
 
 def create_wps_namelist(conf, stream=None):
