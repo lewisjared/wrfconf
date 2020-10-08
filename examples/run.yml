@@ -46,7 +46,7 @@ wps:
    fg_name: 'FILE'
    io_form_metgrid: 2
 
-namelist:
+wrf:
   time_control:
     interval_seconds: 10800
     input_from_file: [True, True, True, True]
