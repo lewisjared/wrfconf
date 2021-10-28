@@ -26,20 +26,20 @@ def create_wrf_namelist(conf, stream=None):
     wrf_config = OrderedDict()
     run_info = conf['run_info']
     domain = conf['domain']
-    start_time = convert_str_to_dt(run_info['start_date'])
-    end_time = convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
+    start_time = [convert_str_to_dt(x) for x in run_info['start_date']] #convert_str_to_dt(run_info['start_date'])
+    end_time = convert_str_to_dt(run_info['start_date'][0]) + timedelta(hours=run_info['run_hours']) #convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
 
     # Merge in the time info
     max_dom = run_info['max_dom']
     wrf_config['time_control'] = {
         'run_days': 0,
         'run_hours': run_info['run_hours'],
-        'start_year': make_list(start_time.year, max_dom),
-        'start_month': make_list(start_time.month, max_dom),
-        'start_day': make_list(start_time.day, max_dom),
-        'start_hour': make_list(start_time.hour, max_dom),
-        'start_minute': make_list(start_time.minute, max_dom),
-        'start_second': make_list(start_time.second, max_dom),
+        'start_year': [make_list(x.year, 1) for x in start_time],#make_list(start_time.year, max_dom),
+        'start_month': [make_list(x.month, 1) for x in start_time],#make_list(start_time.month, max_dom),
+        'start_day': [make_list(x.day, 1) for x in start_time],#make_list(start_time.day, max_dom),
+        'start_hour': [make_list(x.hour, 1) for x in start_time],#make_list(start_time.hour, max_dom),
+        'start_minute': [make_list(x.minute, 1) for x in start_time],#make_list(start_time.minute, max_dom),
+        'start_second': [make_list(x.second, 1) for x in start_time],#make_list(start_time.second, max_dom),
         'end_year': make_list(end_time.year, max_dom),
         'end_month': make_list(end_time.month, max_dom),
         'end_day': make_list(end_time.day, max_dom),
@@ -66,13 +66,14 @@ def create_wps_namelist(conf, stream=None):
     wrf_config = OrderedDict()
     run_info = conf['run_info']
     domain = conf['domain']
-    end_time = convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
+    #end_time = convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
+    end_time = convert_str_to_dt(run_info['start_date'][0]) + timedelta(hours=run_info['run_hours']) #convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
 
     # Merge in the time info
     max_dom = run_info['max_dom']
     wrf_config['share'] = {
         'max_dom': max_dom,
-        'start_date': make_list(run_info['start_date'], max_dom),
+        'start_date': make_list(run_info['start_date'], 1),
         'end_date': make_list(convert_dt_to_str(end_time), max_dom),
     }
 
