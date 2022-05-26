@@ -78,7 +78,7 @@ def create_wps_namelist(conf, stream=None):
     }
 
     # Merge in the domain info
-    domain_keys_to_copy = ('e_we', 'e_sn', 'parent_id', 'parent_grid_ratio', 'i_parent_start', 'j_parent_start', 'ref_lat', 'ref_lon',
+    domain_keys_to_copy = ('e_we', 'e_sn', 'parent_id', 'parent_grid_ratio', 'i_parent_start', 'j_parent_start', 'map_proj', 'ref_lat', 'ref_lon',
                            'ref_x', 'ref_y', 'truelat1', 'truelat2', 'stand_lon', 'geog_data_res')
     wrf_config['geogrid'] = {}
     wrf_config['geogrid']['dx'] = domain['dx'][0]
