@@ -49,7 +49,7 @@ def create_wrf_namelist(conf, stream=None):
     }
 
     # Merge in the domain info
-    domain_keys_to_copy = ('e_we', 'e_sn', 'dx', 'dy', 'parent_id', 'i_parent_start', 'j_parent_start', 'parent_grid_ratio')
+    domain_keys_to_copy = ('e_we', 'e_sn', 'e_vert', 'dx', 'dy', 'parent_id', 'i_parent_start', 'j_parent_start', 'parent_grid_ratio')
 
     wrf_config['domains'] = {
         'max_dom': max_dom,
