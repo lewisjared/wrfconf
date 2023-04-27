@@ -1,7 +1,8 @@
 from collections import OrderedDict
+from datetime import datetime
 from datetime import timedelta
 from os.path import join
-
+import numpy as np
 import yaml
 
 from wrfconf.serialize import dump
@@ -46,6 +47,7 @@ def create_wrf_namelist(conf, stream=None):
         'end_hour': make_list(end_time.hour, max_dom),
         'end_minute': make_list(end_time.minute, max_dom),
         'end_second': make_list(end_time.second, max_dom),
+        'interval_seconds': conf['wps']['share']['interval_seconds'],
     }
 
     # Merge in the domain info
@@ -63,12 +65,15 @@ def create_wrf_namelist(conf, stream=None):
 
 
 def create_wps_namelist(conf, stream=None):
+    
     wrf_config = OrderedDict()
     run_info = conf['run_info']
     domain = conf['domain']
     #end_time = convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
-    end_time = convert_str_to_dt(run_info['start_date'][0]) + timedelta(hours=run_info['run_hours']) #convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
-
+    interval_seconds = conf['wps']['share']['interval_seconds']
+    len_grib = interval_seconds/3600.0*(np.floor(run_info['run_hours']/(interval_seconds/3600.0))+1)
+    end_time = convert_str_to_dt(run_info['start_date'][0]) + timedelta(hours=len_grib) #convert_str_to_dt(run_info['start_date']) + timedelta(hours=run_info['run_hours'])
+    
     # Merge in the time info
     max_dom = run_info['max_dom']
     wrf_config['share'] = {
