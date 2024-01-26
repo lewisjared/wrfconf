@@ -60,7 +60,7 @@ class Representer(BaseRepresenter):
 
     def represent_str(self, data, is_value=False):
         if ',' in data:
-            warnings.warn('Value was potentially incorrectly intepreted as a string, please check: {}'.format(data))
+            warnings.warn('Value was potentially incorrectly interpreted as a string, please check: {}'.format(data))
         if is_value:
             return self.represent_scalar("'{}'".format(data))
 
